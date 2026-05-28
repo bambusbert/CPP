@@ -1,6 +1,5 @@
 #include <iostream>
 
-//TODO static cast verwenden <>
 // cout anschauen wie das geht und syntax
 int main (int argc, char **argv)
 {
@@ -16,8 +15,8 @@ int main (int argc, char **argv)
     {
         j = -1;
         while (argv[i][++j])
-            std::cout << static_cast<char>(toupper(argv[i][j]));
+            std::cout << static_cast<char>(std::toupper(static_cast<int>(argv[i][j])));
     }
-    std::cout << "\n";
+    std::cout << std::endl;
     return 0;
 }
