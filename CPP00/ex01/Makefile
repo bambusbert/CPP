@@ -6,6 +6,7 @@ RM = rm -f
 SRC =	contact.cpp \
 		phonebook.cpp \
 		main.cpp
+		
 OBJ = $(SRC:.cpp=.o)
 DEP = $(SRC:.cpp=.d)
 

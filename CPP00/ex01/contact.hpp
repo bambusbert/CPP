@@ -13,6 +13,7 @@ private:
     std::string secret;
 
 public:
+    Contact();
     const std::string &getFirstName() const;
     const std::string &getLastName() const;
     const std::string &getNickName() const;
