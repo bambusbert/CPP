@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 16:45:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/01 17:16:42 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/01 17:36:04 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,37 +17,58 @@ Account::Account( int initial_deposit )
     
 }
 
+//destructor! used for cleanup
 Account::~Account( void )
 {
     
 }
 
-static int	getNbAccounts(void)
+int	Account::getNbAccounts(void)
+{
+    return _nbAccounts;
+}
+
+int	Account::getTotalAmount(void)
+{
+    return _totalAmount;
+}
+
+int	Account::getNbDeposits(void)
+{
+    return _totalNbDeposits;
+}
+
+int	Account::getNbWithdrawals(void)
+{
+    return _totalNbWithdrawals;
+}
+
+void	Account::displayAccountsInfos(void)
 {
     
 }
 
-static int	getTotalAmount(void)
+void	Account::makeDeposit( int deposit )
+{
+
+}
+
+bool	Account::makeWithdrawal( int withdrawal )
+{
+
+}
+
+int		Account::checkAmount( void ) const
+{
+
+}
+
+void	Account::displayStatus( void ) const
 {
     
 }
 
-static int	getNbDeposits(void)
-{
-    
-}
-
-static int	getNbWithdrawals(void)
-{
-    
-}
-
-static void	displayAccountsInfos(void)
-{
-    
-}
-
-static void	_displayTimestamp( void )
+void	Account::_displayTimestamp( void )
 {
     std::time_t time;
     std::tm *t_struct;
@@ -61,5 +82,5 @@ static void	_displayTimestamp( void )
 
 int main (void)
 {
-    _displayTimestamp();
+    //this->_displayTimestamp();
 }
