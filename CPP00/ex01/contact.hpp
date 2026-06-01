@@ -19,6 +19,9 @@ public:
     const std::string &getNickName() const;
     const std::string &getNumber() const;
     const std::string &getSecret() const;
+    std::string getTruncFirstName() const;
+    std::string getTruncLastName() const;
+    std::string getTruncNickName() const;
     void setFirstName(const std::string &name);
     void setLastName(const std::string &name);
     void setNickName(const std::string &name);

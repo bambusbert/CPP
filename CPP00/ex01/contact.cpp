@@ -27,6 +27,27 @@ const std::string &Contact::getSecret() const
     return secret;
 }
 
+std::string Contact::getTruncFirstName() const
+{
+    if (first_name.length() <= 10)
+        return first_name;
+    return first_name.substr(0, 9) + ".";
+}
+
+std::string Contact::getTruncLastName() const
+{
+    if (last_name.length() <= 10)
+        return last_name;
+    return last_name.substr(0, 9) + ".";
+}
+
+std::string Contact::getTruncNickName() const
+{
+    if (nick_name.length() <= 10)
+        return nick_name;
+    return nick_name.substr(0, 9) + ".";
+}
+
 void Contact::setFirstName(const std::string &name)
 {
     first_name = name;
