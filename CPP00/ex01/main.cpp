@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 12:30:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/01 15:06:57 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/01 16:18:09 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,16 @@ void search_contact (PhoneBook& book)
         std::cout << "invalid index! has to be between 0 and 7" << std::endl;
 }
 
+int is_empty(std::string str)
+{
+    if (str.empty())
+    {
+        std::cout << "empty input detected! as a punishment you have to start again." << std::endl;
+        return 1;
+    }
+    return 0;
+}
+
 void add_contact(PhoneBook& book)
 {
     std::string fn;
@@ -59,15 +69,25 @@ void add_contact(PhoneBook& book)
     std::string num;
     std::string sec;
     
-    std::cout << "firstname" << std::endl;
+    std::cout << "Enter first name." << std::endl;
     std::getline(std::cin, fn);
-    std::cout << "lastname" << std::endl;
+    if (is_empty(fn))
+        return;        
+    std::cout << "Enter last name." << std::endl;
     std::getline(std::cin, ln);
-    std::cout << "nickname" << std::endl;
+    if (is_empty(ln))
+        return;   
+    std::cout << "Enter nickname." << std::endl;
     std::getline(std::cin, nn);
-    std::cout << "number" << std::endl;
+    if (is_empty(nn))
+        return;   
+    std::cout << "Enter phone number." << std::endl;
     std::getline(std::cin, num);
-    std::cout << "secret" << std::endl;
+    if (is_empty(num))
+        return;   
+    std::cout << "Enter darkest secret." << std::endl;
     std::getline(std::cin, sec);
+    if (is_empty(sec))
+        return;   
     book.addContact(fn, ln, nn, num, sec);
 }
