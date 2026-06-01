@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Stefan Lambert <slambert@student.42vien    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/29 16:11:48 by bert              #+#    #+#             */
+/*   Updated: 2026/05/29 16:14:43 by Stefan Lamb      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 
-// cout anschauen wie das geht und syntax
 int main (int argc, char **argv)
 {
     int i = 0;
