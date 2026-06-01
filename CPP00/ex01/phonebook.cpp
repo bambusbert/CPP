@@ -47,8 +47,3 @@ int PhoneBook::getSize()
 {
     return this->sssize;
 }
-
-// const Contact PhoneBook::getContactById(int id)
-// {
-
-// }

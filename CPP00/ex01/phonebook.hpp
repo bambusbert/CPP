@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 12:30:59 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/01 12:48:49 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/01 14:57:33 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ class PhoneBook
         void addContact(const std::string& fn, const std::string& ln, const std::string& nn, const std::string& num, const std::string& sec);
         void printContact(int index);
         void printAll();
-        // const Contact getContactById(int id); 
 };
 
 #endif
