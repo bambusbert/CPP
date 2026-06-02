@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 12:30:59 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/01 14:57:33 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/02 12:47:20 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define PHONEBOOK_HPP
 
 #include "contact.hpp"
+#include <cctype>
 
 class PhoneBook
 {
@@ -24,7 +25,8 @@ class PhoneBook
         PhoneBook();
         int getSize();
         void addContact(const std::string& fn, const std::string& ln, const std::string& nn, const std::string& num, const std::string& sec);
-        void printContact(int index);
+        void printContactTrunc(int index);
+        void printContactDetail(int index);
         void printAll();
 };
 

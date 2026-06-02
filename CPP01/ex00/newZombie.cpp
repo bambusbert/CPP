@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   newZombie.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/29 16:11:48 by bert              #+#    #+#             */
-/*   Updated: 2026/06/02 11:26:18 by slambert         ###   ########.fr       */
+/*   Created: 2026/06/02 12:07:08 by slambert          #+#    #+#             */
+/*   Updated: 2026/06/02 12:07:17 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "Zombie.hpp"
 
-int main (int argc, char **argv)
+Zombie* newZombie( std::string name )
 {
-    int i = 0;
-    int j;
-
-    if (argc == 1)
-    {
-        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
-        return 0;
-    }
-    while (argv[++i])
-    {
-        j = -1;
-        while (argv[i][++j])
-            std::cout << static_cast<char>(std::toupper(static_cast<int>(argv[i][j])));
-    }
-    std::cout << std::endl;
-    return 0;
+    
 }

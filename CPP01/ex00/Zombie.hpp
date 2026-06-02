@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/29 16:11:48 by bert              #+#    #+#             */
-/*   Updated: 2026/06/02 11:26:18 by slambert         ###   ########.fr       */
+/*   Created: 2026/06/02 11:42:23 by slambert          #+#    #+#             */
+/*   Updated: 2026/06/02 12:07:34 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "iostream"
 
-int main (int argc, char **argv)
+class Zombie
 {
-    int i = 0;
-    int j;
+    private:
+        std::string name;
 
-    if (argc == 1)
-    {
-        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
-        return 0;
-    }
-    while (argv[++i])
-    {
-        j = -1;
-        while (argv[i][++j])
-            std::cout << static_cast<char>(std::toupper(static_cast<int>(argv[i][j])));
-    }
-    std::cout << std::endl;
-    return 0;
-}
+    public:
+        Zo
+        const std::string getName() const;
+        void announce (void);
+};

@@ -1,11 +1,13 @@
-NAME = professtional_bankster
+NAME = zombie
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 DFLAGS	= -MMD -MP
 RM = rm -f
 
-SRC =	Account.cpp \
-		tests.cpp
+SRC =	main.cpp \
+		Zombie.cpp \
+		newZombie.cpp \
+		randomChump.cpp
 		
 OBJ = $(SRC:.cpp=.o)
 DEP = $(SRC:.cpp=.d)
