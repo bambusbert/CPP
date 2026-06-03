@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 11:42:23 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/03 18:56:10 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/03 19:08:35 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ class Zombie
 
     public:
         const std::string getName() const;
+        void setName(std::string name);
         void announce (void);
+        Zombie();
         Zombie(std::string name);
         ~Zombie();
 };
