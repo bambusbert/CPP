@@ -12,7 +12,6 @@
 #ifndef __ACCOUNT_H__
 #define __ACCOUNT_H__
 
-//TODO am i allowed to change this file??
 #include <ctime>
 #include <iostream>
 

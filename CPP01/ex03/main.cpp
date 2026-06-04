@@ -6,10 +6,11 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 11:42:13 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/04 11:26:10 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/04 18:32:00 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Weapon.hpp"
 #include "HumanA.hpp"
 #include "HumanB.hpp"
 
