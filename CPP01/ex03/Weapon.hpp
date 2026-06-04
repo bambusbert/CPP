@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 20:24:52 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/03 20:46:53 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/04 11:04:07 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Weapon
         std::string type;
     
     public:
-        Weapon();
+        Weapon(std::string name);
         const std::string& getType() const;
         void setType(std::string type);
 };

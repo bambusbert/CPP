@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.hpp                                         :+:      :+:    :+:   */
+/*   replace.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/03 20:25:31 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/04 11:20:40 by slambert         ###   ########.fr       */
+/*   Created: 2026/06/04 11:36:02 by slambert          #+#    #+#             */
+/*   Updated: 2026/06/04 11:39:48 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUMANB_HPP
-#define HUMANB_HPP
+#ifndef REPLACE_HPP
+#define REPLACE_HPP
 
 #include <iostream>
-#include "Weapon.hpp"
 
-class HumanB
-{
-    private:
-        std::string name;
-        Weapon* weapon;
-    
-    public:
-        HumanB(std::string name);
-        void attack(); 
-        void setWeapon(Weapon &weapon);
-};
+int replace_stuff(std::string s1, std::string s2, std::string s3);
 
 #endif

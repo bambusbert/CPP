@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/03 20:25:31 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/04 11:20:40 by slambert         ###   ########.fr       */
+/*   Created: 2026/06/02 11:42:13 by slambert          #+#    #+#             */
+/*   Updated: 2026/06/04 12:28:39 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUMANB_HPP
-#define HUMANB_HPP
+#include "replace.hpp"
 
-#include <iostream>
-#include "Weapon.hpp"
-
-class HumanB
+int main(int argc, char **argv)
 {
-    private:
-        std::string name;
-        Weapon* weapon;
-    
-    public:
-        HumanB(std::string name);
-        void attack(); 
-        void setWeapon(Weapon &weapon);
-};
-
-#endif
+    if (argc != 4)
+    {
+        std::cerr << "wrong number of arguments. Usage: ./replace <filename> <str1> <str2>" << std::endl;
+        return 1;
+    }
+    return replace_stuff(argv[1], argv[2], argv[3]);
+}
