@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   harl.hpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/04 11:36:02 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/05 11:49:33 by slambert         ###   ########.fr       */
+/*   Created: 2026/06/02 11:42:13 by slambert          #+#    #+#             */
+/*   Updated: 2026/06/05 11:58:16 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HARL_HPP
-# define HARL_HPP
+#include "harl.hpp"
 
-# include <iostream>
-
-class Harl
+int main(int argc, char **argv)
 {
-    private:
-	    void debug(void);
-	    void info(void);
-	    void warning(void);
-	    void error(void);
-        
-    public:
-	    void complain(std::string level);
-};
-
-#endif
+    if (argc != 2)
+    {
+        std::cout << "wrong number of arguments! try again." << std::endl;
+        std::cout << "Usage: ./harlFilter level" << std::endl;
+        return 1;
+    }
+    Harl harli;
+    harli.complain(argv[1]);
+}
