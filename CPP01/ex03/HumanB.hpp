@@ -6,14 +6,14 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 20:25:31 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/04 11:20:40 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/06 11:07:21 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HUMANB_HPP
 #define HUMANB_HPP
 
-#include <iostream>
+#include <string>
 #include "Weapon.hpp"
 
 class HumanB

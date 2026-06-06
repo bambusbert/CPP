@@ -6,11 +6,11 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 11:42:13 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/05 11:49:57 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/06 10:10:56 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "harl.hpp"
+#include "Harl.hpp"
 
 int main(void)
 {

@@ -6,13 +6,14 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 12:30:59 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/02 12:47:20 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/06 10:58:09 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONEBOOK_HPP
 #define PHONEBOOK_HPP
 
+#include <string>
 #include "contact.hpp"
 #include <cctype>
 

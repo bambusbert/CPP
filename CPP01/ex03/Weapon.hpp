@@ -6,14 +6,14 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 20:24:52 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/04 11:04:07 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/06 10:57:55 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WEAPON_H
 #define WEAPON_H
 
-#include <iostream>
+#include <string>
 
 class Weapon
 {

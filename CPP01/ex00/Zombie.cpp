@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 11:42:37 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/03 18:59:47 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/06 10:14:10 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,3 @@ void Zombie::announce (void)
 {
     std::cout << getName() << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
-

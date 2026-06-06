@@ -6,11 +6,12 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 11:42:13 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/03 19:23:15 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/06 10:58:08 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <string>
 
 int main (void)
 {

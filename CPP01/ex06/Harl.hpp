@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   harl.hpp                                           :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 11:36:02 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/05 11:49:33 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/06 11:13:02 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class Harl
 	    void info(void);
 	    void warning(void);
 	    void error(void);
-        
+
     public:
 	    void complain(std::string level);
 };

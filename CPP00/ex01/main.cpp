@@ -6,12 +6,13 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 12:30:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/02 12:53:22 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/06 10:58:08 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "phonebook.hpp"
 #include <iostream>
+#include <string>
 
 void say_bye();
 int add_contact(PhoneBook &book);

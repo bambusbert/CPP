@@ -1,11 +1,11 @@
 NAME = harl
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 DFLAGS	= -MMD -MP
 RM = rm -f
 
 SRC =	main.cpp \
-		harl.cpp
+		Harl.cpp
 		
 OBJ = $(SRC:.cpp=.o)
 DEP = $(SRC:.cpp=.d)
