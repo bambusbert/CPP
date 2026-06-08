@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 11:35:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/08 16:41:13 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/08 16:58:59 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 Fixed::Fixed(): num(0)
 {
     std::cout << "Default constructor called" << std::endl;
+}
+
+Fixed::Fixed(const int num): num(num << fract_bits)
+{
+    std::cout << "Int constructor called" << std::endl;
 }
 
 //copy constructor.
