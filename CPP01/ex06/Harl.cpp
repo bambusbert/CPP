@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 11:35:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/06 11:20:19 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/08 12:50:34 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	Harl::error(void)
 	std::cout << "AKLBFIUGEUIOZZDGSAHKLVBiEUJK FBJKEVIL" << std::endl;
 }
 
+//this solution gave me a compilter error on my personal machine
+//(-Werror flag complains because of implicit fallthrough)
 void	Harl::complain(std::string level)
 {
 	std::string levels[] = 
@@ -55,34 +57,30 @@ void	Harl::complain(std::string level)
         if (levels[i] == level)
             break;
     }
-    int start = -1;
     switch (i)
     {
         case 0:
-            start = 0;
-            break;
+            std::cout << "[ " << levels[0] << " ]" << std::endl;
+            this->debug();
+            std::cout << std::endl;
         case 1:
-            start = 1;
-            break;
+            std::cout << "[ " << levels[1] << " ]" << std::endl;
+            this->info();
+            std::cout << std::endl;
         case 2:
-            start = 2;
-            break;
+            std::cout << "[ " << levels[2] << " ]" << std::endl;
+            this->warning();
+            std::cout << std::endl;
         case 3:
-            start = 3;
+            std::cout << "[ " << levels[3] << " ]" << std::endl;
+            this->error();
+            std::cout << std::endl;
             break;
         default:
             std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
-            return ;
-    }
-    for (int j = start; j < size; j++)
-    {
-        std::cout << "[ " << levels[j] << " ]" << std::endl;   
-        (this->*functions[j])();
-        std::cout << std::endl;
     }
 }
 
-//2nd solution (-Werror flag complains because of implicit fallthrough)
 // void	Harl::complain(std::string level)
 // {
 // 	std::string levels[] = 
@@ -106,30 +104,32 @@ void	Harl::complain(std::string level)
 //         if (levels[i] == level)
 //             break;
 //     }
+//     int start = -1;
 //     switch (i)
 //     {
 //         case 0:
-//             std::cout << "[ " << levels[0] << " ]" << std::endl;
-//             this->debug();
-//             std::cout << std::endl;
+//             start = 0;
+//             break;
 //         case 1:
-//             std::cout << "[ " << levels[1] << " ]" << std::endl;
-//             this->info();
-//             std::cout << std::endl;
+//             start = 1;
+//             break;
 //         case 2:
-//             std::cout << "[ " << levels[2] << " ]" << std::endl;
-//             this->warning();
-//             std::cout << std::endl;
+//             start = 2;
+//             break;
 //         case 3:
-//             std::cout << "[ " << levels[3] << " ]" << std::endl;
-//             this->error();
-//             std::cout << std::endl;
+//             start = 3;
 //             break;
 //         default:
 //             std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+//             return ;
+//     }
+//     for (int j = start; j < size; j++)
+//     {
+//         std::cout << "[ " << levels[j] << " ]" << std::endl;   
+//         (this->*functions[j])();
+//         std::cout << std::endl;
 //     }
 // }
-
 //1st solution (no switch case)
 // void	Harl::complain(std::string level)
 // {
