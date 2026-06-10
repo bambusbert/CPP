@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 11:42:13 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/06 10:58:08 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/10 10:08:54 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int main (void)
 {
-    std::string string = "HI THIS IS BRIAN";
+    std::string string = "HI THIS IS BRAIN";
     std::string* stringPTR = &string;
     std::string& stringREF = string;
 
