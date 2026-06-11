@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 11:35:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/08 12:50:34 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/11 10:52:22 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,17 @@ void	Harl::complain(std::string level)
             std::cout << "[ " << levels[0] << " ]" << std::endl;
             this->debug();
             std::cout << std::endl;
+            //fallthrough
         case 1:
             std::cout << "[ " << levels[1] << " ]" << std::endl;
             this->info();
             std::cout << std::endl;
+            //fallthrough
         case 2:
             std::cout << "[ " << levels[2] << " ]" << std::endl;
             this->warning();
             std::cout << std::endl;
+            //fallthrough
         case 3:
             std::cout << "[ " << levels[3] << " ]" << std::endl;
             this->error();
