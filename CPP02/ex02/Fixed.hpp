@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 11:36:02 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/11 20:22:49 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/12 10:23:15 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,20 @@ class Fixed
 		bool operator>=(const Fixed& other) const;
 		bool operator==(const Fixed& other) const;
 		bool operator!=(const Fixed& other) const;
-
 		Fixed operator+(const Fixed& other) const;
 		Fixed operator-(const Fixed& other) const;
 		Fixed operator*(const Fixed& other) const;
 		Fixed operator/(const Fixed& other) const;
+		//pre-increment
+		Fixed& operator++(void);
+		Fixed& operator--(void);
+		//post-increment
+		Fixed operator++ (int);
+		Fixed operator-- (int);
+		static Fixed& min(Fixed &n1, Fixed& n2);
+		static Fixed& max(Fixed &n1, Fixed& n2);
+		static const Fixed& min(const Fixed &n1, const Fixed& n2);
+		static const Fixed& max(const Fixed &n1, const Fixed& n2);
 };
 
 std::ostream& operator<<(std::ostream& stream, const Fixed& f);
