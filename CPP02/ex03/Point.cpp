@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 10:29:20 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/12 11:15:00 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/15 12:04:50 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,14 @@ Point& Point::operator=(const Point& p)
 {
     (void) p;
     return *this;
+}
+
+Fixed Point::getX( void ) const 
+{ 
+    return this->_x; 
+}
+
+Fixed Point::getY( void ) const 
+{ 
+    return this->_y; 
 }

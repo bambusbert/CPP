@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 10:27:46 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/12 10:38:25 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/15 12:04:48 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ class Point
         Point(const Point& p);
         Point& operator=(const Point& p);
         ~Point();
+        Fixed getX( void ) const;
+        Fixed getY( void ) const;
 };
 
 #endif
