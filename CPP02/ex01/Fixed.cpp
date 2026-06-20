@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 11:35:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/11 12:57:45 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/20 12:24:34 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ Fixed::Fixed(const int val)
 //float constructor. precision is lost
 //we can't bit shift a float. therefore we do the equivalant (multiplication)
 //(multiplication with 256 is 1 left-shifted by _fract_bits bits)
+//(we could also just multiply by 2^_fract_bits - 256 - in the int
+//constructor but thats slower i think)
 Fixed::Fixed(const float val)
 {
     std::cout << "Float constructor called" << std::endl;
@@ -71,12 +73,17 @@ void Fixed::setRawBits( int const raw )
 }
 
 //divide by 2^_fract_bits and return that
+//(this is the opposite what we did in the float constructor)
 float Fixed::toFloat( void ) const
 {
     return static_cast<float>(_val) / (1 << _fract_bits);
 }
 
 //we return truncated int (right shift by _fract_bits bits)
+//(this is the opposite what we did in the int constructor)
+//for me it would be much more logical if we rounded to the next int
+//BUT the standard C++ behaviour is to just truncate, so we mimick that
+//ofc this is also more efficient
 int Fixed::toInt( void ) const
 {
     return _val >> _fract_bits;

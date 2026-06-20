@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 11:42:13 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/15 12:09:33 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/20 13:18:30 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@
 #include <iostream>
 #include "Point.hpp"
 
-// Forward declaration of the bsp function
 bool bsp( Point const a, Point const b, Point const c, Point const point);
 
-// A small helper function to keep the main output clean and readable
 void runTest(std::string testName, Point a, Point b, Point c, Point p, bool expected)
 {
     bool result = bsp(a, b, c, p);

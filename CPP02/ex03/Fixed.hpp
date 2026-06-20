@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 11:36:02 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/12 10:23:15 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/20 13:03:07 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include <iostream>
 #include <cmath>
-#include <fstream>
 
 class Fixed
 {
