@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 14:21:25 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/22 17:38:17 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/22 17:51:07 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ int main (void)
     a.beRepaired(6);
     a.takeDamage(255);
     a.attack("asdf");
+    a.guardGate();
 }
