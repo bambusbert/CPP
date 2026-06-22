@@ -6,16 +6,16 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 14:21:25 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/22 17:28:17 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/22 17:38:17 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main (void)
 {
     std::string name = "Herbert";
-    ClapTrap a(name);
+    ScavTrap a(name);
     a.attack("manfred");
     a.takeDamage(5);
     a.beRepaired(6);

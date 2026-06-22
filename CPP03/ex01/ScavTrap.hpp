@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/22 14:21:25 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/22 17:28:17 by slambert         ###   ########.fr       */
+/*   Created: 2026/06/22 17:06:04 by slambert          #+#    #+#             */
+/*   Updated: 2026/06/22 17:39:06 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef SCAVTRAP_H
+#define SCAVTRAP_H
+
 #include "ClapTrap.hpp"
 
-int main (void)
+class ScavTrap: public ClapTrap
 {
-    std::string name = "Herbert";
-    ClapTrap a(name);
-    a.attack("manfred");
-    a.takeDamage(5);
-    a.beRepaired(6);
-    a.takeDamage(255);
-    a.attack("asdf");
-}
+    private:
+    
+    public:
+        ScavTrap();
+        ScavTrap(std::string name);
+        ScavTrap(const ScavTrap& other);
+        ScavTrap& operator=(const ScavTrap& other);
+        ~ScavTrap();
+};
+
+#endif
