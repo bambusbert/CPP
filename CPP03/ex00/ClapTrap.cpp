@@ -6,13 +6,13 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 14:22:32 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/22 14:53:11 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/22 17:04:05 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(std::string name): _name(name)
+ClapTrap::ClapTrap(std::string name): _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
     std::cout << "Default constructor called" << std::endl;
 }
@@ -43,22 +43,31 @@ ClapTrap::~ClapTrap()
 void ClapTrap::attack(const std::string& target)
 {
     if (_hitPoints < 1 || _energyPoints < 1)
+    {
+        std::cout << "attack function exited early" << std::endl;
         return;
+    }
     _energyPoints--;
-    std::cout << _name << " attacks " << target << ", causing " << _attackDamage << " damage!" << std::endl;
+    std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << _attackDamage << " damage!" << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
     _hitPoints -= amount;
-    std::cout << _name << " took " << amount << " damage. hitpoints left: " << _hitPoints << std::endl;
+    if (_hitPoints > 0)
+        std::cout << _name << " took " << amount << " damage. hitpoints left: " << _hitPoints << std::endl;
+    else
+        std::cout << "ClapTrap " << _name << " took " << amount << " damage. " << _name << " is now dead." << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
     if (_hitPoints < 1 || _energyPoints < 1)
+    {
+        std::cout << "beRepaired function exited early" << std::endl;
         return;
+    }
     _hitPoints += amount;
     _energyPoints--;
-    std::cout << _name << " repairs itself by " << amount << " hitpoints. Total hitpoints: " << _hitPoints << std::endl;
+    std::cout << "ClapTrap " << _name << " repairs itself by " << amount << " hitpoints. Total hitpoints: " << _hitPoints << std::endl;
 }

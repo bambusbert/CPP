@@ -1,6 +1,6 @@
 NAME = ex00
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wpedantic
 DFLAGS	= -MMD -MP
 RM = rm -f
 
