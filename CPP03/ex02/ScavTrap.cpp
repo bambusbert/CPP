@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 17:05:59 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/23 12:26:08 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/23 19:09:08 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void ScavTrap::attack(const std::string& target)
 {
     if (_hitPoints < 1 || _energyPoints < 1)
     {
-        std::cout << "attack function exited early" << std::endl;
+        std::cout << "ScavTrap attack function exited early" << std::endl;
         return;
     }
     _energyPoints--;
