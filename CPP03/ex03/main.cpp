@@ -6,23 +6,45 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 14:21:25 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/23 13:46:57 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/23 15:18:39 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
-int main (void)
+int	main(void)
 {
-    //std::string name = "Herbert";
-    ClapTrap a("Herbert");
-    a.attack("manfred");
-    a.takeDamage(5);
-    a.beRepaired(6);
-    a.takeDamage(255);
-    a.attack("asdf");
-    std::cout << std::endl;
-    
-    ClapTrap b;
-    b.attack("adss");
+	// std::string name = "Herbert";
+	// ScavTrap a("Herbert");
+	// a.attack("manfred");
+	// a.takeDamage(5);
+	// a.beRepaired(6);
+	// a.guardGate();
+	// a.takeDamage(255);
+	// a.attack("asdf");
+	// a.guardGate();
+	// std::cout << std::endl;
+	 
+	// FragTrap b("Rudolf");
+	// b.attack("Herbert");
+	// b.takeDamage(22);
+	// b.beRepaired(1);
+	// b.highFivesGuys();
+	// std::cout << std::endl;
+	
+	DiamondTrap c("BLING");
+	c.whoAmI();
+	c.attack("deine mama");
+	c.beRepaired(3);
+	c.takeDamage(22);
+	c.highFivesGuys();
+	c.guardGate();
+	c.takeDamage(444);
+	std::cout << std::endl;
+	
+	DiamondTrap d;
+	d.whoAmI();
+	
 }

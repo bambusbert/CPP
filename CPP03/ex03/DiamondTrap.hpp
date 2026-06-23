@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/22 14:22:34 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/23 15:10:51 by slambert         ###   ########.fr       */
+/*   Created: 2026/06/23 11:48:24 by slambert          #+#    #+#             */
+/*   Updated: 2026/06/23 12:50:25 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_H
-# define CLAPTRAP_H
+#ifndef DIAMONDTRAP_H
+#define DIAMONDTRAP_H
 
-#include <string>
-#include <iostream>
+#include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
-class ClapTrap
+class DiamondTrap : public FragTrap, public ScavTrap
 {
-    protected:
+    private:
         std::string _name;
-        int _hitPoints;
-        int _energyPoints;
-        int _attackDamage;
     public:
-        ClapTrap();
-        ClapTrap(const std::string &name);
-        ClapTrap(const ClapTrap& other);
-        ClapTrap& operator=(const ClapTrap& other);
-        virtual ~ClapTrap();
+        DiamondTrap();
+        DiamondTrap(const std::string& name);
+        DiamondTrap(const DiamondTrap& other);
+        DiamondTrap& operator=(const DiamondTrap& other);
+        ~DiamondTrap();
         void attack(const std::string& target);
-        void takeDamage(unsigned int amount);
-        void beRepaired(unsigned int amount);
+        void whoAmI();
 };
-
 #endif
