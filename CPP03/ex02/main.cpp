@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 14:21:25 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/23 11:45:24 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/02 16:07:50 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,8 @@ int	main(void)
 	b.attack("Herbert");
 	b.takeDamage(22);
 	b.beRepaired(1);
+	b.highFivesGuys();
+	b.takeDamage(333);
+	b.attack("dd");
 	b.highFivesGuys();
 }

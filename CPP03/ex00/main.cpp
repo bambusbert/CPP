@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 14:21:25 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/23 13:46:57 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/02 15:50:43 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int main (void)
     a.takeDamage(5);
     a.beRepaired(6);
     a.takeDamage(255);
+    a.takeDamage(1);
     a.attack("asdf");
     std::cout << std::endl;
     

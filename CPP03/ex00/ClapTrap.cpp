@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 14:22:32 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/23 13:46:30 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/02 15:56:24 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void ClapTrap::attack(const std::string& target)
 {
     if (_hitPoints < 1 || _energyPoints < 1)
     {
-        std::cout << "attack function exited early" << std::endl;
+        std::cout << "ClapTrap " << _name << " can't attack" << std::endl;
         return;
     }
     _energyPoints--;
@@ -58,6 +58,11 @@ void ClapTrap::attack(const std::string& target)
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
+    if (_hitPoints < 1)
+    {
+        std::cout << "ClapTrap " << _name << " is already dead. Leave " << _name << " alone!" << std::endl;
+        return;
+    }
     _hitPoints -= amount;
     if (_hitPoints > 0)
         std::cout << _name << " took " << amount << " damage. hitpoints left: " << _hitPoints << std::endl;
@@ -69,7 +74,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
     if (_hitPoints < 1 || _energyPoints < 1)
     {
-        std::cout << "beRepaired function exited early" << std::endl;
+        std::cout << "ClapTrap " << _name << " can't be repaired" << std::endl;
         return;
     }
     _hitPoints += amount;

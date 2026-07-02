@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 11:36:51 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/23 15:10:40 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/02 16:09:08 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 
 class FragTrap: public ClapTrap
 {
-    private:
-
     public:
         FragTrap();
         FragTrap(const std::string& name);

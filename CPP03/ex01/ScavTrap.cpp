@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 17:05:59 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/23 19:06:41 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/02 16:02:29 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ ScavTrap::ScavTrap(): ClapTrap()
     _attackDamage = 20;
 }
 
-ScavTrap::ScavTrap(const std::string name): ClapTrap(name)
+ScavTrap::ScavTrap(const std::string& name): ClapTrap(name)
 {
     std::cout << "ScavTrap Name constructor called" << std::endl;
     _hitPoints = 100;
@@ -50,7 +50,7 @@ void ScavTrap::attack(const std::string& target)
 {
     if (_hitPoints < 1 || _energyPoints < 1)
     {
-        std::cout << "ScavTrap attack function exited early" << std::endl;
+        std::cout << "ScavTrap " << _name << " can't attack" << std::endl;
         return;
     }
     _energyPoints--;
@@ -61,7 +61,7 @@ void ScavTrap::guardGate()
 {
     if (_hitPoints < 1 || _energyPoints < 1)
     {
-        std::cout << "guardGate function exited early" << std::endl;
+        std::cout << "ScavTrap " << _name << " can't guard the gate" << std::endl;
         return;
     }
     std::cout << "ScavTrap " << _name << " is now in Gate keeper mode." << std::endl;
