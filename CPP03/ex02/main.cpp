@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 14:21:25 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/02 16:07:50 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/06 13:39:55 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(void)
 	a.takeDamage(255);
 	a.attack("asdf");
 	a.guardGate();
+	std::cout << std::endl;
 	
 	FragTrap b("Rudolf");
 	b.attack("Herbert");
@@ -33,4 +34,21 @@ int	main(void)
 	b.takeDamage(333);
 	b.attack("dd");
 	b.highFivesGuys();
+	std::cout << std::endl;
+
+	FragTrap c("OriginalFrag");
+	
+	// Copy Constructor
+	FragTrap d(c);
+	d.highFivesGuys();
+	std::cout << std::endl;
+
+	// Copy Assignment Operator
+	FragTrap e("TempFrag");
+	e = c;
+	e.highFivesGuys();
+	std::cout << std::endl;
+
+	return 0;
+	
 }

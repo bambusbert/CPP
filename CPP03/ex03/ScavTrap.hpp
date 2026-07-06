@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 17:06:04 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/02 16:01:55 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/06 12:57:46 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 
 #include "ClapTrap.hpp"
 
-class ScavTrap: public ClapTrap
+class ScavTrap: virtual public ClapTrap
 {
+    protected:
+        int _defaultHitPoints;
+        int _defaultEnergyPoints;
+        int _defaultAttackDamage;
     public:
         ScavTrap();
         ScavTrap(const std::string& name);
