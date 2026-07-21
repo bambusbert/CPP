@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   WrongCat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,35 +10,35 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "WrongCat.hpp"
 
-Cat::Cat(): Animal()
+WrongCat::WrongCat(): WrongAnimal()
 {
-    std::cout << "Cat default constructor called" << std::endl;
-    _type = "Cat";
+    std::cout << "WrongCat default constructor called" << std::endl;
+    _type = "WrongCat";
 }
 
-Cat::Cat(const Cat &other): Animal(other)
+WrongCat::WrongCat(const WrongCat &other): WrongAnimal(other)
 {
-    std::cout << "Cat copy constructor called" << std::endl;
+    std::cout << "WrongCat copy constructor called" << std::endl;
 }
 
-Cat& Cat::operator=(const Cat &other)
+WrongCat& WrongCat::operator=(const WrongCat &other)
 {
-    std::cout << "Cat copy assignment operator called" << std::endl;
+    std::cout << "WrongCat copy assignment operator called" << std::endl;
     if (this != &other)
     {
-        Animal::operator=(other);
+        WrongAnimal::operator=(other);
     }
     return *this;
 }
 
-Cat::~Cat()
+WrongCat::~WrongCat()
 {
-    std::cout <<  "Cat Destructor called" << std::endl;
+    std::cout <<  "WrongCat Destructor called" << std::endl;
 }
 
-void Cat::makeSound() const
+void WrongCat::makeSound() const
 {
-    std::cout <<  "Cat sounds" << std::endl;
+    std::cout <<  "WrongCat sounds" << std::endl;
 }

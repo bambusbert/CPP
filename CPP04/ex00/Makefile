@@ -1,14 +1,15 @@
-NAME = ex03
+NAME = ex00
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wpedantic
 DFLAGS	= -MMD -MP
 RM = rm -f
 
-SRC =	main.cpp \
-		ClapTrap.cpp \
-		ScavTrap.cpp \
-		FragTrap.cpp \
-		DiamondTrap.cpp
+SRC =	Animal.cpp \
+		Dog.cpp \
+		Cat.cpp \
+		WrongAnimal.cpp \
+		WrongCat.cpp \
+		main.cpp
 		
 OBJ = $(SRC:.cpp=.o)
 DEP = $(SRC:.cpp=.d)
