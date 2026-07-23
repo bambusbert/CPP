@@ -1,14 +1,14 @@
-NAME = ex01
+NAME = ex02
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wpedantic
 
 DFLAGS	= -MMD -MP
 RM = rm -f
 
-SRC =	Animal.cpp \
-		Dog.cpp \
+SRC =	Dog.cpp \
 		Cat.cpp \
 		Brain.cpp \
+		AAnimal.cpp \
 		main.cpp
 		
 OBJ = $(SRC:.cpp=.o)
