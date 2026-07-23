@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AAnimal.cpp                                        :+:      :+:    :+:   */
+/*   AMateria.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/23 15:17:27 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/23 15:33:04 by slambert         ###   ########.fr       */
+/*   Created: 2026/07/23 15:40:24 by slambert          #+#    #+#             */
+/*   Updated: 2026/07/23 16:46:55 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AAnimal.hpp"
+#include "AMateria.hpp"
 
-AAnimal::AAnimal(): _type("")
+AMateria::AMateria()
 {
-    std::cout << "AAnimal default constructor called" << std::endl;
+    
 }
 
-AAnimal::AAnimal(const AAnimal &other): _type(other._type)
+AMateria::AMateria(std::string const &type)
 {
-    std::cout << "AAnimal copy constructor called" << std::endl;
+    this->_type = type;
 }
 
-AAnimal& AAnimal::operator=(const AAnimal &other)
+AMateria::AMateria(const AMateria &other)
 {
-    std::cout << "AAnimal copy assignment operator called" << std::endl;
+    this->_type = other._type;
+}
+
+AMateria& AMateria::operator=(const AMateria &other)
+{
     if (this != &other)
     {
         this->_type = other._type;
@@ -32,13 +36,17 @@ AAnimal& AAnimal::operator=(const AAnimal &other)
     return *this;
 }
 
-const std::string& AAnimal::getType() const
+AMateria::~AMateria()
 {
-    return _type;
+    
 }
 
-AAnimal::~AAnimal()
+std::string const &AMateria::getType() const
 {
-    std::cout <<  "AAnimal Destructor called" << std::endl;
+    return this->_type;
 }
 
+void AMateria::use(ICharacter &target)
+{
+    //???
+}
