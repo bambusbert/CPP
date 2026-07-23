@@ -1,0 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/23 15:35:27 by slambert          #+#    #+#             */
+/*   Updated: 2026/07/23 14:58:15 by slambert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef DOG_HPP
+#define DOG_HPP
+
+#include "Animal.hpp"
+#include "Brain.hpp"
+
+class Dog: public Animal
+{
+    private:
+        Brain* _brain;   
+    public:
+        Dog();
+        Dog(const Dog &other);
+        Dog& operator=(const Dog &other);
+        ~Dog();
+        virtual void makeSound() const;
+        Brain* getBrain() const;
+};
+
+#endif
