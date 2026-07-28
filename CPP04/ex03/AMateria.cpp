@@ -6,13 +6,13 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 15:40:24 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/23 16:46:55 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/28 12:44:01 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.hpp"
 
-AMateria::AMateria()
+AMateria::AMateria(): _type("anon material")
 {
     
 }
@@ -48,5 +48,6 @@ std::string const &AMateria::getType() const
 
 void AMateria::use(ICharacter &target)
 {
-    //???
+    //this will only print if i messed up
+    std::cout << "* generic weapon used on " + target.getName() << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 15:56:18 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/23 16:05:30 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/28 11:51:49 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define IMATERIASOURCE_HPP
 
 #include <string>
-#include "AMateria.hpp"
+//#include "AMateria.hpp"
 
 class IMateriaSource
 {

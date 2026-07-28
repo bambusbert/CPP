@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 15:59:47 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/23 16:52:21 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/28 12:36:32 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class Ice : AMateria
         ~Ice();
 
         AMateria *clone() const;
+        void use(ICharacter &target);
 };
 
 #endif

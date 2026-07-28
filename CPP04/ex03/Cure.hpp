@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 16:00:15 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/23 16:53:09 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/28 12:36:40 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class Cure : AMateria
         ~Cure();
         
         AMateria *clone() const;
+        void use(ICharacter &target);
 };
 
 #endif

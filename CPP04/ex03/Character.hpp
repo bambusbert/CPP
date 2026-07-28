@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 15:59:14 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/23 16:28:21 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/28 12:17:09 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 
 class Character : public ICharacter
 {
+    private:
+        std::string const _name;
+        AMateria* _inventory[4];
+        void empty_inv();
     public:
         Character();
         Character(const Character& other);
