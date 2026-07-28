@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 15:57:37 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/23 17:03:38 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/28 14:41:46 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 #define MATERIASOURCE_HPP
 
 #include "AMateria.hpp"
+#include "IMateriaSource.hpp"
 #include <string>
 
-class MateriaSource
+class MateriaSource : public IMateriaSource
 {
     private:
         AMateria* _materias[4];
-        int _known_materias;
+        void empty_materias();
+        void free_materias();
+        void clone_materias(const MateriaSource &other);
     public:
         MateriaSource();
         MateriaSource(const MateriaSource& other);

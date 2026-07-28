@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 16:00:15 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/28 12:36:40 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/28 14:43:52 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "AMateria.hpp"
 
-class Cure : AMateria
+class Cure :  public AMateria
 {
     public:
         Cure();

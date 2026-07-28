@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 15:59:14 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/28 12:17:09 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/28 14:37:51 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define CHARACTER_HPP
 
 #include "ICharacter.hpp"
+#include "AMateria.hpp"
 
 class Character : public ICharacter
 {
@@ -21,8 +22,11 @@ class Character : public ICharacter
         std::string const _name;
         AMateria* _inventory[4];
         void empty_inv();
+        void free_inv();
+        void clone_inv(const Character &other);
     public:
         Character();
+        Character(const std::string name);
         Character(const Character& other);
         Character& operator=(const Character& other);
         ~Character();

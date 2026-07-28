@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 15:58:10 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/23 16:24:17 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/28 14:38:40 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #define ICHARACTER_HPP
 
 #include <string>
-#include "AMateria.hpp"
+//#include "AMateria.hpp"
+class AMateria;
 
 class ICharacter
 {

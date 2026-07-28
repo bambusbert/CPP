@@ -1,7 +1,6 @@
 NAME = ex03
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wpedantic
-
+CXXFLAGS = -g -Wall -Wextra -Werror -std=c++98 -Wpedantic
 DFLAGS	= -MMD -MP
 RM = rm -f
 
@@ -9,8 +8,6 @@ SRC =	AMateria.cpp \
 		Character.cpp \
 		Cure.cpp \
 		Ice.cpp \
-		ICharacter.cpp \
-		IMateriaSource.cpp \
 		MateriaSource.cpp \
 		main.cpp
 		

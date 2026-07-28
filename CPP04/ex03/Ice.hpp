@@ -6,16 +6,16 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 15:59:47 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/28 12:36:32 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/28 14:44:09 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CURE_HPP
-#define CURE_HPP
+#ifndef ICE_HPP
+#define ICE_HPP
 
 #include "AMateria.hpp"
 
-class Ice : AMateria
+class Ice : public AMateria
 {
     public:
         Ice();
