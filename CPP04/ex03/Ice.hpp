@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 15:59:47 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/28 16:51:06 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/28 17:09:35 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ class Ice : public AMateria
         Ice();
         Ice(const Ice& other);
         const Ice& operator=(const Ice& other);
-        ~Ice();
-        AMateria *clone() const;
-        void use(ICharacter &target);
+        virtual ~Ice();
+        virtual AMateria *clone() const;
+        virtual void use(ICharacter &target);
 };
 
 #endif
