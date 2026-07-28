@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 15:57:43 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/28 14:51:59 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/28 17:00:43 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void MateriaSource::empty_materias()
         this->_materias[i] = NULL;
 }
 
-//delete NULL i OK so no protection needed
+//delete NULL is OK so no protection needed
 void MateriaSource::free_materias()
 {
     for (int i = 0; i < 4; i++)
@@ -31,9 +31,7 @@ void MateriaSource::free_materias()
 void MateriaSource::clone_materias(const MateriaSource &other)
 {
     for (int i = 0; i < 4; i++)
-    {
         this->_materias[i] = other._materias[i]->clone(); 
-    }
 }
 
 MateriaSource::MateriaSource()
@@ -65,6 +63,8 @@ void MateriaSource::learnMateria(AMateria *materia)
 {
     int i = 0;
     
+    if (!materia)
+        return ;
     while (this->_materias[i])
     {
         i++;
@@ -84,7 +84,7 @@ AMateria *MateriaSource::createMateria(std::string const &type)
 
     while (i < 4)
     {
-        if (_materias[i]->getType() == type)
+        if (_materias[i] && _materias[i]->getType() == type)
             return _materias[i]->clone();
         i++;
     }

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 16:00:04 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/28 13:40:48 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/28 16:51:16 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ Ice::Ice(): AMateria("ice")
 
 Ice::Ice(const Ice &other): AMateria(other)
 {
-    
 }
 
 const Ice &Ice::operator=(const Ice &other)
