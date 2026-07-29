@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 15:59:22 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/29 11:25:44 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/29 12:20:58 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void Character::empty_inv()
         this->_inventory[i] = NULL;
 }
 
-//delete NULL i OK so no protection needed
+//delete NULL is OK so no protection needed
 void Character::free_inv()
 {
     for (int i = 0; i < 4; i++)
@@ -33,7 +33,8 @@ void Character::clone_inv(const Character &other)
 {
     for (int i = 0; i < 4; i++)
     {
-        this->_inventory[i] = other._inventory[i]->clone(); 
+        if (other._inventory[i])
+            this->_inventory[i] = other._inventory[i]->clone(); 
     }
 }
 
@@ -49,6 +50,7 @@ Character::Character(const std::string name): _name(name)
 
 Character::Character(const Character &other): _name(other._name)
 {
+    empty_inv();
     clone_inv(other);
 }
 

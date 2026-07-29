@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 15:57:43 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/29 11:34:56 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/29 11:54:33 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,9 @@ void MateriaSource::learnMateria(AMateria *materia)
     {
         i++;
         if (i >= 4)
-        {
-            delete materia;
             return ;
-        }
     }
     this->_materias[i] = materia->clone();
-    delete materia;
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type)
