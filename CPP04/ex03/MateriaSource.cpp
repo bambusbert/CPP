@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 15:57:43 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/28 17:00:43 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/29 11:34:56 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void MateriaSource::free_materias()
 void MateriaSource::clone_materias(const MateriaSource &other)
 {
     for (int i = 0; i < 4; i++)
-        this->_materias[i] = other._materias[i]->clone(); 
+    {
+        if (other._materias[i])
+            this->_materias[i] = other._materias[i]->clone(); 
+    }
 }
 
 MateriaSource::MateriaSource()
@@ -41,6 +44,7 @@ MateriaSource::MateriaSource()
 
 MateriaSource::MateriaSource(const MateriaSource &other)
 {
+    empty_materias();
     clone_materias(other);
 }
 

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 16:06:29 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/28 17:24:58 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/29 11:25:01 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int main ()
     ICharacter* bob = new Character("bob");
     me->use(0, *bob);
     me->use(1, *bob);
+    me->use(2, *bob);
     delete bob;
     delete me;
     delete src;
