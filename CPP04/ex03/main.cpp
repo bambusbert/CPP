@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 16:06:29 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/29 12:41:36 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/29 15:21:14 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int main ()
     tmp = new Cure();
     src->learnMateria(tmp);
     delete tmp;
-    // The 5th Materia should be rejected and cleaned up by learnMateria
+    // The 5th Materia should be rejected (nothing happens)
     AMateria* extraSpell = new Ice();
     src->learnMateria(extraSpell);
     delete extraSpell;
@@ -79,7 +79,7 @@ int main ()
     // The 5th equip should do nothing 
     AMateria* tmpReject = src->createMateria("ice");
     me->equip(tmpReject);
-    delete tmpReject; // Must manually delete since 'me' couldn't equip it!
+    delete tmpReject;
 
     std::cout << "\n--- 3. Testing Deep Copy of Character ---" << std::endl;
     Character* originalBob = new Character("bob");
