@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 16:06:29 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/29 15:21:14 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/12 12:27:41 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 int main ()
 {
+    std::cout << "old tests - base subject pdf" << std::endl;
     IMateriaSource* src2 = new MateriaSource();
     IMateriaSource* src(src2);
     AMateria* tmp;
@@ -48,7 +49,7 @@ int main ()
     delete src;
     
     // return 0;
-    std::cout << "--- 1. Testing MateriaSource & Overflow ---" << std::endl;
+    std::cout << "Test 1: MateriaSource & Overflow" << std::endl;
     src = new MateriaSource();
     tmp = new Ice();
     src->learnMateria(tmp);
@@ -67,7 +68,7 @@ int main ()
     src->learnMateria(extraSpell);
     delete extraSpell;
 
-    std::cout << "\n--- 2. Testing Character Equip & Overflow ---" << std::endl;
+    std::cout << "\nTest 2. Character Equip & Overflow" << std::endl;
     me = new Character("me");
     
     AMateria* tmp1 = src->createMateria("ice");
@@ -81,7 +82,7 @@ int main ()
     me->equip(tmpReject);
     delete tmpReject;
 
-    std::cout << "\n--- 3. Testing Deep Copy of Character ---" << std::endl;
+    std::cout << "\nTest 3. Deep Copy of Character" << std::endl;
     Character* originalBob = new Character("bob");
     originalBob->equip(src->createMateria("cure"));
     Character* cloneBob = new Character(*originalBob); // Testing Copy Constructor
@@ -91,7 +92,7 @@ int main ()
     ICharacter* target = new Character("TargetDummy");
     cloneBob->use(0, *target);
 
-    std::cout << "\n--- 4. Cleanup ---" << std::endl;
+    std::cout << "\nTest 4. Cleanup" << std::endl;
     delete me;
     delete cloneBob;
     delete target;
