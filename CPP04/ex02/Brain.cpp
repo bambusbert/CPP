@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 12:39:37 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/23 15:03:59 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/12 11:58:21 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void Brain::setIdea(std::string& idea, int index)
     _ideas[index] = idea;
 }
 
-std::string Brain::getIdea(int index) const
+const std::string& Brain::getIdea(int index) const
 {
     static const std::string err_msg = "you are a bad boy";
     if (index < 0 || index >= 100)
