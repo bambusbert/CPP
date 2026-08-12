@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
+#include <exception>
 
 Bureaucrat::Bureaucrat() : _name("anon"), _grade(75)
 {
@@ -53,7 +55,6 @@ unsigned int Bureaucrat::getGrade() const
     return _grade;
 }
 
-// also throw exceptions
 void Bureaucrat::incrementGrade()
 {
     if (_grade - 1 < 1)
@@ -66,6 +67,20 @@ void Bureaucrat::decrementGrade()
     if (_grade + 1 > 150)
         throw Bureaucrat::GradeTooHighException();
     _grade++;
+}
+
+void Bureaucrat::signForm(Form& f)
+{
+    try
+    {
+        f.beSigned(*this);
+        std::cout << this->_name << " signed " << f.getName() << std::endl;
+    }
+    catch(Form::GradeTooLowException &e)
+    {
+        std::cout << this->_name << " couldn't sign " << f.getName() << " because ";
+        std::cout << this->_name << " is not a good enough bureaucrat" << std::endl;
+    }
 }
 
 void Bureaucrat::myExceptionThrower(unsigned int grade)

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 13:30:46 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/12 14:08:55 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/12 15:19:32 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,16 @@
 int main(void)
 {
     Bureaucrat a;
+    std::cout << a;
+    a.decrementGrade();
+    std::cout << a;
     Bureaucrat b("manfred", 7);
+    std::cout << b;
+    Bureaucrat b1 = b;
+    std::cout << b1;
+    a = b1;
+    std::cout << a;
+    std::cout << "\nnow testing exception stuff\n";
     try
     {
         Bureaucrat c("lanfred", 0);
@@ -40,14 +49,19 @@ int main(void)
     }
     catch(std::exception &e)
     {
-        std::cerr << e.what() << std::endl;
+        std::cout << e.what() << std::endl;
     }
-    std::cout << e.getGrade() << std::endl;
     std::cout << e;
     Bureaucrat *pB = new Bureaucrat("sepp", 10);
     pB->decrementGrade();
     std::cout << pB;
     delete(pB);
-    
+
+
+    //Bureaucrat asd("bert", 0);
+    //without try/catch block we will get the following behaviour:
+    //terminate called after throwing an instance of 'Bureaucrat::GradeTooLowException'
+    //what():  Grade is too low
+    //Aborted                    (core dumped) ./ex00
     
 }
