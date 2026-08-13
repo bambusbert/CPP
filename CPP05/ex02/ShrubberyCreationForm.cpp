@@ -40,7 +40,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 {
 }
 
-void ShrubberyCreationForm::beExecuted()
+void ShrubberyCreationForm::beExecuted() const
 {
     std::ofstream file((_target + "_shrubbery").c_str(), std::ofstream::out);
     file << ASCII_TREE;

@@ -15,6 +15,7 @@
 
 #include <string>
 #include <exception>
+#include <iostream>
 
 class Bureaucrat;
 
@@ -37,8 +38,8 @@ class AForm
         unsigned int getGradeSign() const;
         unsigned int getGradeExecute() const;
         void beSigned(Bureaucrat& b);
-        void execute(Bureaucrat &b);
-        virtual void beExecuted() = 0;
+        void execute(Bureaucrat const & executor) const;
+        virtual void beExecuted() const = 0;
         class GradeTooLowException: public std::exception
         {
             public:
