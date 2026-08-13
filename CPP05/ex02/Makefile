@@ -7,9 +7,9 @@ RM = rm -f
 SRC =	Bureaucrat.cpp \
 		AForm.cpp \
 		ShrubberyCreationForm.cpp \
+		PresidentialPardonForm.cpp \
+		RobotomyRequestForm.cpp \
 		main.cpp
-		# RobotomyRequestForm.cpp \
-		# PresidentialPardonForm.cpp \
 
 OBJ = $(SRC:.cpp=.o)
 DEP = $(SRC:.cpp=.d)
