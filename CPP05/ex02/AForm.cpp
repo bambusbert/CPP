@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,21 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
-Form::Form() : _name("anon Form"), _signed(false), _gradeSign(75), _gradeExecute(75)
+AForm::AForm() : _name("anon AForm"), _signed(false), _gradeSign(75), _gradeExecute(75)
 {
 }
 
-Form::Form(const std::string &name, unsigned int gradeSign, unsigned int gradeExecute) :
+AForm::AForm(const std::string &name, unsigned int gradeSign, unsigned int gradeExecute) :
 	_name(name), _signed(false), _gradeSign(gradeSign), _gradeExecute(gradeExecute)
 {
 	myExceptionThrower(gradeSign);
 	myExceptionThrower(gradeExecute);
 }
 
-Form::Form(const Form &other) :
+AForm::AForm(const AForm &other) :
 	_name(other._name), _signed(other._signed), _gradeSign(other._gradeSign),
 	_gradeExecute(other._gradeExecute)
 {
@@ -32,38 +32,38 @@ Form::Form(const Form &other) :
 	myExceptionThrower(other._gradeExecute);
 }
 
-Form &Form::operator=(const Form &other)
+AForm &AForm::operator=(const AForm &other)
 {
 	if (this != &other)
 		this->_signed = other._signed;
 	return *this;
 }
 
-Form::~Form()
+AForm::~AForm()
 {
 }
 
-const std::string Form::getName() const
+const std::string AForm::getName() const
 {
 	return _name;
 }
 
-bool Form::getSigned() const
+bool AForm::getSigned() const
 {
 	return _signed;
 }
 
-unsigned int Form::getGradeSign() const
+unsigned int AForm::getGradeSign() const
 {
 	return _gradeSign;
 }
 
-unsigned int Form::getGradeExecute() const
+unsigned int AForm::getGradeExecute() const
 {
 	return _gradeExecute;
 }
 
-void Form::beSigned(Bureaucrat &b)
+void AForm::beSigned(Bureaucrat &b)
 {
 	if (!(b.getGrade() <= this->_gradeSign))
 		throw GradeTooLowException();
@@ -71,35 +71,49 @@ void Form::beSigned(Bureaucrat &b)
 	this->_signed = true;
 }
 
-void Form::myExceptionThrower(unsigned int grade)
+void AForm::execute(Bureaucrat &b)
 {
-	if (grade < 1)
-		throw Form::GradeTooHighException();
-	if (grade > 150)
-		throw Form::GradeTooLowException();
+	if (!_signed)
+		throw FormNotSignedException();
+	if (!(b.getGrade() <= this->getGradeExecute()))
+		throw GradeTooLowException();
+	this->beExecuted();
 }
 
-const char *Form::GradeTooLowException::what() const throw()
+void AForm::myExceptionThrower(unsigned int grade)
+{
+	if (grade < 1)
+		throw AForm::GradeTooHighException();
+	if (grade > 150)
+		throw AForm::GradeTooLowException();
+}
+
+const char *AForm::GradeTooLowException::what() const throw()
 {
 	return "Grade is too low";
 }
 
-const char *Form::GradeTooHighException::what() const throw()
+const char *AForm::GradeTooHighException::what() const throw()
 {
 	return "Grade is too high";
 }
 
-std::ostream &operator<<(std::ostream &o, Form *f)
+const char *AForm::FormNotSignedException::what() const throw()
 {
-	o << "Form name: " << f->getName() << ", " << "Signed: " << f->getSigned()
+	return "Form not signed";
+}
+
+std::ostream &operator<<(std::ostream &o, AForm *f)
+{
+	o << "AForm name: " << f->getName() << ", " << "Signed: " << f->getSigned()
 	  << ", Grade Sign: " << f->getGradeSign() << ", "
 	  << "Grade Execute: " << f->getGradeExecute() << std::endl;
 	return o;
 }
 
-std::ostream &operator<<(std::ostream &o, Form &f)
+std::ostream &operator<<(std::ostream &o, AForm &f)
 {
-	o << "Form name: " << f.getName() << ", " << "Signed: " << f.getSigned()
+	o << "AForm name: " << f.getName() << ", " << "Signed: " << f.getSigned()
 	  << ", Grade Sign: " << f.getGradeSign() << ", "
 	  << "Grade Execute: " << f.getGradeExecute() << std::endl;
 	return o;

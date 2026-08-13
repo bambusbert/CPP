@@ -1,0 +1,35 @@
+NAME = ex02
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wpedantic
+DFLAGS	= -MMD -MP
+RM = rm -f
+
+SRC =	Bureaucrat.cpp \
+		AForm.cpp \
+		ShrubberyCreationForm.cpp \
+		main.cpp
+		# RobotomyRequestForm.cpp \
+		# PresidentialPardonForm.cpp \
+
+OBJ = $(SRC:.cpp=.o)
+DEP = $(SRC:.cpp=.d)
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) $(DFLAGS) -c $< -o $@
+
+-include $(DEP)
+
+clean:
+	$(RM) $(OBJ) $(DEP)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re

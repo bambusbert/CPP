@@ -15,6 +15,7 @@
 
 #include <string>
 #include <iostream>
+#include <exception>
 
 class Bureaucrat
 {
@@ -32,8 +33,8 @@ class Bureaucrat
         unsigned int getGrade() const;
         void incrementGrade();
         void decrementGrade();
-        
-        class GradeTooLowException: public std::exception 
+
+        class GradeTooLowException: public std::exception
         {
             public:
                 virtual const char* what() const throw();

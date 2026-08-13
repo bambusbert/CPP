@@ -10,31 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
-#include "Form.hpp"
 #include <iostream>
+#include "Bureaucrat.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 int main(void)
 {
-	std::cout << "TEST 0" << std::endl;
-	Form valid("BLAFORM", 1, 100);
-	try
-	{
-		Form invalid("INVFORM", 1, 151);
-	}
-	catch (Form::GradeTooLowException &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	std::cout << "\nTEST 1" << std::endl;
-	Bureaucrat a("Horst", 10);
-	Bureaucrat b("Borst", 100);
-	std::cout << a;
-	std::cout << b;
-	Form f("form1", 10, 10);
-	std::cout << f;
-	b.signForm(f);
-	std::cout << f;
-	a.signForm(f);
-	std::cout << f;
+    // this should not work, bc it's an abstract class
+    // AForm a("asd", 5, 5);
+    Bureaucrat b("Bert", 137);
+    ShrubberyCreationForm sf("target");
+    std::cout << sf;
+    b.executeForm(sf);
+    b.signForm(sf);
+    std::cout << sf;
+    b.executeForm(sf);
+
+   // b.signForm(sf);
 }

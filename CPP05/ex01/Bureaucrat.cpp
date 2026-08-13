@@ -12,7 +12,6 @@
 
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
-#include <exception>
 
 Bureaucrat::Bureaucrat() : _name("anon"), _grade(75)
 {
