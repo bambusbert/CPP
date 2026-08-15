@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
+#include <climits>
 #include <cstdlib>
 
 ScalarConverter::ScalarConverter()
@@ -35,15 +36,38 @@ ScalarConverter::~ScalarConverter()
 {
 }
 
-static void print_char(long num)
+static void printChar(long num)
 {
     if (num >= 32 && num <= 126)
         std::cout << "char: " << static_cast<char>(num) << std::endl;
     else
         std::cout << "char: not printable"  << std::endl;
-	std::cout << "int: " << num << std::endl;
-	std::cout << "float: " <<  static_cast<float>(num) << std::endl;
-	std::cout << "double: " << static_cast<double>(num) << std::endl;
+}
+
+static void printInt(long num)
+{
+    if (num > INT_MAX || num < INT_MIN)
+        std::cout << "int: impossible" << std::endl;
+    else
+        std::cout << "int: " << num << std::endl;
+}
+
+static void printFloat(float num)
+{
+    std::cout << "float: " <<  static_cast<float>(num) << "f" << std::endl;
+}
+
+static void printDouble(double num)
+{
+    std::cout << "double: " << static_cast<double>(num) << std::endl;
+}
+
+static void print_char_stuff(long num)
+{
+    printChar(num);
+    printInt(num);
+    printFloat(static_cast<float>(num));
+    printDouble(static_cast<double>(num));
 }
 
 static void handleInt(std::string str)
@@ -52,12 +76,15 @@ static void handleInt(std::string str)
     char *endptr;
 
     long num = strtol(str.c_str(), &endptr, 10);
-
+    printChar(num);
+    printInt(num);
+    printFloat(static_cast<float>(num));
+    printDouble(static_cast<double>(num));
 }
 
 static void handleChar(char c)
 {
-    print_char(static_cast<long>(c));
+    print_char_stuff(static_cast<long>(c));
 }
 
 static bool isFloatOrDouble(std::string str)
