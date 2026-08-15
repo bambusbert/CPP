@@ -15,8 +15,7 @@
 
 #include <string>
 #include <iostream>
-#include <cstdlib>
-#include <limits>
+#include <stdlib.h>
 
 class ScalarConverter
 {

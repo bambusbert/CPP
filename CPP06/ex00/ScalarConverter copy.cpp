@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
-#include <cstdlib>
 
 ScalarConverter::ScalarConverter()
 {
@@ -35,7 +34,13 @@ ScalarConverter::~ScalarConverter()
 {
 }
 
-static void print_char(long num)
+static float charToFloat(char c)
+{
+    int temp = (int)c;
+    return (float)temp;
+}
+
+static void print_int(int num)
 {
     if (num >= 32 && num <= 126)
         std::cout << "char: " << static_cast<char>(num) << std::endl;
@@ -46,47 +51,43 @@ static void print_char(long num)
 	std::cout << "double: " << static_cast<double>(num) << std::endl;
 }
 
-static void handleInt(std::string str)
-{
-    //strol
-    char *endptr;
-
-    long num = strtol(str.c_str(), &endptr, 10);
-
-}
-
 static void handleChar(char c)
 {
-    print_char(static_cast<long>(c));
+    print_int(static_cast<int>(c));
 }
 
-static bool isFloatOrDouble(std::string str)
+static void handleInt(int i)
 {
-    int countCommas = 0;
-    int countF = 0;
-
-    for (int i = 0; i < str.length(); i++)
-    {
-        if (!((str[i] >= '0' && str[i] <= '9') || str[i] == '.' || str[i] == 'f'))
-            return false;
-        if (str[i] == '.')
-            countCommas++;
-        if (str[i] == 'f')
-            countF++;
-    }
-    if (countCommas == 1 && countF == 0)
-    {
-        std::cout << "double" << std::endl;
-        return true;
-    }
-    if (countCommas > 1 || countF > 1 || (countF == 1 && str[str.length() - 1] != 'f'))
-        return false;
-    if (countCommas == 0 && countF == 0)
-        return false;
-    std::cout << "float" << std::endl;
-    return true;
+    print_int(i);
 }
 
+static void handleFloatOrDouble(double num_double)
+{
+    //float num_float = std::stof()
+}
+
+static int myAtoi(const char *str)
+{
+    //check if it is int (or string or smth)
+    //over- & underflow check
+    return atoi(str);
+}
+
+static double myAtof(const char *str)
+{
+    //check if it is int (or string or smth)
+    // check if overflow
+    return atof(str);
+}
+
+// string to int: std::stoi
+// string to float: std::stof
+// string to double: std::stod
+// but they are not allowed bc they are C++11
+//
+// allowed is:
+// atof: returns double, argument C string
+// atoi: returns int, argument C string
 void ScalarConverter::convert(std::string str)
 {
 	// if length is 1 and ascii printable: char (exclude 0-9)
@@ -97,15 +98,9 @@ void ScalarConverter::convert(std::string str)
 		if (!(str[0] >= '0' && str[0] <= '9'))
 			return handleChar(str[0]);
 	}
-	if (!isFloatOrDouble(str))
-	{
-	    handleInt(str);
-		exit (0);
-	}
-	//     handleFloat(str);
-
-
-	//strol
-	// strtod
-
+	int num_int = myAtoi(str.c_str());
+	double num_double = myAtof(str.c_str());
+	if (num_double - num_int == 0)
+	    return handleInt(num_int);
+	return handleFloatOrDouble(num_double);
 }
