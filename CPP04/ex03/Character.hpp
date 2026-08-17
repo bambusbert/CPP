@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 15:59:14 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/28 14:37:51 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/17 17:33:56 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ class Character : public ICharacter
         Character(const std::string name);
         Character(const Character& other);
         Character& operator=(const Character& other);
-        ~Character();
-        std::string const &getName() const;
-        void equip(AMateria *m);
-        void unequip(int idx);
-        void use(int idx, ICharacter &target);
+        virtual ~Character();
+        virtual std::string const &getName() const;
+        virtual void equip(AMateria *m);
+        virtual void unequip(int idx);
+        virtual void use(int idx, ICharacter &target);
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 15:34:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/21 16:37:38 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/17 17:32:33 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class WrongCat: public WrongAnimal
         WrongCat();
         WrongCat(const WrongCat &other);
         WrongCat& operator=(const WrongCat &other);
-        ~WrongCat();
+        virtual ~WrongCat();
         void makeSound() const;
 };
 

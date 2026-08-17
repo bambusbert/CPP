@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 15:35:27 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/21 16:12:40 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/17 17:30:45 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Dog: public Animal
         Dog();
         Dog(const Dog &other);
         Dog& operator=(const Dog &other);
-        ~Dog();
+        virtual ~Dog();
         virtual void makeSound() const;        
 };
 

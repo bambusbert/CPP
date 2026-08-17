@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 15:34:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/21 16:12:34 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/17 17:30:33 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Cat: public Animal
         Cat();
         Cat(const Cat &other);
         Cat& operator=(const Cat &other);
-        ~Cat();
+        virtual ~Cat();
         virtual void makeSound() const;
 };
 
