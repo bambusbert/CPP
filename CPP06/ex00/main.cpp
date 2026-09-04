@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 13:30:46 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/12 15:19:32 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/26 12:49:53 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int main(int argc, char **argv)
 {
     if (argc != 2)
     {
-        std::cout << "Enter only 1 argument" << std::endl;
+        std::cout << "Enter exactly 1 argument" << std::endl;
         return 1;
     }
-    //innput validation here?
+    //input validation here?
     ScalarConverter::convert(argv[1]);
 }
