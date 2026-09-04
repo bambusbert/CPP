@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:54 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/04 11:24:09 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/04 12:49:50 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <climits>
+#include <cmath>
 
 //TODO make non instantiable (= 0)
 class ScalarConverter
