@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*   PresidentialPardonForm.cpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/12 14:05:48 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/09 16:08:11 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "AForm.hpp"
 #include <cstdlib>
 
-PresidentialPardonForm::PresidentialPardonForm(): AForm("pres", 25, 5), _target("anon_target")
+PresidentialPardonForm::PresidentialPardonForm(): AForm("PresidentialPardonForm", 25, 5), _target("anon_target")
 {
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string &target):
-AForm("pres", 25, 5), _target(target)
+AForm("PresidentialPardonForm", 25, 5), _target(target)
 {
 }
 

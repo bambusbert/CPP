@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/12 14:05:48 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/09 16:07:56 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 #include "AForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(): AForm("shrub", 145, 137), _target("anon_target")
+ShrubberyCreationForm::ShrubberyCreationForm(): AForm("ShrubberyCreationForm", 145, 137), _target("anon_target")
 {
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target):
-AForm("shrub", 145, 137), _target(target)
+AForm("ShrubberyCreationForm", 145, 137), _target(target)
 {
 }
 

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:54 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/09 15:56:29 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/09 16:08:11 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static AForm *makeRobo(const std::string &target)
 	return new RobotomyRequestForm(target);
 }
 
-// shrub, pres, robo
+// ShrubberyCreationForm, PresidentialPardonForm, RobotomyRequestForm
 AForm *Intern::makeForm(const std::string &formName, const std::string &target)
 {
 	std::string forms[3] = {"ShrubberyCreationForm", "RobotomyRequestForm",

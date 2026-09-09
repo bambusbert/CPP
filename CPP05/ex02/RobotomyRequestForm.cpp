@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/09 14:56:20 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/09 16:07:40 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "AForm.hpp"
 #include <cstdlib>
 
-RobotomyRequestForm::RobotomyRequestForm(): AForm("robo", 72, 45), _target("anon_target")
+RobotomyRequestForm::RobotomyRequestForm(): AForm("RobotomyRequestForm", 72, 45), _target("anon_target")
 {
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target):
-AForm("robo", 72, 45), _target(target)
+AForm("RobotomyRequestForm", 72, 45), _target(target)
 {
 }
 

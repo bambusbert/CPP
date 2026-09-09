@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 13:30:46 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/09 15:44:40 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/09 16:07:40 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int main(void)
     mama.executeForm(rf);
     std::cout << rf;
 
-    std::cout << "\n\nTEST2b - testing robo chance" << std::endl;
+    std::cout << "\n\nTEST2b - testing RobotomyRequestForm chance" << std::endl;
     for (int i = 0; i < 20; i++)
         mama.executeForm(rf);
 
