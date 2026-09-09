@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*   Intern.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:54 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/12 14:05:42 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/09 15:56:29 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ AForm *Intern::makeForm(const std::string &formName, const std::string &target)
 {
 	std::string forms[3] = {"ShrubberyCreationForm", "RobotomyRequestForm",
 							"PresidentialPardonForm"};
-	AForm *(*functionPointers[3])(const std::string &) = {&makeShrub, &makeRobo, &makePres};
-
+	AForm*(*functionPointers[3])(const std::string&) = {&makeShrub, &makeRobo, &makePres};
 	for (int i = 0; i < 3; i++)
 	{
 		if (formName == forms[i])
@@ -63,6 +62,6 @@ AForm *Intern::makeForm(const std::string &formName, const std::string &target)
 			return functionPointers[i](target);
 		}
 	}
-	std::cout << "Intern could not create " << formName << std::endl;
+	std::cout << "Intern could not create " << formName << " because that's not a valid form" << std::endl;
 	return NULL;
 }

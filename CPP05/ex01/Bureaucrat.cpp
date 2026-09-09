@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/12 14:05:48 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/09 13:55:15 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ unsigned int Bureaucrat::getGrade() const
 void Bureaucrat::incrementGrade()
 {
     if (_grade - 1 < 1)
-        throw Bureaucrat::GradeTooLowException();
+        throw Bureaucrat::GradeTooHighException();
     _grade--;
 }
 
 void Bureaucrat::decrementGrade()
 {
     if (_grade + 1 > 150)
-        throw Bureaucrat::GradeTooHighException();
+        throw Bureaucrat::GradeTooLowException();
     _grade++;
 }
 

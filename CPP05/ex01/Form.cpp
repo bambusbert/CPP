@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 15:23:09 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/12 16:21:03 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/09 14:07:00 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ unsigned int Form::getGradeExecute() const
 void Form::beSigned(Bureaucrat &b)
 {
 	if (!(b.getGrade() <= this->_gradeSign))
-		throw GradeTooLowException();
-
+		throw Form::GradeTooLowException();
 	this->_signed = true;
 }
 

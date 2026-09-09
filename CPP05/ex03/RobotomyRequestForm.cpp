@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/12 14:05:48 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/09 15:01:07 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,12 @@ RobotomyRequestForm::~RobotomyRequestForm()
 {
 }
 
-//common practice is to seed in main
+//if this method is used it is necessary to seed in main (srand)
 void RobotomyRequestForm::beExecuted() const
 {
-    static bool seeded = false;
-
-    if (!seeded)
-    {
-        srand(time(NULL));
-        seeded = true;
-    }
     std::cout << "...DRILLING NOISES..." << std::endl;
     if (rand() % 2)
-        std::cout << _target << " has successfully been robotomized" << std::endl;
+        std::cout << _target << " has been successfully robotomized." << std::endl;
     else
-        std::cout << "Robotomization failed" << std::endl;
+        std::cout << "Robotomy failed." << std::endl;
 }

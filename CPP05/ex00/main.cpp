@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 13:30:46 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/12 15:19:32 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/09 14:01:51 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,28 @@ int main(void)
     }
     catch(std::exception &e)
     {
-        std::cout << e.what() << std::endl;
+        std::cout << "Nope. " << e.what() << std::endl;
     }
     std::cout << e;
     Bureaucrat *pB = new Bureaucrat("sepp", 10);
     pB->decrementGrade();
     std::cout << pB;
+
+    std::cout << "\nnow testing if incrementGrade also throws exception\n";
+    while (true)
+    {
+        try
+        {
+            pB->incrementGrade();
+            std::cout << pB;
+        }
+        catch(const std::exception& e)
+        {
+            std::cout << "Nope. " << e.what() << std::endl;
+            break;
+        }
+    }
     delete(pB);
-
-
     //Bureaucrat asd("bert", 0);
     //without try/catch block we will get the following behaviour:
     //terminate called after throwing an instance of 'Bureaucrat::GradeTooLowException'

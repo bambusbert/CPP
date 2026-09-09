@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/12 14:05:48 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/09 13:53:37 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 {
     if (this != &other)
     {
-        // name stays the same, because it has to be const
+        //name stays the same, because it has to be const
+        //technically that is not instantiation so i think it would be ok
+        //not to call myExceptionThrower here
         myExceptionThrower(other._grade);
         this->_grade = other._grade;
     }
@@ -57,14 +59,14 @@ unsigned int Bureaucrat::getGrade() const
 void Bureaucrat::incrementGrade()
 {
     if (_grade - 1 < 1)
-        throw Bureaucrat::GradeTooLowException();
+        throw Bureaucrat::GradeTooHighException();
     _grade--;
 }
 
 void Bureaucrat::decrementGrade()
 {
     if (_grade + 1 > 150)
-        throw Bureaucrat::GradeTooHighException();
+        throw Bureaucrat::GradeTooLowException();
     _grade++;
 }
 
