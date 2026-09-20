@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/09 16:07:56 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/20 13:10:37 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,10 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 void ShrubberyCreationForm::beExecuted() const
 {
     std::ofstream file((_target + "_shrubbery").c_str(), std::ofstream::out);
+    if (!file.is_open())
+    {
+        std::cout << "Could not create " << _target << "_shrubbery" << std::endl;
+        return;
+    }
     file << ASCII_TREE;
 }
