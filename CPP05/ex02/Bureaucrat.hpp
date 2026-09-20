@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:54 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/20 12:27:47 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/20 13:05:39 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@ class Bureaucrat
 {
     private:
         const std::string _name;
-        unsigned int _grade;
-        void myExceptionThrower(unsigned int grade);
+        int _grade;
+        void myExceptionThrower(int grade);
     public:
         Bureaucrat();
-        Bureaucrat(const std::string& name, unsigned int grade);
+        Bureaucrat(const std::string& name, int grade);
         Bureaucrat(const Bureaucrat& other);
         Bureaucrat& operator=(const Bureaucrat& other);
         ~Bureaucrat();
         const std::string& getName() const;
-        unsigned int getGrade() const;
+        int getGrade() const;
         void incrementGrade();
         void decrementGrade();
-        void signForm(AForm& f);
+        void signForm(AForm& f) const;
         void executeForm(AForm const & form) const;
         class GradeTooLowException: public std::exception
         {

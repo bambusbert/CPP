@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 15:22:52 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/20 12:28:10 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/20 13:04:15 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,22 @@ class AForm
     private:
         const std::string _name;
         bool _signed;
-        const unsigned int _gradeSign;
-        const unsigned int _gradeExecute;
-        void myExceptionThrower(unsigned int grade);
+        const int _gradeSign;
+        const int _gradeExecute;
+        void myExceptionThrower(int grade);
+        virtual void beExecuted() const = 0;
     public:
         AForm();
-        AForm(const std::string& name, unsigned int gradeSign, unsigned int gradeExecute);
+        AForm(const std::string& name, int gradeSign, int gradeExecute);
         AForm(const AForm& other);
         AForm& operator=(const AForm& other);
         virtual ~AForm();
         const std::string getName() const;
         bool getSigned() const;
-        unsigned int getGradeSign() const;
-        unsigned int getGradeExecute() const;
-        void beSigned(Bureaucrat& b);
+        int getGradeSign() const;
+        int getGradeExecute() const;
+        void beSigned(const Bureaucrat& b);
         void execute(Bureaucrat const & executor) const;
-        virtual void beExecuted() const = 0;
         class GradeTooLowException: public std::exception
         {
             public:

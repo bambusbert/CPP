@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/20 12:30:09 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/20 13:06:00 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Bureaucrat::Bureaucrat() : _name("anon"), _grade(75)
 {
 }
 
-Bureaucrat::Bureaucrat(const std::string &name, unsigned int grade) : _name(name)
+Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name)
 {
 	myExceptionThrower(grade);
 	_grade = grade;
@@ -49,7 +49,7 @@ const std::string &Bureaucrat::getName() const
 	return _name;
 }
 
-unsigned int Bureaucrat::getGrade() const
+int Bureaucrat::getGrade() const
 {
 	return _grade;
 }
@@ -68,7 +68,7 @@ void Bureaucrat::decrementGrade()
 	_grade++;
 }
 
-void Bureaucrat::signForm(AForm &f)
+void Bureaucrat::signForm(AForm &f) const
 {
 	try
 	{
@@ -101,7 +101,7 @@ void Bureaucrat::executeForm(AForm const & form) const
 	}
 }
 
-void Bureaucrat::myExceptionThrower(unsigned int grade)
+void Bureaucrat::myExceptionThrower(int grade)
 {
 	if (grade < 1)
 		throw Bureaucrat::GradeTooHighException();

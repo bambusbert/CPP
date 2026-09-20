@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 13:30:46 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/20 12:19:46 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/20 12:55:10 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(void)
     Intern i;
     AForm *a = i.makeForm("robotomy request", "abc");
     AForm *b = i.makeForm("NonExistingForm", "def");
-    AForm *c = i.makeForm("presidential request", "Jeffrey");
+    AForm *c = i.makeForm("presidential pardon", "Jeffrey");
     
     std::cout << "\n\nTEST2" << std::endl;
     Bureaucrat b1 ("Rüdiger", 150);

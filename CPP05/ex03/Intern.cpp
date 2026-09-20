@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:54 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/20 12:19:28 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/20 12:55:02 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static AForm *makeRobo(const std::string &target)
 // ShrubberyCreationForm, PresidentialPardonForm, RobotomyRequestForm
 AForm *Intern::makeForm(const std::string &formName, const std::string &target)
 {
-	std::string forms[3] = {"shrubbery request", "robotomy request",
-							"presidential request"};
+	std::string forms[3] = {"shrubbery creation", "robotomy request",
+							"presidential pardon"};
 	AForm*(*functionPointers[3])(const std::string&) = {&makeShrub, &makeRobo, &makePres};
 	for (int i = 0; i < 3; i++)
 	{

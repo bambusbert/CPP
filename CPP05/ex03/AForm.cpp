@@ -17,7 +17,7 @@ AForm::AForm() : _name("anon AForm"), _signed(false), _gradeSign(75), _gradeExec
 {
 }
 
-AForm::AForm(const std::string &name, unsigned int gradeSign, unsigned int gradeExecute) :
+AForm::AForm(const std::string &name, int gradeSign, int gradeExecute) :
 	_name(name), _signed(false), _gradeSign(gradeSign), _gradeExecute(gradeExecute)
 {
 	myExceptionThrower(gradeSign);
@@ -53,17 +53,17 @@ bool AForm::getSigned() const
 	return _signed;
 }
 
-unsigned int AForm::getGradeSign() const
+int AForm::getGradeSign() const
 {
 	return _gradeSign;
 }
 
-unsigned int AForm::getGradeExecute() const
+int AForm::getGradeExecute() const
 {
 	return _gradeExecute;
 }
 
-void AForm::beSigned(Bureaucrat &b)
+void AForm::beSigned(const Bureaucrat &b)
 {
 	if (!(b.getGrade() <= this->_gradeSign))
 		throw GradeTooLowException();
@@ -80,7 +80,7 @@ void AForm::execute(Bureaucrat const & executor) const
 	this->beExecuted();
 }
 
-void AForm::myExceptionThrower(unsigned int grade)
+void AForm::myExceptionThrower(int grade)
 {
 	if (grade < 1)
 		throw AForm::GradeTooHighException();

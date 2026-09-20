@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/12 14:05:48 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/20 12:57:01 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ class ShrubberyCreationForm: public AForm
 {
     private:
         std::string _target;
+        virtual void beExecuted() const;
     public:
         ShrubberyCreationForm();
         ShrubberyCreationForm(const std::string& target);
         ShrubberyCreationForm(const ShrubberyCreationForm& other);
         ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
         virtual ~ShrubberyCreationForm();
-        virtual void beExecuted() const;
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 15:23:09 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/20 12:27:14 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/20 13:03:12 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Form::Form() : _name("anon Form"), _signed(false), _gradeSign(75), _gradeExecute
 {
 }
 
-Form::Form(const std::string &name, unsigned int gradeSign, unsigned int gradeExecute) :
+Form::Form(const std::string &name, int gradeSign, int gradeExecute) :
 	_name(name), _signed(false), _gradeSign(gradeSign), _gradeExecute(gradeExecute)
 {
 	myExceptionThrower(gradeSign);
@@ -53,24 +53,24 @@ bool Form::getSigned() const
 	return _signed;
 }
 
-unsigned int Form::getGradeSign() const
+int Form::getGradeSign() const
 {
 	return _gradeSign;
 }
 
-unsigned int Form::getGradeExecute() const
+int Form::getGradeExecute() const
 {
 	return _gradeExecute;
 }
 
-void Form::beSigned(Bureaucrat &b)
+void Form::beSigned(const Bureaucrat &b)
 {
 	if (!(b.getGrade() <= this->_gradeSign))
 		throw Form::GradeTooLowException();
 	this->_signed = true;
 }
 
-void Form::myExceptionThrower(unsigned int grade)
+void Form::myExceptionThrower(int grade)
 {
 	if (grade < 1)
 		throw Form::GradeTooHighException();
