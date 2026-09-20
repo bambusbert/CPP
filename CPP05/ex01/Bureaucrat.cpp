@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/09 13:55:15 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/20 12:26:56 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ const char *Bureaucrat::GradeTooHighException::what() const throw()
     return "Grade is too high";
 }
 
-std::ostream& operator<<(std::ostream &o, Bureaucrat *b)
+std::ostream& operator<<(std::ostream &o, const Bureaucrat *b)
 {
     o << b->getName() << ", bureaucrat grade " << b->getGrade() << "." << std::endl;
     return o;
 }
 
-std::ostream& operator<<(std::ostream &o, Bureaucrat &b)
+std::ostream& operator<<(std::ostream &o, const Bureaucrat &b)
 {
     o << b.getName() << ", bureaucrat grade " << b.getGrade() << "." << std::endl;
     return o;

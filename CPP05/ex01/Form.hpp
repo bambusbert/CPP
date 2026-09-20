@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 15:22:52 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/12 15:33:39 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/20 12:27:06 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ class Form
         };
 };
 
-std::ostream& operator<<(std::ostream &o, Form *f);
-std::ostream& operator<<(std::ostream &o, Form &f);
+std::ostream& operator<<(std::ostream &o, const Form *f);
+std::ostream& operator<<(std::ostream &o, const Form &f);
 
 #endif

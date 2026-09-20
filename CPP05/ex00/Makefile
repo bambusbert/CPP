@@ -7,7 +7,6 @@ RM = rm -f
 SRC =	Bureaucrat.cpp \
 		main.cpp
 
-		
 OBJ = $(SRC:.cpp=.o)
 DEP = $(SRC:.cpp=.d)
 

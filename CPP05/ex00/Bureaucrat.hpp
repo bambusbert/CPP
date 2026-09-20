@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:54 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/12 14:05:42 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/20 12:33:40 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ class Bureaucrat
         };
 };
 
-std::ostream& operator<<(std::ostream &o, Bureaucrat *b);
-std::ostream& operator<<(std::ostream &o, Bureaucrat &b);
+std::ostream& operator<<(std::ostream &o, const Bureaucrat *b);
+std::ostream& operator<<(std::ostream &o, const Bureaucrat &b);
 
 #endif

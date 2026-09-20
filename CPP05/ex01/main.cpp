@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 13:30:46 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/09 14:11:41 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/20 12:03:21 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int main(void)
 	}
 	catch (Form::GradeTooLowException &e)
 	{
-		std::cout << "Nope. " << e.what() << std::endl;
+		std::cout << "Form could not be created. " << e.what() << std::endl;
 	}
+	
 	std::cout << "\nTEST 1\n" << std::endl;
 	Bureaucrat a("Horst", 10);
 	Bureaucrat b("Borst", 100);

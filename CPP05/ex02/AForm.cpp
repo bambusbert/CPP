@@ -103,7 +103,7 @@ const char *AForm::FormNotSignedException::what() const throw()
 	return "Form not signed";
 }
 
-std::ostream &operator<<(std::ostream &o, AForm *f)
+std::ostream &operator<<(std::ostream &o, const AForm *f)
 {
 	o << "Form name: " << f->getName() << ", " << "Signed: " << f->getSigned()
 	  << ", Grade Sign: " << f->getGradeSign() << ", "
@@ -111,7 +111,7 @@ std::ostream &operator<<(std::ostream &o, AForm *f)
 	return o;
 }
 
-std::ostream &operator<<(std::ostream &o, AForm &f)
+std::ostream &operator<<(std::ostream &o, const AForm &f)
 {
 	o << "Form name: " << f.getName() << ", " << "Signed: " << f.getSigned()
 	  << ", Grade Sign: " << f.getGradeSign() << ", "

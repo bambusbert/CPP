@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 15:22:52 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/12 15:33:39 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/20 12:30:17 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ class AForm
         };
 };
 
-std::ostream& operator<<(std::ostream &o, AForm *f);
-std::ostream& operator<<(std::ostream &o, AForm &f);
+std::ostream& operator<<(std::ostream &o, const AForm *f);
+std::ostream& operator<<(std::ostream &o, const AForm &f);
 
 #endif

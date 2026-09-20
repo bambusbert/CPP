@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 15:23:09 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/09 14:07:00 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/20 12:27:14 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ const char *Form::GradeTooHighException::what() const throw()
 	return "Grade is too high";
 }
 
-std::ostream &operator<<(std::ostream &o, Form *f)
+std::ostream &operator<<(std::ostream &o, const Form *f)
 {
 	o << "Form name: " << f->getName() << ", " << "Signed: " << f->getSigned()
 	  << ", Grade Sign: " << f->getGradeSign() << ", "
@@ -96,7 +96,7 @@ std::ostream &operator<<(std::ostream &o, Form *f)
 	return o;
 }
 
-std::ostream &operator<<(std::ostream &o, Form &f)
+std::ostream &operator<<(std::ostream &o, const Form &f)
 {
 	o << "Form name: " << f.getName() << ", " << "Signed: " << f.getSigned()
 	  << ", Grade Sign: " << f.getGradeSign() << ", "
