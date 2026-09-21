@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:54 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/04 17:24:39 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/21 13:36:25 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@
 #include <cmath>
 #include <iomanip>
 
-//TODO make non instantiable (= 0)
 class ScalarConverter
 {
     private:
         ScalarConverter();
         ScalarConverter(const ScalarConverter &other);
         ScalarConverter& operator=(const ScalarConverter &other);
-        ~ScalarConverter();
+        virtual ~ScalarConverter() = 0;
     public:
         static void convert(std::string str);
 };
