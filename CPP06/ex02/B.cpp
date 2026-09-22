@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 12:27:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/22 14:10:01 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/22 16:56:31 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,4 @@
 B::~B()
 {
     
-}
-
-void B::identify (Base *p)
-{
-    (void)p;
-    std::cout << "B" << std::endl;
-}
-
-void B::identify (Base &p)
-{
-    (void)p;
-    std::cout << "B" << std::endl;
 }
