@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/21 13:39:38 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/21 13:48:07 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ static bool literal_handler(std::string str)
         return (print_literal("+inff", "+inf"), true);
     else if (str == "-inff" || str == "-inf")
         return (print_literal("-inff", "-inf"), true);
+    else if (str == "nanf")
+        return (print_literal("impossible", "impossible"), true);
     return false;
 }
 
