@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/21 13:48:07 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/23 11:17:03 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,20 @@ ScalarConverter::~ScalarConverter()
 {
 }
 
+static void special_char_handler(long num_int)
+{
+    if (num_int == static_cast<long>(INT_MIN) - 1 || num_int > 127 || num_int < 0)
+        std::cout << "char: impossible"  << std::endl;
+    else
+        std::cout << "char: Non displayable"  << std::endl;
+}
+
 static void print_nums(long num_int, float num_float, double num_double)
 {
     if (num_int >= 32 && num_int <= 126)
-        std::cout << "char: " << static_cast<char>(num_int) << std::endl;
-    else if (num_int != static_cast<long>(INT_MIN) - 1)
-        std::cout << "char: Non displayable"  << std::endl;
+        std::cout << "char: '" << static_cast<char>(num_int) << "'" << std::endl;
     else
-        std::cout << "char: impossible"  << std::endl;
+        special_char_handler(num_int);
     if (num_int == static_cast<long>(INT_MIN) - 1)
         std::cout << "int: impossible" << std::endl;
     else
@@ -71,6 +77,7 @@ static bool is_impossible(std::string str)
     int c_dot = 0;
     int c_f = 0;
     int i = -1;
+    int c_nums = 0;
     std::string allowed = "0123456789.f";
     
     if (!str[0])
@@ -85,10 +92,14 @@ static bool is_impossible(std::string str)
             c_dot++;
         else if (str[i] == 'f')
             c_f++;
+        else if (str[i] >= '0' && str[i] <= '9')
+            c_nums++; 
     }
     if (c_dot > 1 || c_f > 1)
         return true;
     if (c_f == 1 && str[i - 1] != 'f')
+        return true;
+    if (c_nums == 0)
         return true;
     return false;    
 }
@@ -104,11 +115,11 @@ static void print_literal(std::string str1, std::string str2)
 static bool literal_handler(std::string str)
 {
     if (str == "inff" || str == "+inff" || str == "inf" || str == "+inf")
-        return (print_literal("+inff", "+inf"), true);
+        return (print_literal("inff", "inf"), true);
     else if (str == "-inff" || str == "-inf")
         return (print_literal("-inff", "-inf"), true);
-    else if (str == "nanf")
-        return (print_literal("impossible", "impossible"), true);
+    else if (str == "nan" || str == "+nan" || str == "-nan" || str == "nanf" || str == "+nanf" || str == "-nanf")
+        return (print_literal("nanf", "nan"), true);
     return false;
 }
 
@@ -125,6 +136,8 @@ void ScalarConverter::convert(std::string str)
     {
         return print_literal("impossible", "impossible");
     }
+    //atm i treat everything as a double if my code comes here.
+    //TODO change that to have 2 different strategies. add one for float
 	double num_double = atof(str.c_str());
     if (std::isnan(num_double))
         return print_literal("impossible", "impossible");

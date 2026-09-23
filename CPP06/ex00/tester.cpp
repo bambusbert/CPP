@@ -1,0 +1,96 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tester.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/23 10:18:31 by slambert          #+#    #+#             */
+/*   Updated: 2026/09/23 10:36:07 by slambert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+//this is a tester for ex00. 
+
+#include <string>
+#include <iostream>
+#include "ScalarConverter.hpp"
+
+int main ()
+{
+    const std::string test_cases[] = 
+    {
+        // ---- char: printable single characters ----
+        "a", "z", "A", "*", "~", "!", " ", "'",
+        "f", "n", "i", ".", "+", "-",           // chars that are also number/literal syntax
+        // ---- int: basics ----
+        "0", "9", "42", "-42", "+42", "-0", "+0",
+        "00042", "052",                          // leading zeros: still decimal
+
+        // ---- int -> char boundaries ----
+        "31", "32", "65", "126", "127", "-1", "-128", "128", "255", "256", "300",
+
+        // ---- int limits ----
+        "2147483647", "-2147483648",
+        "2147483648", "-2147483649",
+        "9999999999", "-9999999999",
+        "99999999999999999999",
+
+        // ---- float: basics ----
+        "0.0f", "-0.0f", "+0.0f", "42.0f", "-42.0f", "4.2f", "-4.2f",
+        "0.1f", "1.5f", "65.0f", "65.9f", "126.9f",
+
+        // ---- float: odd-but-arguably-valid formats ----
+        ".5f", "5.f", "42f", "0f", "-.5f",
+
+        // ---- float: precision / limits ----
+        "123456789.0f",                          // not representable exactly as float
+        "16777216.0f", "16777217.0f",            // 2^24, 2^24+1
+        "2147483647.0f",                         // rounds to 2^31 as float -> int overflow?
+        "-2147483648.0f",
+        "340282346638528859811704183484516925440.0f",   // FLT_MAX
+        "340282356779733661637539395458142568448.0f",   // just past FLT_MAX
+        "1000000000000000000000000000000000000000.0f",  // 1e39
+        "0.0000000000000000000000000000000000000000000014f", // ~FLT_TRUE_MIN
+        "0.0000001f",
+
+        // ---- double: basics ----
+        "0.0", "-0.0", "+0.0", "42.0", "-42.0", "4.2", "-4.2",
+        "0.1", "1.5", "65.9", "-65.9",
+
+        // ---- double: odd-but-arguably-valid formats ----
+        ".5", "5.", "-.5", "+.5",
+
+        // ---- double: precision / limits ----
+        "1.23456789", "1.23456789f",
+        "0.0000001", "0.00000001",
+        "2147483647.0", "2147483647.9", "2147483648.0",
+        "-2147483648.0", "-2147483648.9", "-2147483649.0",
+        "9007199254740992.0", "9007199254740993.0",     // 2^53, 2^53+1
+
+        // ---- pseudo-literals ----
+        "nan", "nanf", "+nan", "-nan", "+nanf", "-nanf",
+        "inf", "+inf", "-inf", "inff", "+inff", "-inff",
+
+        // ---- dots and f's ----
+        "..", ".f", "..f", "ff", "f.", "0.f.", "4.2.2", "4..2",
+        "4.2ff", "4f.2", "4f2", "f42", "4.2f ", ".f5",
+
+        // ---- whitespace ----
+        "", "  ", "\t", " 42", "42 ", "4 2", " 4.2f", "4.2f\t",
+
+        // ---- other garbage ----
+        "abc", "42a", "a42", "4a2", "0x2A", "1e3", "1e3f", "1E3", "4,2", "42L", "42u",
+        "\"a\"", "\\", "#"
+    };
+
+    const int size = sizeof(test_cases) / sizeof(test_cases[0]);
+
+    std::cout << std::endl;
+    for (int i = 0; i < size; i++)
+    {
+        std::cout << "Test " << i << ": [" << test_cases[i] << "]" << std::endl;
+        ScalarConverter::convert(test_cases[i]); 
+        std::cout << std::endl;
+    }
+}
