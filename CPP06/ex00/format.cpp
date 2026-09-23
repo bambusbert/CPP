@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 15:04:43 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/23 15:07:38 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/23 16:12:02 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ std::string format_float(float value)
         oss << std::fixed << std::setprecision(1) << value;
         return oss.str();
     }
-    for (int p = 1; p <= 9; p++)        // 9 significant digits always round-trip a float
+    for (int p = 1; p <= 9; p++)        // 9 significant digits always enough for a float
     {
         oss.str("");
         oss << std::setprecision(p) << value;
@@ -39,7 +39,7 @@ std::string format_double(double value)
         oss << std::fixed << std::setprecision(1) << value;
         return oss.str();
     }
-    for (int p = 1; p <= 17; p++)       // 17 significant digits always round-trip a double
+    for (int p = 1; p <= 17; p++)       // 17 significant digits always enough for a double
     {
         oss.str("");
         oss << std::setprecision(p) << value;

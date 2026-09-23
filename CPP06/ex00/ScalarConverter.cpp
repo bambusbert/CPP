@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/23 15:41:50 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/23 16:02:25 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,9 +180,7 @@ void ScalarConverter::convert(const std::string &str)
     if (literal_handler(str))
         return ;
     if (is_impossible(str))
-    {
         return print_literal("impossible", "impossible");
-    }
     e_type type = get_type(str);
     if (type == FLOAT)
         float_handler(str);
