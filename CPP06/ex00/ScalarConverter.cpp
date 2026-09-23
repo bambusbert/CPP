@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/23 11:17:03 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/23 15:41:50 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,45 +34,38 @@ ScalarConverter::~ScalarConverter()
 {
 }
 
-static void special_char_handler(long num_int)
+static void special_char_handler(bool int_overflow, int num_int)
 {
-    if (num_int == static_cast<long>(INT_MIN) - 1 || num_int > 127 || num_int < 0)
+    if (int_overflow || num_int > 127 || num_int < 0)
         std::cout << "char: impossible"  << std::endl;
     else
         std::cout << "char: Non displayable"  << std::endl;
 }
 
-static void print_nums(long num_int, float num_float, double num_double)
+static void print_nums(bool int_overflow, int num_int, bool float_overflow, float num_float, double num_double)
 {
     if (num_int >= 32 && num_int <= 126)
         std::cout << "char: '" << static_cast<char>(num_int) << "'" << std::endl;
     else
-        special_char_handler(num_int);
-    if (num_int == static_cast<long>(INT_MIN) - 1)
+        special_char_handler(int_overflow, num_int);
+    if (int_overflow)
         std::cout << "int: impossible" << std::endl;
     else
 	    std::cout << "int: " << num_int << std::endl;
-    if (num_float == -0)
-        num_float = 0;
-    if (num_double == -0)
-        num_double = 0;
-    std::cout << "float: " << std::fixed << std::setprecision(num_float == std::floor(num_float) ? 1 : 6) << num_float;
-    std::cout << "f" << std::endl;
-	std::cout << "double: " << std::fixed << std::setprecision(num_double == std::floor(num_double) ? 1 : 6) << num_double;
-    std::cout << std::endl;
+    if (float_overflow)
+        std::cout << "float: impossible" << std::endl;
+    else
+        std::cout << "float: " << format_float(num_float) << "f" << std::endl;
+    std::cout << "double: " << format_double(num_double) << std::endl;
 }
 
 static void handleChar(char c)
 {
-    print_nums(static_cast<long>(c), static_cast<float>(c), static_cast<double>(c));
+    print_nums(false, static_cast<int>(c), false, static_cast<float>(c), static_cast<double>(c));
 }
 
-static float doubleToFloat(double num_double)
-{
-    return static_cast<float>(num_double);
-}
 
-static bool is_impossible(std::string str)
+static bool is_impossible(const std::string& str)
 {
     int c_dot = 0;
     int c_f = 0;
@@ -99,12 +92,14 @@ static bool is_impossible(std::string str)
         return true;
     if (c_f == 1 && str[i - 1] != 'f')
         return true;
+    if (c_f == 1 && c_dot != 1)
+        return true;
     if (c_nums == 0)
         return true;
     return false;    
 }
 
-static void print_literal(std::string str1, std::string str2)
+static void print_literal(const std::string& str1, const std::string& str2)
 {
     std::cout << "char: impossible"  << std::endl;
     std::cout << "int: impossible" << std::endl;
@@ -112,7 +107,7 @@ static void print_literal(std::string str1, std::string str2)
     std::cout << "double: " << str2 << std::endl;
 }
 
-static bool literal_handler(std::string str)
+static bool literal_handler(const std::string& str)
 {
     if (str == "inff" || str == "+inff" || str == "inf" || str == "+inf")
         return (print_literal("inff", "inf"), true);
@@ -123,7 +118,59 @@ static bool literal_handler(std::string str)
     return false;
 }
 
-void ScalarConverter::convert(std::string str)
+static void double_handler(const std::string& str)
+{
+    bool int_overflow = false;
+    bool float_overflow = false;
+    errno = 0;
+    double num_double = strtod(str.c_str(), NULL);
+    if (errno == ERANGE && (num_double == HUGE_VAL || num_double == -HUGE_VAL))
+        return print_literal("impossible", "impossible");
+    float num_float = 0;
+    if (num_double < static_cast<double>(-FLT_MAX) || num_double > static_cast<double>(FLT_MAX))
+        float_overflow = true;
+    else
+        num_float = static_cast<float>(num_double);
+    int num_int = 0;
+    if (num_double >= static_cast<double>(INT_MAX) + 1 || num_double <= static_cast<double>(INT_MIN) - 1)
+        int_overflow = true;
+    else
+        num_int = static_cast<int>(num_double);  
+    print_nums(int_overflow, num_int, float_overflow, num_float, num_double);
+}
+
+static void float_handler(const std::string& str)
+{
+    bool int_overflow = false;
+    errno = 0;
+    float num_float = strtof(str.c_str(), NULL);
+    if (errno == ERANGE && (num_float == HUGE_VALF || num_float == -HUGE_VALF))    //float overflow
+        return print_literal("impossible", "impossible");
+    double num_double = static_cast<double>(num_float);
+    int num_int = 0;
+    if (num_double <= static_cast<double>(INT_MIN) - 1 || num_double >= static_cast<double>(INT_MAX) + 1)
+        int_overflow = true;
+    else
+        num_int = static_cast<int>(num_float);
+    print_nums(int_overflow, num_int, false, num_float, num_double);
+}
+
+static void int_handler(const std::string& str)
+{
+    errno = 0;
+    long num_long = strtol(str.c_str(), NULL, 10);
+    if (errno == ERANGE)
+        return print_literal("impossible", "impossible");
+    if (num_long < static_cast<long>(INT_MIN) || num_long > static_cast<long>(INT_MAX))
+        return print_literal("impossible", "impossible");
+    int num_int = static_cast<int>(num_long);
+    float num_float = static_cast<float>(num_int);
+    double num_double = static_cast<double>(num_int);
+    print_nums(false, num_int, false, num_float, num_double);
+}
+
+
+void ScalarConverter::convert(const std::string &str)
 {
 	if (str.length() == 1 && static_cast<int>(str[0]) >= 32 && static_cast<int>(str[0]) <= 126)
 	{
@@ -136,16 +183,11 @@ void ScalarConverter::convert(std::string str)
     {
         return print_literal("impossible", "impossible");
     }
-    //atm i treat everything as a double if my code comes here.
-    //TODO change that to have 2 different strategies. add one for float
-	double num_double = atof(str.c_str());
-    if (std::isnan(num_double))
-        return print_literal("impossible", "impossible");
-    float num_float = doubleToFloat(num_double);
-    long num_int;
-    if (num_double > INT_MAX || num_double < INT_MIN)
-        num_int = static_cast<long>(INT_MIN) - 1;
-    else
-        num_int = static_cast<long>(num_double);  
-    print_nums(num_int, num_float, num_double);
+    e_type type = get_type(str);
+    if (type == FLOAT)
+        float_handler(str);
+    else if (type == DOUBLE)
+        double_handler(str);
+    else if (type == INT)
+        int_handler(str);
 }

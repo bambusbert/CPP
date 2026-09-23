@@ -6,7 +6,9 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wpedantic -g
 DFLAGS   = -MMD -MP
 RM       = rm -f
 
-SRC_COMMON = ScalarConverter.cpp
+SRC_COMMON =	ScalarConverter.cpp \
+				get_type.cpp \
+				format.cpp
 SRC_MAIN   = main.cpp
 SRC_TEST   = tester.cpp
 

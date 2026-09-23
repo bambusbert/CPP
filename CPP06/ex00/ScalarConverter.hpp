@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:54 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/21 13:36:25 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/23 15:41:14 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,17 @@
 
 #include <string>
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib>
+#include <cerrno>
 #include <climits>
 #include <cmath>
 #include <iomanip>
+#include <cfloat>
+
+enum e_type { INT, FLOAT, DOUBLE };
+enum e_type get_type(const std::string &str);
+std::string format_float(float value);
+std::string format_double(double value);
 
 class ScalarConverter
 {
@@ -28,7 +35,7 @@ class ScalarConverter
         ScalarConverter& operator=(const ScalarConverter &other);
         virtual ~ScalarConverter() = 0;
     public:
-        static void convert(std::string str);
+        static void convert(const std::string &str);
 };
 
 #endif
