@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 12:44:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/23 16:02:25 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/26 11:16:58 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void handleChar(char c)
     print_nums(false, static_cast<int>(c), false, static_cast<float>(c), static_cast<double>(c));
 }
 
-
+//i later found about the 
 static bool is_impossible(const std::string& str)
 {
     int c_dot = 0;
