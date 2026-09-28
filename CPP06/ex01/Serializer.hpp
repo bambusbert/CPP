@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 11:45:48 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/22 12:19:14 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/28 12:48:12 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ struct Data
 
 class Serializer
 {
-    public:
+    private:
         Serializer();
         Serializer (const Serializer& other);
         Serializer& operator=(const Serializer& other);
-        virtual ~Serializer() = 0;
+        ~Serializer();
+    public:
         static uintptr_t serialize(Data* ptr);
         static Data* deserialize(uintptr_t raw);  
 };

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 11:45:38 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/22 12:15:05 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/28 12:36:48 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Serializer::Serializer()
 {
     
 }
-
+ 
 Serializer::Serializer(const Serializer& other)
 {
     (void)other;    

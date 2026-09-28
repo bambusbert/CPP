@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 13:30:46 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/22 12:23:19 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/28 13:43:04 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 int main()
 {
+    //class Serializer must not be instantiable
+    //Serializer d;
+    
     Data d;
     d.x = 6;
     d.y = 7;

@@ -6,11 +6,11 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/12 13:30:46 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/22 17:23:35 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/28 13:41:05 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Base.hpp"
+#include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include "A.hpp"
@@ -60,6 +60,7 @@ static void identify(Base &p)
         (void)tmp;
         success = true;
         std::cout << "A" << std::endl;
+        return;
     }
     catch(std::exception &e){}
     try
@@ -68,6 +69,7 @@ static void identify(Base &p)
         (void)tmp;
         success = true;
         std::cout << "B" << std::endl;
+        return;
     }
     catch(std::exception &e){}
     try
@@ -76,22 +78,22 @@ static void identify(Base &p)
         (void)tmp;
         success = true;
         std::cout << "C" << std::endl;
+        return;
     }
     catch(std::exception &e){}
     if (!success)
-    std::cout << "neither A, B or C" << std::endl;
+        std::cout << "neither A, B or C" << std::endl;
 }
 
 int main()
 {
     srand(std::time(NULL));
-    Base* ptrs[10];
     for (int i = 0; i < 10; i++)
     {
-        ptrs[i] = generate();
+        Base *ptr = generate();
         std::cout << "Pointer " << i << ":" << std::endl;
-        identify(ptrs[i]);
-        identify(*(ptrs[i]));
-        delete(ptrs[i]);
+        identify(ptr);
+        identify(*ptr);
+        delete(ptr);
     }
 }
