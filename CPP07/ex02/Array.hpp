@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 14:45:19 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/29 16:48:55 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/29 17:51:06 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ template <typename T> class Array
         ~Array();
         T* getArray() const;
         size_t getSize() const;
+        T& operator[] (const size_t index) const;
+
+        //OutOfBounds Exception
 };
 
 #include "Array.tpp"
