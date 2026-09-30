@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 14:45:19 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/29 17:51:06 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/30 14:06:36 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define ARRAY_HPP
 
 #include <cstddef>
-
+#include <exception>
 
 template <typename T> class Array
 {
@@ -27,11 +27,14 @@ template <typename T> class Array
         Array(const Array& other);
         Array& operator=(const Array& other);
         ~Array();
-        T* getArray() const;
-        size_t getSize() const;
+        size_t size() const;
         T& operator[] (const size_t index) const;
 
-        //OutOfBounds Exception
+        class OutOfBoundsException: public std::exception
+        {
+            public:
+                virtual const char* what() const throw();
+        };
 };
 
 #include "Array.tpp"
