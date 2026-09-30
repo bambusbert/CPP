@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 17:04:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/29 14:28:25 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/30 14:38:17 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ template <typename T> void print_elem(const T& elem)
     std::cout << elem << std::endl;
 }
 
-void increment(int &num)
+void increment_int(int &num)
 {
     num++;
 }
@@ -57,7 +57,7 @@ int main (void)
     
     std::cout << "\nInt array" << std::endl;
     int intarr[] = {1,2,3,4,5};
-    ::iter(intarr, sizeof(intarr) / sizeof(int), increment);
+    ::iter(intarr, sizeof(intarr) / sizeof(int), increment_int);
     print_arr(intarr, sizeof (intarr) / sizeof(int));
     ::iter(intarr, sizeof (intarr) / sizeof(int), print_int_const);
 

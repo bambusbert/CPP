@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 17:04:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/29 11:34:03 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/30 14:21:09 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,10 @@ int main (void)
     ::swap(n1, n2);
     std::cout << "after  " << n1 << ", " << n2 << std::endl;
     
-    std::cout << "MIN" << std::endl;
+    std::cout << "\nMIN" << std::endl;
     int n3 = 5;
-    // int res = min<int>(n1, n2);
-    int res = ::min(n1, n2);
-    std::cout << "Minimum is: " << res << std::endl;
-    // res = min<int>(n1, n3);
-    res = ::min(n1, n3);
-    std::cout << "Minimum is: " << res << std::endl;
+    std::cout << "Minimum is: " << ::min(n1, n2) << std::endl;
+    std::cout << "Minimum is: " << ::min(n1, n3) << std::endl;
 
     std::cout << "\ntest from subject" << std::endl;
     int a = 2;
