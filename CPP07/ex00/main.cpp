@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 17:04:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/30 14:21:09 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/01 16:42:19 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int main (void)
     int n1 = 5;
     int n2 = 10;
     std::cout << "before " << n1 << ", " << n2 << std::endl;
-    // swap<int>(n1, n2);
     ::swap(n1, n2);
     std::cout << "after  " << n1 << ", " << n2 << std::endl;
     
