@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 17:04:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/01 17:20:55 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/05 14:10:36 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,6 @@ int main (void)
     {
         std::cerr << "operation unsuccessful. " << e.what() << '\n';
     }
-    
-    try
-    {
-        strarr[-1] = "blub";
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << "operation unsuccessful. " << e.what() << '\n';
-    }
 
     //test if i get a compiler warning here 
     // std::cout << "new test" << std::endl;
@@ -85,10 +76,11 @@ int main (void)
     // int *a = new int(); //initialized to 0
     // int *b = new int;   //garbage value
     // std::cout << (*a) << std::endl;
-    // //std::cout << (*b) << std::endl;
+    // std::cout << (*b) << std::endl;
     // //this one gives valgrind errors because it still holds garbage values
     // //because it is default initialized
     // //a is direct-initialized
     // delete(a);
     // delete(b);
+    return 0;
 }
