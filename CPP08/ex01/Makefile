@@ -1,10 +1,11 @@
-NAME = ex00
+NAME = ex01
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wpedantic
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wpedantic -g
 DFLAGS	= -MMD -MP
 RM = rm -f
 
-SRC =	main.cpp
+SRC =	main.cpp \
+		Span.cpp
 
 OBJ_DIR = obj
 
