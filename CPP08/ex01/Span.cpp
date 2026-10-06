@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 11:55:11 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/06 15:42:19 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/06 16:15:19 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,15 @@ void Span::printNums() const
         std::cout << nums[i] << std::endl;
 }
 
+long Span::longestSpan() const
+{
+    if (nums.size() <= 1)
+        throw ZeroOrOneElementException();
+    int max = *(std::max_element(nums.begin(), nums.end()));
+    int min = *(std::min_element(nums.begin(), nums.end()));
+    return static_cast<long>(max) - min;
+}
+
 long Span::shortestSpan() const
 {
     if (nums.size() <= 1)
@@ -94,15 +103,6 @@ long Span::shortestSpan() const
     }
     return delta;
 } */
-
-long Span::longestSpan() const
-{
-    if (nums.size() <= 1)
-        throw ZeroOrOneElementException();
-    int max = *(std::max_element(nums.begin(), nums.end()));
-    int min = *(std::min_element(nums.begin(), nums.end()));
-    return static_cast<long>(max) - min;
-}
 
 const char *Span::SpanFullException::what() const throw()
 {

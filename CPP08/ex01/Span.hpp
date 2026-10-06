@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 11:55:05 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/06 15:39:49 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/06 16:12:53 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ public:
     void printNums() const;
     long shortestSpan() const;
     long longestSpan() const;
+    
     template <typename T>
     void addMultipleNumbers(T first, T last);
 
