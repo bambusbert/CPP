@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 17:04:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/06 18:23:21 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/07 14:43:06 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,38 @@ int main()
     }
     std::stack<int> s(mstack);
 
+    std::cout << "\nEND OF SUBJECT TEST" << std::endl;
     it = mstack.begin();
-    *it = 555555;
+
     std::cout << "\nTest 1: copy constructor" << std::endl;
     {
         MutantStack<int> copy(mstack);
-        MutantStack<int>::iterator it = copy.begin();
-        MutantStack<int>::iterator ite = copy.end();
-        
-        std::cout << "\n\nprint whole stack with iterator" << std::endl;
-        while (it != ite)
+        MutantStack<int>::iterator c_it = copy.begin();
+        MutantStack<int>::iterator c_ite = copy.end();
+        int save = *it;
+        *it = 555555;
+        while (c_it != c_ite)
         {
-            std::cout << *it << std::endl;
-            ++it;
+            std::cout << *c_it << std::endl;
+            ++c_it;
         }
+        *it = save;
+    }
+
+    std::cout << "\nTest 2: copy assignment operator" << std::endl;
+    {
+        MutantStack<int> copy;
+        copy = mstack;
+        MutantStack<int>::iterator c_it = copy.begin();
+        MutantStack<int>::iterator c_ite = copy.end();
+        int save = *it;
+        *it = 555555;
+        while (c_it != c_ite)
+        {
+            std::cout << *c_it << std::endl;
+            ++c_it;
+        }
+        *it = save;
     }
 
     return 0;
