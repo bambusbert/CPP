@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 11:55:05 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/07 14:51:19 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/07 15:04:52 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 #include <stack>
 #include <deque>
 
-template <typename T>
-class MutantStack : public std::stack<T>
+template <typename T, typename C=std::deque<T> >
+class MutantStack : public std::stack<T, C>
 {
     public:
         MutantStack();
         MutantStack(const MutantStack &other);
         MutantStack &operator=(const MutantStack &other);
-        virtual ~MutantStack();
+        ~MutantStack();
 
-        typedef typename std::deque<T>::iterator iterator;
+        typedef typename C::iterator iterator;
         iterator begin();
         iterator end();        
 };
