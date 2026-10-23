@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:16:34 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/23 12:02:57 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/23 12:29:39 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
 	return *this;
 }
 
-// returns -1 on error
-// 0 if OK
-// eigentlich brauche ich gar kein error handling, weil data.csv ist vorgegeben
 static int parse_single_data_line(std::string &line, std::map<std::string, double> &rates)
 {
 	int pos_comma = line.find(',');
@@ -62,7 +59,7 @@ int parse_rates(std::ifstream &ifstream, std::map<std::string, double> &rates)
 
 	std::getline(ifstream, line);
 	if (line != "date,exchange_rate")
-		return (std::cout << "First line of data.csv must be 'date,exchange_rate'" << std::endl,
+		return (std::cout << "Error: First line of data.csv must be 'date,exchange_rate'" << std::endl,
 				-1);
 	while (std::getline(ifstream, line))
 	{
@@ -76,9 +73,9 @@ int BitcoinExchange::initialize_prices()
 {
 	std::ifstream infile("data.csv", std::ifstream::in);
 	if (!infile.is_open())
-		return (std::cout << "data.csv could not be opened" << std::endl, 1);
+		return (std::cout << "Error: data.csv could not be opened" << std::endl, 1);
 	if (parse_rates(infile, rates) == -1)
-		return (std::cout << "parsing error data.csv" << std::endl, 1);
+		return (std::cout << "Error: parsing error data.csv" << std::endl, 1);
 	return 0;
 }
 
@@ -106,41 +103,41 @@ static int strtod_wrapper(double *res, std::string &str)
 }
 
 //"Error: bad input => 2001-42-42"
+// 0. char count OK?
 // 1. are there 2 dashes?
 // 2. first dash must not be in the beginning, last dash not in the end
 // 3. extract 3 numbers
 // 4. check if numbers make sense
 static int check_syntax_left(int *year, int *month, int *day, std::string &left)
 {
+	// 0.
+	if (left.length() != 10)
+		return (std::cout << "Error: date syntax. bad input => '" << left << "'" << std::endl, -1);
+		
 	// 1.
 	const int count_dash = std::count(left.begin(), left.end(), '-');
 	// std::cout << count_dash << std::endl;
 	if (count_dash != 2)
-		return (std::cout << "Error: bad input => " << left << std::endl, -1);
+		return (std::cout << "Error: date syntax. bad input => '" << left << "'" << std::endl, -1);
 
 	// 2.
 	int first_dash = left.find('-');
 	int second_dash = left.find_last_of('-');
 	if (first_dash == 0 || second_dash == left.length() - 1)
-		return (std::cout << "Error: bad input => " << left << std::endl, -1);
+		return (std::cout << "Error: date syntax. bad input => '" << left << "'" << std::endl, -1);
+		
 	// 3.
 	std::string year_str = left.substr(0, first_dash);
 	std::string month_str = left.substr(first_dash + 1, second_dash - first_dash - 1);
 	std::string day_str = left.substr(second_dash + 1, left.length() - second_dash);
-	// std::cout << "Year: '" << year_str << "', Month: '" << month_str << "', Day: '" << day_str
-	// 		  << "'" << std::endl;
-
-	// int year, month, day;
 	if (strtol_wrapper(year, year_str) == -1 || strtol_wrapper(month, month_str) == -1 ||
 		strtol_wrapper(day, day_str) == -1)
-		return (std::cout << "Error: bad input => " << left << std::endl, -1);
-	// std::cout << "Year: " << *year << ", Month: " << *month << ", Day: " << *day << std::endl
-	// 		  << std::endl;
+		return (std::cout << "Error: date parsing to int. bad input => '" << left << "'" << std::endl, -1);
 
 	// 4.
 	// i do not check for impossible dates (e.g. 30.2)
 	if (*year < 2008 || *year > 2035 || *month < 1 || *month > 12 || *day < 1 || *day > 31)
-		return (std::cout << "Error: bad input => " << left << std::endl, -1);
+		return (std::cout << "Error: d/m/y to small/big. bad input => '" << left << "'" << std::endl, -1);
 	return 0;
 }
 
@@ -187,7 +184,6 @@ void BitcoinExchange::display_result (const std::string &date, double &amount_tr
 void BitcoinExchange::parse_single_value_line(std::string &line) const
 {
 	// 1.
-	//std::cout << "Line: " << line << std::endl;
 	std::string::size_type first_pipe = line.find('|');
 	if (first_pipe == std::string::npos	   // no pipe
 		|| first_pipe != line.rfind('|')   // more than one pipe
@@ -196,7 +192,7 @@ void BitcoinExchange::parse_single_value_line(std::string &line) const
 		|| line[first_pipe - 1] != ' '	   // no space before
 		|| line[first_pipe + 1] != ' ')	   // no space after
 	{
-		std::cout << "Error: bad input => " << line << std::endl;
+		std::cout << "Error: pipe(s). bad input => '" << line << "'" << std::endl;
 		return;
 	}
 	// 2.

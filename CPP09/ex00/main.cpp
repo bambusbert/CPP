@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:17:47 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/23 12:05:16 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/23 12:08:44 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int main(int argc, char **argv)
 	BitcoinExchange btc3;
 	btc3 = btc2;
 	
-	std::cout << std::endl << "copy constructor" << std::endl;
-	btc2.print_daily_prices();
-	std::cout << std::endl << "copy assignment operator" << std::endl;
-	btc3.print_daily_prices();
+	// std::cout << std::endl << "copy constructor" << std::endl;
+	// btc2.print_daily_prices();
+	// std::cout << std::endl << "copy assignment operator" << std::endl;
+	// btc3.print_daily_prices();
 	
 	return 0;
 }
