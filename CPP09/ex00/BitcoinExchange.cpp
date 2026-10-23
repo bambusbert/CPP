@@ -6,39 +6,39 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:16:34 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/22 21:24:36 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/23 12:02:57 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange() : init_successful(true)
+BitcoinExchange::BitcoinExchange()
 {
-	// initialize amount not called
-	if (initialize_prices() == -1)
-		init_successful = false;
+	initialize_prices();
 }
 
-BitcoinExchange::BitcoinExchange(const std::string &filename) : init_successful(true)
+BitcoinExchange::BitcoinExchange(const std::string &filename)
 {
-	if (initialize_prices() == -1 || loop_input_file(filename) == -1)
-		init_successful = false;
+	initialize_prices();
+	loop_input_file(filename);
 }
 
 BitcoinExchange::~BitcoinExchange()
 {
 }
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : init_successful(true)
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
 {
-	if (initialize_prices() == -1)
-		init_successful = false;
+	rates = other.rates;
+	initialize_prices();
 }
 
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
 {
 	if (this != &other)
 	{
+		rates.clear();
+		rates = other.rates;
 	}
 	return *this;
 }
@@ -56,7 +56,7 @@ static int parse_single_data_line(std::string &line, std::map<std::string, doubl
 	return 0;
 }
 
-static int parse_rates(std::ifstream &ifstream, std::map<std::string, double> &rates)
+int parse_rates(std::ifstream &ifstream, std::map<std::string, double> &rates)
 {
 	std::string line;
 
@@ -83,7 +83,7 @@ int BitcoinExchange::initialize_prices()
 }
 
 // stoi is c++11 so we use c strtol
-int strtol_wrapper(int *res, std::string &str)
+static int strtol_wrapper(int *res, std::string &str)
 {
 	char *end;
 	const char *c_str = str.c_str();
@@ -94,7 +94,7 @@ int strtol_wrapper(int *res, std::string &str)
 	return 0;
 }
 
-int strtod_wrapper(double *res, std::string &str)
+static int strtod_wrapper(double *res, std::string &str)
 {
 	char *end;
 	const char *c_str = str.c_str();
@@ -110,7 +110,7 @@ int strtod_wrapper(double *res, std::string &str)
 // 2. first dash must not be in the beginning, last dash not in the end
 // 3. extract 3 numbers
 // 4. check if numbers make sense
-int check_syntax_left(int *year, int *month, int *day, std::string &left)
+static int check_syntax_left(int *year, int *month, int *day, std::string &left)
 {
 	// 1.
 	const int count_dash = std::count(left.begin(), left.end(), '-');
@@ -144,11 +144,12 @@ int check_syntax_left(int *year, int *month, int *day, std::string &left)
 	return 0;
 }
 
-// TODO das ist long es sollte float sein
-int check_syntax_right(double *val_right, std::string &right)
+static int check_syntax_right(double *val_right, std::string &right)
 {
 	if (strtod_wrapper(val_right, right) == -1)
-		return -1;
+		return (std::cout << "Error: not a valid number." << std::endl, -1);
+	if (*val_right != *val_right)
+		return (std::cout << "Error: nan is not between 0 and 1000." << std::endl, -1);
 	if (*val_right < 0)
 		return (std::cout << "Error: not a positive number." << std::endl, -1);
 	if (*val_right > 1000)
@@ -156,29 +157,34 @@ int check_syntax_right(double *val_right, std::string &right)
 	return 0;
 }
 
-void display_result (int &year, int &month, int &day, double &val)
+//if key does not exist take the next one below
+//lower_bound returns the element that is >= the given key
+double BitcoinExchange::return_price_for_date(const std::string &date) const
+{
+	std::map<std::string, double>::const_iterator it;
+	it = rates.lower_bound(date);
+	if (it != rates.end() && it->first == date)
+		return it->second;
+	if (it == rates.begin())
+		return -1;
+	return (--it)->second;
+}
+
+void BitcoinExchange::display_result (const std::string &date, double &amount_traded) const
 {
 	//1. display date
-	std::cout	<< std::setfill('0')
-				<< std::setw(4) << year << "-"
-				<< std::setw(2) << month << "-"
-				<< std::setw(2) << day
-				<< std::setfill(' ')
-				<< " => " << val << " = " << "..." << std::endl;
-	//2. display val
-	//3. display val * price
-	//(2011-01-03 => 1.2 = 0.36)
+	std::cout	<< date << " => "
+				<< amount_traded << " = "
+				<< return_price_for_date(date) * amount_traded 
+				<< std::endl;
 }
+
 
 // Rules:
 // 1.	there has to be 1 pipe, must not be at the beginning nor the end
 // 2.	split in left and right
 // 3.	check left and right
-// check if stuff right of pipe is a valid double
-// if parsing ok: print output
-//TODO only pass left string and look database for that key.
-//(if key not there find closest one - in the past)
-void parse_single_value_line(std::string &line)
+void BitcoinExchange::parse_single_value_line(std::string &line) const
 {
 	// 1.
 	//std::cout << "Line: " << line << std::endl;
@@ -196,17 +202,15 @@ void parse_single_value_line(std::string &line)
 	// 2.
 	std::string left = line.substr(0, first_pipe - 1);
 	std::string right = line.substr(first_pipe + 2, line.length());
-	// std::cout << "Line: " << line << std::endl << "Left: '" << left << "', Right: '" << right <<
-	// "'" << std::endl << std::endl;
 	double val_right;
 	int year, month, day;
 	if (check_syntax_right(&val_right, right) == -1 ||
 		check_syntax_left(&year, &month, &day, left) == -1)
 		return;
-	display_result(year, month, day, val_right);
+	display_result(left, val_right);
 }
 
-int BitcoinExchange::loop_input_file(const std::string &filename)
+int BitcoinExchange::loop_input_file(const std::string &filename) const
 {
 	std::ifstream infile(filename.c_str(), std::ifstream::in);
 	if (!infile.is_open())
@@ -225,9 +229,4 @@ void BitcoinExchange::print_daily_prices()
 {
 	for (std::map<std::string, double>::iterator i = rates.begin(); i != rates.end(); ++i)
 		std::cout << i->first << ", " << i->second << std::endl;
-}
-
-bool BitcoinExchange::get_init_successful()
-{
-	return init_successful;
 }
