@@ -36,7 +36,7 @@ ko() {
     [ $# -eq 0 ] && label="(no argument)"
     if [ -z "$out" ] && [[ "$err" == *Error* ]]; then
         PASS=$((PASS + 1))
-        printf "${GREEN}OK${RESET}   %-45s → Error\n" "$label"
+        printf "${GREEN}OK${RESET}   %-45s → stderr: %s\n" "$label" "$err"
     else
         FAIL=$((FAIL + 1))
         printf "${RED}FAIL${RESET} %-45s expected Error on stderr, got stdout '%s' stderr '%s'\n" "$label" "$out" "$err"

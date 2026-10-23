@@ -6,7 +6,8 @@ DFLAGS	= -MMD -MP
 RM = rm -f
 
 SRC =	main.cpp \
-		RPN.cpp
+		RPN.cpp \
+		execution.cpp
 
 OBJ_DIR = obj
 

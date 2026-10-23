@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "lldb ex02",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/PmergeMe",
+            "args": ["1", "2", "3", "4"],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "make ex02"
+        }
+    ]
+}
