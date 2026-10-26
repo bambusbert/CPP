@@ -6,36 +6,36 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:16:34 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/23 12:52:58 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/26 15:17:28 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange()
+BitcoinExchange::BitcoinExchange(): _input_file("")
 {
-	initialize_prices();
+	//initialize_rates();
 }
 
-BitcoinExchange::BitcoinExchange(const std::string &filename)
+BitcoinExchange::BitcoinExchange(const std::string &filename): _input_file(filename)
 {
-	initialize_prices();
-	loop_input_file(filename);
+	if (initialize_rates() == -1)
+		_input_file = "";
 }
 
 BitcoinExchange::~BitcoinExchange()
 {
 }
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : rates(other.rates)
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : rates(other.rates), _input_file(other._input_file)
 {
-	initialize_prices();
 }
 
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
 {
 	if (this != &other)
 	{
+		_input_file = other._input_file;
 		rates.clear();
 		rates = other.rates;
 	}
@@ -90,24 +90,27 @@ void BitcoinExchange::parse_single_value_line(std::string &line) const
 	display_result(left, val_right);
 }
 
-int BitcoinExchange::loop_input_file(const std::string &filename) const
+void BitcoinExchange::loop_input_file() const
 {
-	std::ifstream infile(filename.c_str(), std::ifstream::in);
+	if (_input_file == "")
+	{
+		//std::cout << "Error. btc exchange does not have an input file" << std::endl;
+		return ;
+	}
+	std::ifstream infile(_input_file.c_str(), std::ifstream::in);
 	if (!infile.is_open())
-		return (std::cout << "input file could not be opened" << std::endl, 1);
+	{
+		std::cout << "Error. input file could not be opened" << std::endl;
+		return;
+	}
 
 	std::string line;
 	std::getline(infile, line);
 	if (line != "date | value")
-		return (std::cout << "First line of input file must be 'date | value'" << std::endl, -1);
+	{
+		std::cout << "Error. First line of input file must be 'date | value'" << std::endl;
+		return;
+	}
 	while (std::getline(infile, line))
 		parse_single_value_line(line);
-	return 0;
 }
-
-// for debugging copy constructor and copy assignment operator
-// void BitcoinExchange::print_daily_prices()
-// {
-// 	for (std::map<std::string, double>::iterator i = rates.begin(); i != rates.end(); ++i)
-// 		std::cout << i->first << ", " << i->second << std::endl;
-// }

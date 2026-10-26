@@ -1,13 +1,13 @@
 NAME = btc
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wpedantic
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wpedantic -g
 # CXXFLAGS = -std=c++98 -g
 DFLAGS	= -MMD -MP
 RM = rm -f
 
 SRC =	main.cpp \
 		BitcoinExchange.cpp \
-		parse_database.cpp \
+		initialize_rates.cpp \
 		syntax.cpp
 
 OBJ_DIR = obj

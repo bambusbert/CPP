@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:16:46 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/23 12:53:05 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/26 15:17:36 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ class BitcoinExchange
 {
     private:
         std::map<std::string, double> rates;
-        int initialize_prices();
-        int loop_input_file(const std::string &filename) const;
+        std::string _input_file;
+        int initialize_rates();
         void parse_single_value_line(std::string &line) const;
         double return_price_for_date(const std::string &date) const;
         int check_syntax_left(int *year, int *month, int *day, std::string &left) const;
@@ -40,7 +40,7 @@ class BitcoinExchange
         ~BitcoinExchange();
         BitcoinExchange(const BitcoinExchange& other);
         BitcoinExchange& operator=(const BitcoinExchange& other);
-        // void print_daily_prices();
+        void loop_input_file() const;
 };
 
 #endif
