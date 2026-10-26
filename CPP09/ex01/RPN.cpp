@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 13:05:43 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/23 17:13:24 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/26 16:00:23 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,12 @@ RPN::~RPN()
 {
 }
 
-RPN::RPN(const std::string &str)
+RPN::RPN(const std::string &str): _str(str)
 {
-	parse_string(str);
 }
 
-RPN::RPN(const RPN &other)
+RPN::RPN(const RPN &other): _lst (other._lst), _str(other._str)
 {
-	_lst = other._lst;
 }
 
 RPN &RPN::operator=(const RPN &other)
@@ -36,6 +34,7 @@ RPN &RPN::operator=(const RPN &other)
 	{
 		_lst.clear();
 		_lst = other._lst;
+		_str = other._str;
 	}
 	return *this;
 }
@@ -53,46 +52,39 @@ static bool is_operator(char c)
 	return false;
 }
 
-void RPN::parse_string(const std::string &str)
+void RPN::insert_result (long &res)
 {
-	if (str.find_first_not_of("0123456789 +-*/") != str.npos)
-	{
-		std::cerr << "Error. invalid character detected." << std::endl;
-		return;
-	}
+	_lst.pop_back();
+	_lst.pop_back();
+	_lst.push_back(res);
+}
 
+void RPN::parse_string()
+{
+    if (_str.find_first_not_of("0123456789 +-*/") != _str.npos)
+		return (void)(std::cerr << "Error. invalid character detected." << std::endl);
+	_lst.clear();
 	bool fail = false;
 	int i = -1;
-	while (str[++i])
+	while (_str[++i])
 	{
-		if (str[i] == ' ')
+		if (_str[i] == ' ')
 			continue;
-		if (is_operator(str[i]))
+		if (is_operator(_str[i]))
 		{
 			long res;
-			if (execute_operation(&res, str[i]) == -1)
-			{
-				fail = true;
-				break;
-			}
-			_lst.pop_back();
-			_lst.pop_back();
-			_lst.push_back(res);
+			if (execute_operation(&res, _str[i]) == -1)
+				{ fail = true; break; }
+			insert_result(res);
 			continue;
 		}
-		parse_char_to_long_and_add_to_list(str[i]);
+		parse_char_to_long_and_add_to_list(_str[i]);
 	}
 	if (fail)
 		return;
-	if (_lst.size() == 0)
-	{
-		std::cerr << "Error. empty input" << std::endl;
-		return ;
-	}
+	if (_lst.empty())
+		return (void)(std::cerr << "Error. empty input" << std::endl);
 	else if (_lst.size() > 1)
-	{
-		std::cerr << "Error. notation does not solve to one value" << std::endl;
-		return ;
-	}
-	std::cout << _lst.front() << std::endl;		
+		return (void)(std::cerr << "Error. notation does not solve to one value" << std::endl);
+	std::cout << _lst.front() << std::endl;
 }
