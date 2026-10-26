@@ -6,7 +6,7 @@
             "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/PmergeMe",
-            "args": ["1", "2", "3", "4"],
+            "args": ["5", "1", "2", "3", "4"],
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "make ex02"
         }
