@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 11:55:11 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/27 12:53:33 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/27 15:32:05 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ unsigned int Span::longestSpan() const
         throw ZeroOrOneElementException();
     int max = *(std::max_element(_nums.begin(), _nums.end()));
     int min = *(std::min_element(_nums.begin(), _nums.end()));
-    return static_cast<unsigned int>(max) - min;
+    long longest_dist = static_cast<long>(max) - min;
+    return static_cast<unsigned int>(longest_dist);
 }
 
 unsigned int Span::shortestSpan() const
@@ -73,7 +74,7 @@ unsigned int Span::shortestSpan() const
     std::sort(v.begin(), v.end());
     std::adjacent_difference(v.begin(), v.end(), v.begin());
     long shortest_dist = *(std::min_element(v.begin() + 1, v.end()));
-    return shortest_dist;
+    return static_cast<unsigned int>(shortest_dist);
 }
 
 //stupid solution without algorithm

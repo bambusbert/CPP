@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 17:04:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/27 14:56:17 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/27 15:32:45 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int main(void)
     // short_span.addNumber(0);
     // short_span.printNums();
     std::cout << "The shortest span is " << short_span.shortestSpan() << std::endl;
+    std::cout << "The shortest span is " << b.shortestSpan() << std::endl;
     try
     {
         //std::cout << "The longest span is " << short_span.longestSpan() << std::endl;
