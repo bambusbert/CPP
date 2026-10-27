@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 14:38:03 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/07 14:57:34 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/27 14:32:05 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ MutantStack<T, C>& MutantStack<T, C>::operator=(const MutantStack &other)
 template <typename T, typename C>
 MutantStack<T, C>::~MutantStack() {}
 
+//this->c accesses the actual container
 template <typename T, typename C>
 typename C::iterator MutantStack<T, C>::begin()
 {

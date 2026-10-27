@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 17:04:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/07 15:25:30 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/27 14:47:12 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <iostream>
 #include <list>
 #include <iterator>
+#include <vector>
 
 int main()
 {
@@ -40,7 +41,7 @@ int main()
         ++it;
     }
 
-    std::cout << "Test from subject2 - list instead of MutantStack" << std::endl;
+    std::cout << "\nTest from subject2 - list instead of MutantStack" << std::endl;
 
     std::list<int> lst;
     lst.push_back(5);
@@ -62,57 +63,95 @@ int main()
         std::cout << *lit << std::endl;
         ++lit;
     }
-    
-    
+
     std::cout << "\nEND OF SUBJECT TEST" << std::endl;
-    
-    std::cout << "\nTest 0: MutantStack with explicitly chosen container" << std::endl;
-    MutantStack<int, std::list<int> > list_mutant;
-    list_mutant.push(1);
-    list_mutant.push(2);
-    list_mutant.push(3);
-    list_mutant.push(4);
-    MutantStack<int, std::list<int> >::iterator it2 = list_mutant.begin();
-    MutantStack<int, std::list<int> >::iterator ite2 = list_mutant.end();
-    ++it2;
-    --it2;
-    while (it2 != ite2)
+
     {
-        std::cout << *it2 << std::endl;
+        std::cout << "\nTest 1a: MutantStack with explicitly chosen container - std::list" << std::endl;
+        MutantStack<int, std::list<int> > list_mutant;
+        list_mutant.push(1);
+        list_mutant.push(2);
+        list_mutant.push(3);
+        list_mutant.push(4);
+        MutantStack<int, std::list<int> >::iterator it2 = list_mutant.begin();
+        MutantStack<int, std::list<int> >::iterator ite2 = list_mutant.end();
         ++it2;
+        --it2;
+        while (it2 != ite2)
+        {
+            std::cout << *it2 << std::endl;
+            ++it2;
+        }
     }
-    
+
+    {
+        std::cout << "\nTest 1b: MutantStack with explicitly chosen container - std::vector" << std::endl;
+        MutantStack<int, std::vector<int> > list_mutant;
+        list_mutant.push(1);
+        list_mutant.push(2);
+        list_mutant.push(3);
+        list_mutant.push(4);
+        MutantStack<int, std::vector<int> >::iterator it2 = list_mutant.begin();
+        MutantStack<int, std::vector<int> >::iterator ite2 = list_mutant.end();
+        ++it2;
+        --it2;
+        while (it2 != ite2)
+        {
+            std::cout << *it2 << std::endl;
+            ++it2;
+        }
+    }
+
+    {
+        std::cout << "\nTest 1c: MutantStack with explicitly chosen container - std::deque" << std::endl;
+        MutantStack<int, std::deque<int> > list_mutant;
+        list_mutant.push(1);
+        list_mutant.push(2);
+        list_mutant.push(3);
+        list_mutant.push(4);
+        MutantStack<int, std::deque<int> >::iterator it2 = list_mutant.begin();
+        MutantStack<int, std::deque<int> >::iterator ite2 = list_mutant.end();
+        ++it2;
+        --it2;
+        while (it2 != ite2)
+        {
+            std::cout << *it2 << std::endl;
+            ++it2;
+        }
+    }
+
     it = mstack.begin();
 
-    std::cout << "\nTest 1: copy constructor" << std::endl;
+    std::cout << "\nTest 2: copy constructor" << std::endl;
     {
         MutantStack<int> copy(mstack);
         MutantStack<int>::iterator c_it = copy.begin();
         MutantStack<int>::iterator c_ite = copy.end();
-        int save = *it;
-        *it = 555555;
+        int save = *(mstack.begin());
+        *(mstack.begin()) = 555555;
         while (c_it != c_ite)
         {
             std::cout << *c_it << std::endl;
             ++c_it;
         }
-        *it = save;
+        //(void)save;
+        *(mstack.begin()) = save;
     }
 
-    std::cout << "\nTest 2: copy assignment operator" << std::endl;
+    std::cout << "\nTest 3: copy assignment operator" << std::endl;
     {
         MutantStack<int> copy;
         copy = mstack;
         MutantStack<int>::iterator c_it = copy.begin();
         MutantStack<int>::iterator c_ite = copy.end();
-        int save = *it;
-        *it = 555555;
+        int save = *(mstack.begin());
+        *(mstack.begin()) = 555555;
         while (c_it != c_ite)
         {
             std::cout << *c_it << std::endl;
             ++c_it;
         }
-        *it = save;
+        *(mstack.begin()) = save;
     }
 
     return 0;
