@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 17:04:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/06 11:38:28 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/27 12:19:20 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,17 @@ void display_found (T found_elem, T end)
 
 int main (void)
 {
-    std::cout << "Playing around" << std::endl;
+    std::cout << "Test 0 - Vector: number in container" << std::endl;
+    
     std::vector<int> v;
     v.push_back(1);
     v.push_back(2);
     v.push_back(3);
     v.push_back(4);
     v.push_back(5);
-    print_container(v);
     v.pop_back();
-    std::cout << "Element at index 0: " << v.at(0)<< std::endl;
     v.insert(v.begin(), 789);
-    print_container(v);
 
-    std::cout << "\nTest 0 - Vector: number in container" << std::endl;
     int num_2_find = 4;
     std::vector<int>::iterator int_found = easyfind(v, num_2_find);
     display_found(int_found, v.end());
@@ -60,15 +57,18 @@ int main (void)
     int_found = easyfind(v, num_2_find);
     display_found(int_found, v.end());
 
-    std::cout << "\nTest 2 - List: number not in container CONST" << std::endl;
-    //now our result variable has to be of type const_iterator
-    //this does not compile bc initialization by initializer list is forbidden.
-    //to execute this test we have to remove the flags first
-    // const std::list<int> list = {4,5,6,7};
-    const std::list<int> list;
+    std::cout << "\nTest 2 - List: number in container CONST" << std::endl;
+    std::list<int> list_nonconst;
+    list_nonconst.push_back(1);
+    list_nonconst.push_back(2);
+    list_nonconst.push_back(3);
+    list_nonconst.push_back(4);
+    list_nonconst.push_back(5);
+    list_nonconst.pop_back();
+    const std::list<int> list_const(list_nonconst);
     num_2_find = 4;
-    std::list<int>::const_iterator int_found_const = easyfind(list, num_2_find);
-    display_found(int_found_const,list.end());
+    std::list<int>::const_iterator int_found_const = easyfind(list_const, num_2_find);
+    display_found(int_found_const,list_const.end());
 
     std::cout << "\nTest 3 - Deqeue: number in container" << std::endl;
     std::deque<int> q;
