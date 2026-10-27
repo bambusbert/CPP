@@ -6,14 +6,9 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 17:04:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/27 14:17:56 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/27 14:56:17 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*TODO
-- better tests
-- algorithm solution for shortestSpan
-- method to add multiple numbers at once */
 
 #include "Span.hpp"
 #include <iostream>
@@ -112,7 +107,7 @@ int main(void)
         size_t _size_2 = 2;
         for (size_t i = 0; i < _size_1; i++)
             v.push_back(i * 3); // sorted gaps are all 3
-        //std::random_shuffle(v.begin(), v.end());
+        std::random_shuffle(v.begin(), v.end());
         Span sp(_size_1 + _size_2);
         clock_t t = clock();
         sp.addMultipleNumbers(v.begin(), v.end());
