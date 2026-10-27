@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 11:55:05 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/06 16:12:53 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/27 12:35:35 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 #include <exception>
 #include <vector>
 #include <iostream>
-#include <algorithm>
 #include <numeric>
+#include <algorithm>
 
 class Span
 {
 private:
     unsigned int _N;
-    std::vector<int> nums;
+    std::vector<int> _nums;
 
 public:
     Span();
@@ -33,8 +33,8 @@ public:
     ~Span();
     void addNumber(int num);
     void printNums() const;
-    long shortestSpan() const;
-    long longestSpan() const;
+    unsigned int shortestSpan() const;
+    unsigned int longestSpan() const;
     
     template <typename T>
     void addMultipleNumbers(T first, T last);

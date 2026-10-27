@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 11:55:11 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/06 16:15:19 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/27 12:53:33 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ Span::Span() : _N(0)
 
 Span::Span(unsigned int N) : _N(N)
 {
-    nums.reserve(_N);
+    _nums.reserve(_N);
 }
 
-Span::Span(const Span &other) : _N(other._N), nums(other.nums)
+Span::Span(const Span &other) : _N(other._N), _nums(other._nums)
 {
-    nums.reserve(_N);
+    _nums.reserve(_N);
 }
 
 Span &Span::operator=(const Span &other)
@@ -31,8 +31,8 @@ Span &Span::operator=(const Span &other)
     if (this != &other)
     {
         _N = other._N;
-        nums = other.nums;
-        nums.reserve(_N);
+        _nums = other._nums;
+        _nums.reserve(_N);
     }
     return *this;
 }
@@ -43,33 +43,33 @@ Span::~Span()
 
 void Span::addNumber(int num)
 {
-    if (nums.size() >= _N)
+    if (_nums.size() >= _N)
         throw SpanFullException();
-    nums.push_back(num);
+    _nums.push_back(num);
 }
 
 void Span::printNums() const
 {
-    for (unsigned int i = 0; i < nums.size(); i++)
-        std::cout << nums[i] << std::endl;
+    for (unsigned int i = 0; i < _nums.size(); i++)
+        std::cout << _nums[i] << std::endl;
 }
 
-long Span::longestSpan() const
+unsigned int Span::longestSpan() const
 {
-    if (nums.size() <= 1)
+    if (_nums.size() <= 1)
         throw ZeroOrOneElementException();
-    int max = *(std::max_element(nums.begin(), nums.end()));
-    int min = *(std::min_element(nums.begin(), nums.end()));
-    return static_cast<long>(max) - min;
+    int max = *(std::max_element(_nums.begin(), _nums.end()));
+    int min = *(std::min_element(_nums.begin(), _nums.end()));
+    return static_cast<unsigned int>(max) - min;
 }
 
-long Span::shortestSpan() const
+unsigned int Span::shortestSpan() const
 {
-    if (nums.size() <= 1)
+    if (_nums.size() <= 1)
         throw ZeroOrOneElementException();
     std::vector<long>v;
-    v.reserve(nums.size());
-    v.insert(v.end(), nums.begin(), nums.end());
+    v.reserve(_nums.size());
+    v.insert(v.end(), _nums.begin(), _nums.end());
     std::sort(v.begin(), v.end());
     std::adjacent_difference(v.begin(), v.end(), v.begin());
     long shortest_dist = *(std::min_element(v.begin() + 1, v.end()));
