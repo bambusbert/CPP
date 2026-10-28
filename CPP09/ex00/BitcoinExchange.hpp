@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:16:46 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/28 12:51:56 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/28 14:31:05 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 #define FAIL -1
 #define SUCCESS 0
+#define YEAR_MAX 2035
 
 #include <map>
 #include <string>
@@ -35,7 +36,7 @@ class BitcoinExchange
         std::string _input_file;
         bool _init_successful;
         int initialize_rates();
-        void parse_single_value_line(std::string &line) const;
+        void parse_single_quantity_line(std::string &line) const;
         double return_price_for_date(const std::string &date) const;
         int check_syntax_left(int *year, int *month, int *day, std::string &left) const;
         int check_syntax_right(double *val_right, std::string &right) const;
@@ -46,7 +47,7 @@ class BitcoinExchange
         ~BitcoinExchange();
         BitcoinExchange(const BitcoinExchange& other);
         BitcoinExchange& operator=(const BitcoinExchange& other);
-        void loop_input_file() const;
+        void loop_quantity_file() const;
 };
 
 int strtod_wrapper(double *res, const std::string &str);

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 12:35:25 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/28 12:52:23 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/28 14:31:13 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int is_leap_year(int &year)
 
 static int date_checker (int &year, int &month, int &day)
 {
-	if (year < 2008 || year > 2035 || month < 1 || month > 12 || day < 1 || day > 31)
+	if (year < 2008 || year > YEAR_MAX || month < 1 || month > 12 || day < 1 || day > 31)
 		return FAIL;
 	int max_days;
 	if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
@@ -68,7 +68,7 @@ static int date_checker (int &year, int &month, int &day)
 // 1. are there 2 dashes?
 // 2. first dash must not be in the beginning, last dash not in the end
 // 3. extract 3 numbers
-// 3a. check if yyyy/mm/dd correct number of chard
+// 3a. check if yyyy/mm/dd correct number of chars
 // 4. check if numbers make sense
 int BitcoinExchange::check_syntax_left(int *year, int *month, int *day, std::string &left) const
 {
@@ -77,23 +77,22 @@ int BitcoinExchange::check_syntax_left(int *year, int *month, int *day, std::str
 		return (std::cout << "Error: date syntax. bad input => '" << left << "'" << std::endl, FAIL);
 	// 1.
 	const int count_dash = std::count(left.begin(), left.end(), '-');
-	// std::cout << count_dash << std::endl;
 	if (count_dash != 2)
 		return (std::cout << "Error: date syntax. bad input => '" << left << "'" << std::endl, FAIL);
-
 	// 2.
 	size_t first_dash = left.find('-');
 	size_t second_dash = left.find_last_of('-');
 	if (first_dash == 0 || second_dash == left.length() - 1)
 		return (std::cout << "Error: date syntax. bad input => '" << left << "'" << std::endl, FAIL);
-		
+
 	// 3.
 	std::string year_str = left.substr(0, first_dash);
 	std::string month_str = left.substr(first_dash + 1, second_dash - first_dash - 1);
 	std::string day_str = left.substr(second_dash + 1, left.length() - second_dash);
-	
+	// 3a.
 	if (year_str.length() != 4 || month_str.length() != 2 || day_str.length() != 2)
 		return (std::cout << "Error: date syntax. bad input => '" << left << "'" << std::endl, FAIL);
+
 	if (strtol_wrapper(year, year_str) == FAIL || strtol_wrapper(month, month_str) == FAIL ||
 		strtol_wrapper(day, day_str) == FAIL)
 		return (std::cout << "Error: date parsing to int. bad input => '" << left << "'" << std::endl, FAIL);

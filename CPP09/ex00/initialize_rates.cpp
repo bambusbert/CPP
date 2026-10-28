@@ -6,13 +6,13 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 12:31:48 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/28 12:26:59 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/28 14:12:06 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-static int parse_single_data_line(std::string &line, std::map<std::string, double> &rates)
+static int parse_single_rate_line(std::string &line, std::map<std::string, double> &rates)
 {
 	int pos_comma = line.find(',');
 	std::string key = line.substr(0, pos_comma);
@@ -34,7 +34,7 @@ static int parse_rates(std::ifstream &ifstream, std::map<std::string, double> &r
 				FAIL);
 	while (std::getline(ifstream, line))
 	{
-		if (parse_single_data_line(line, rates) == -1)
+		if (parse_single_rate_line(line, rates) == FAIL)
 			return FAIL;
 	}
 	return SUCCESS;
