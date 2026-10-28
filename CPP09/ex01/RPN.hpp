@@ -6,12 +6,15 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 13:04:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/26 15:59:37 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/28 15:01:27 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RPN_H
 #define RPN_H
+
+#define FAIL -1
+#define SUCCESS 0
 
 #include <string>
 #include <list>

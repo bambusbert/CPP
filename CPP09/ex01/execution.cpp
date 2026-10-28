@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 17:13:04 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/23 17:45:57 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/28 15:03:43 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ long RPN::execute_subtraction()
 	return *second_to_last - _lst.back();
 }
 
+//TODO overflow protection
 long RPN::execute_multiplication()
 {
 	std::list<long>::iterator second_to_last = _lst.end();
@@ -36,18 +37,18 @@ long RPN::execute_multiplication()
 int RPN::execute_division(long *res)
 {
 	if (_lst.back() == 0)
-		return -1;
+		return FAIL;
 	std::list<long>::iterator second_to_last = _lst.end();
 	std::advance(second_to_last, -2);
 	*res = *second_to_last / _lst.back();
-	return 0;
+	return SUCCESS;
 }
 
 int RPN::execute_operation(long *res, char c)
 {
 	int div_by_zero = 0;
 	if (_lst.size() <= 1)
-		return (std::cerr << "Error. there need to be 2 numbers before an operator" << std::endl, -1);
+		return (std::cerr << "Error. there need to be 2 numbers before an operator" << std::endl, FAIL);
 	if (c == '+')
 		*res = execute_addition();
 	else if (c == '-')
@@ -56,7 +57,7 @@ int RPN::execute_operation(long *res, char c)
 		*res = execute_multiplication();
 	else if (c == '/')
 		div_by_zero = execute_division(res);
-	if (div_by_zero == -1)
-		return (std::cerr << "Error. Division by zero" << std::endl, -1);
+	if (div_by_zero == FAIL)
+		return (std::cerr << "Error. Division by zero" << std::endl, FAIL);
 	return 0;
 }

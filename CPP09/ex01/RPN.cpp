@@ -6,27 +6,20 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 13:05:43 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/26 16:00:23 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/28 15:01:33 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
-RPN::RPN()
-{
-}
+//TODO check if parse string on default constructed element does nothing stupid
+RPN::RPN() { }
 
-RPN::~RPN()
-{
-}
+RPN::~RPN() { }
 
-RPN::RPN(const std::string &str): _str(str)
-{
-}
+RPN::RPN(const std::string &str): _str(str) { }
 
-RPN::RPN(const RPN &other): _lst (other._lst), _str(other._str)
-{
-}
+RPN::RPN(const RPN &other): _lst (other._lst), _str(other._str) { }
 
 RPN &RPN::operator=(const RPN &other)
 {
@@ -73,7 +66,7 @@ void RPN::parse_string()
 		if (is_operator(_str[i]))
 		{
 			long res;
-			if (execute_operation(&res, _str[i]) == -1)
+			if (execute_operation(&res, _str[i]) == FAIL)
 				{ fail = true; break; }
 			insert_result(res);
 			continue;
