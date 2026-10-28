@@ -6,12 +6,12 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:17:47 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/26 10:52:54 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/28 12:52:55 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //data.csv stores prices
-//input.csv stores amount (value) of btc
+//input.csv stores traded amount (quantity) of btc
 //output is the multiplication of these 2 variables
 #include "BitcoinExchange.hpp"
 #include <iostream>
@@ -41,10 +41,13 @@ int main(int argc, char **argv)
 // 	// std::cout << "\nbtc" << std::endl;
 // 	// (*btc).loop_input_file(); ,
 
- // 	std::cout << "\nbtc2" << std::endl;
+//  	std::cout << "\nTEST 0 - btc2 | copy constructor" << std::endl;
 // 	btc2.loop_input_file();
-// 	std::cout << "\nbtc3" << std::endl;
+//  	std::cout << "\nTEST 1 - btc3 | copy assignment operator" << std::endl;
 // 	btc3.loop_input_file();
+// 	std::cout << "\nTEST 2 - default constructor" << std::endl;
+// 	BitcoinExchange def;
+// 	def.loop_input_file();
 // 	// std::cout << std::endl << "copy constructor" << std::endl;
 // 	// btc2.print_daily_prices();
 // 	// std::cout << std::endl << "copy assignment operator" << std::endl;

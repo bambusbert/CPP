@@ -6,28 +6,32 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:16:34 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/26 15:17:28 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/28 12:47:06 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
-
-BitcoinExchange::BitcoinExchange(): _input_file("")
+// TODO Dates before the first rate print garbage
+BitcoinExchange::BitcoinExchange() : _input_file("")
 {
-	//initialize_rates();
+	// that's nonsensical but subject requires it
+	// initialize_rates();
+	_init_successful = false;
 }
 
-BitcoinExchange::BitcoinExchange(const std::string &filename): _input_file(filename)
+BitcoinExchange::BitcoinExchange(const std::string &filename) : _input_file(filename)
 {
-	if (initialize_rates() == -1)
-		_input_file = "";
+	if (initialize_rates() == FAIL)
+		_init_successful = false;
+	else
+		_init_successful = true;
 }
 
 BitcoinExchange::~BitcoinExchange()
 {
 }
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : rates(other.rates), _input_file(other._input_file)
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : _rates(other._rates), _input_file(other._input_file), _init_successful(other._init_successful)
 {
 }
 
@@ -36,8 +40,9 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
 	if (this != &other)
 	{
 		_input_file = other._input_file;
-		rates.clear();
-		rates = other.rates;
+		_rates.clear();
+		_rates = other._rates;
+		_init_successful = other._init_successful;
 	}
 	return *this;
 }
@@ -47,18 +52,24 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
 double BitcoinExchange::return_price_for_date(const std::string &date) const
 {
 	std::map<std::string, double>::const_iterator it;
-	it = rates.lower_bound(date);
-	if (it != rates.end() && it->first == date)
+	it = _rates.lower_bound(date);
+	if (it != _rates.end() && it->first == date)
 		return it->second;
-	if (it == rates.begin())
-		return -1;
+	if (it == _rates.begin())
+		return FAIL;
 	return (--it)->second;
 }
 
 void BitcoinExchange::display_result(const std::string &date, double &amount_traded) const
 {
+	double price = return_price_for_date(date);
+	if (price == FAIL)
+	{
+		std::cout << "Error: no regarding price in database. (valid date but no match)" << std::endl;
+		return;
+	}
 	std::cout << date << " => " << amount_traded << " = "
-			  << return_price_for_date(date) * amount_traded << std::endl;
+			  << price * amount_traded << std::endl;
 }
 
 // Rules:
@@ -92,10 +103,10 @@ void BitcoinExchange::parse_single_value_line(std::string &line) const
 
 void BitcoinExchange::loop_input_file() const
 {
-	if (_input_file == "")
+	if (_init_successful == false)
 	{
-		//std::cout << "Error. btc exchange does not have an input file" << std::endl;
-		return ;
+		std::cout << "Error. loop can't be executed because initialization failed" << std::endl;
+		return;
 	}
 	std::ifstream infile(_input_file.c_str(), std::ifstream::in);
 	if (!infile.is_open())
