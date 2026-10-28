@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 17:04:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/27 15:32:45 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/28 11:43:57 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,25 @@ int main(void)
         std::cout << "shortest: " << sp.shortestSpan() << " (expect 3)" << std::endl;
         std::cout << "longest:  " << sp.longestSpan() << " (expect " << 3 * 19999 + 6 << ")" << std::endl;
         std::cout << "time: " << (double(clock() - t) / CLOCKS_PER_SEC) * 1000 << "ms" << std::endl;
+    }
+
+    std::cout << "\nTest 9: FRIDO TEST" << std::endl;
+    {
+        Span frido(5);
+        std::vector<int> to_fill;
+        to_fill.push_back(1);
+        to_fill.push_back(2);
+        to_fill.push_back(3);
+        to_fill.push_back(4);
+        to_fill.push_back(5);
+        frido.addMultipleNumbers(to_fill.begin(), to_fill.end());
+        try
+        {
+            frido.addMultipleNumbers(to_fill.begin(), to_fill.end());
+        }
+        catch (std::exception &e)
+        {
+            std::cout << "did not work." << e.what() << std::endl;
+        }
     }
 }
