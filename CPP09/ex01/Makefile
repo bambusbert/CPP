@@ -1,6 +1,6 @@
 NAME = RPN
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wpedantic -g
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wpedantic -g -fsanitize=undefined
 # CXXFLAGS = -std=c++98 -g
 DFLAGS	= -MMD -MP
 RM = rm -f
