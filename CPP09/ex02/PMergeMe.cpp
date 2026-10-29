@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 17:47:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/26 17:22:52 by slambert         ###   ########.fr       */
+/*   Updated: 2026/10/29 17:09:20 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,20 +72,35 @@ bool PMergeMe::validate_input_and_fill_containers(char **argv)
 // 	std::cout << "Time deq: " << _t_deq << std::endl;
 // }
 
+template <typename T>
+T PMergeMe::indices_2_values(T& con, T& val)
+{
+	//TODO
+}
+
 void PMergeMe::sort_containers()
 {
 	struct timespec ts;
 	long start, end;
 	clock_gettime(CLOCK_REALTIME, &ts);
 	start = ts.tv_nsec + ts.tv_sec * 1000 * 1000 * 1000;
-	_con_vec = sort_container(_con_vec);
+	
+	std::vector<int> vec_indices;
+	for (int i = 0; i < static_cast<int>(_con_vec.size()); i++)
+		vec_indices.push_back(i);
+	vec_indices = sort_container2(_con_vec, vec_indices);
+	_con_vec = indices_2_values(_con_vec, vec_indices);
 	clock_gettime(CLOCK_REALTIME, &ts);
 	end = ts.tv_nsec + ts.tv_sec * 1000 * 1000 * 1000;
 	_t_vec = (end - start);
 
 	clock_gettime(CLOCK_REALTIME, &ts);
 	start = ts.tv_nsec + ts.tv_sec * 1000 * 1000 * 1000;
-	_con_deq = sort_container(_con_deq);
+	std::deque<int> deq_indices;
+	for (int i = 0; i < static_cast<int>(_con_deq.size()); i++)
+		deq_indices.push_back(i);
+	deq_indices = sort_container2(_con_deq, deq_indices);
+	_con_deq = indices_2_values(_con_deq, deq_indices);
 	clock_gettime(CLOCK_REALTIME, &ts);
 	end = ts.tv_nsec + ts.tv_sec * 1000 * 1000 * 1000;
 	_t_deq = (end - start);
@@ -99,6 +114,8 @@ void PMergeMe::sort_containers()
 // 2. perform sort_container on these 2 arrays
 // 3. merge these 2 arrays back into one
 // 4. stop & set timer
+//TODO this is standard merge sort (or divide-and-conquer). what we need to
+//implement is the "Ford-Johnson" or "merge insert" algo.
 template <typename T> T PMergeMe::sort_container(T &con)
 {
 	if (con.size() == 1)
@@ -111,6 +128,56 @@ template <typename T> T PMergeMe::sort_container(T &con)
 	right = sort_container(right);
 	return merge_container(left, right);
 }
+
+
+//always work with the indices
+//at the end sort indices
+template <typename T> T PMergeMe::sort_container2(T &values, T& indices)
+{
+	//base case
+	int ssize = static_cast<int>(indices.size());
+	if (ssize == 1)
+		return indices;
+	T a, b, partners;
+	for (int i = 0; i < values.size(); i++)
+		partners.push_back(-1);
+	// 1. create pairs of 2, insert winner/loser indices in a and b
+	
+	for (typename T::iterator it = indices.begin(); it < indices.end() - 1; std::advance(it, 2))
+	{
+		int winner_index, loser_index;
+		if (values[*it] > values[*(it + 1)])
+			{winner_index = *it; loser_index = *(it + 1);}
+		else
+			{winner_index = *(it + 1); loser_index = *it;}
+		a.push_back(winner_index);
+		b.push_back(loser_index);
+		partners[winner_index] = loser_index;
+		partners[loser_index] = winner_index;
+	}
+	// 1a. if odd put elem in b
+	if (ssize % 2 != 0)
+	{
+		b.push_back(*(indices.end() - 1));
+		//partners.push_back(-1);
+	}
+	// 2. recursive sorting of the winners
+	a = sort_container2(values, a);
+	
+	
+}
+
+	// for (int i = 0; i < (ssize / 2) * 2; i+= 2)
+	// {
+	// 	int winner_index, loser_index;
+	// 	if (con[i] > con[i + 1])
+	// 		winner_index = i; loser_index = i + 1;
+	// 	else
+	// 		bigger_index = i + 1; loser_index = i;
+	// 	a.push_back(winner_index);
+	// 	b.push_back(loser_index);
+	// 	//zu jedem loser muss ich den winner speichern
+	// }
 
 // problem: pop_front gibt es nur bei deque, nicht bei vector
 // ich kann aber T::erase(T:begin()) verwenden
