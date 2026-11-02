@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 17:47:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/29 17:09:20 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/02 17:31:17 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,23 +139,23 @@ template <typename T> T PMergeMe::sort_container2(T &values, T& indices)
 	if (ssize == 1)
 		return indices;
 	T a, b, partners;
-	for (int i = 0; i < values.size(); i++)
+	for (int i = 0; i < values.size(); i++) // that right?
 		partners.push_back(-1);
 	// 1. create pairs of 2, insert winner/loser indices in a and b
 	
-	for (typename T::iterator it = indices.begin(); it < indices.end() - 1; std::advance(it, 2))
+	for (typename T::iterator index_it = indices.begin(); index_it < indices.end() - 1; std::advance(index_it, 2))
 	{
 		int winner_index, loser_index;
-		if (values[*it] > values[*(it + 1)])
-			{winner_index = *it; loser_index = *(it + 1);}
+		if (values[*index_it] > values[*(index_it + 1)])
+			{winner_index = *index_it; loser_index = *(index_it + 1);}
 		else
-			{winner_index = *(it + 1); loser_index = *it;}
+			{winner_index = *(index_it + 1); loser_index = *index_it;}
 		a.push_back(winner_index);
 		b.push_back(loser_index);
-		partners[winner_index] = loser_index;
+		partners[winner_index] = loser_index; //i think i don't need that
 		partners[loser_index] = winner_index;
 	}
-	// 1a. if odd put elem in b
+	// 1a. if odd put last elem in b
 	if (ssize % 2 != 0)
 	{
 		b.push_back(*(indices.end() - 1));
@@ -163,7 +163,34 @@ template <typename T> T PMergeMe::sort_container2(T &values, T& indices)
 	}
 	// 2. recursive sorting of the winners
 	a = sort_container2(values, a);
-	
+	// 3. handling of losers (b) - insert elem in list a (binary search from 0 up to the partner)
+	//TODO not one after each other but Jacobsthal style
+	for (typename T::iterator b_index_it = b.begin(); b_index_it != b.end(); ++b_index_it)
+	{
+		// a. find partner index
+		int partner_index = partners[*b_index_it];
+		// int partner_number = values[partner_index];
+		// b. find partner iterator
+		typename T::iterator partner_iterator = std::find(a.begin(), a.end(), partner_index);
+		// c. find where to insert
+		//typename T::iterator where_2_insert = std::lower_bound(a.begin(), partner_it, *b_index_it); //no worky
+		typename T::iterator insert_here = where_2_insert(values, a, *b_index_it, partner_iterator);
+		
+		// d. actual insert
+		
+	}
+	// TODO think if plain return is smart (reference?)
+	return a;
+}
+
+
+//this returns the iterator into a. binary search
+template <typename T>
+typename T::iterator PMergeMe::where_2_insert(T &values, T &a, int index, typename T::iterator high)
+{
+	//0. find value based on index
+	//1. find iterator where_2_insert VALUE
+	typename T::iterator low = a.begin();
 	
 }
 

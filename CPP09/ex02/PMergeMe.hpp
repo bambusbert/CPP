@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 17:47:36 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/29 16:52:19 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/02 17:05:52 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ class PMergeMe
         T merge_container(T& left, T& right);
         template <typename T>
         T indices_2_values(T& con, T& val);
+        template <typename T>
+        typename T::iterator where_2_insert(T &values, T &a, int index, typename T::iterator partner_it);
     public:
 	    PMergeMe();
 	    ~PMergeMe();
