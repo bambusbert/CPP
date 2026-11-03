@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PMergeMe.cpp                                       :+:      :+:    :+:   */
+/*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 17:47:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/03 16:56:25 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/03 18:06:09 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PMergeMe.hpp"
+#include "PmergeMe.hpp"
 
-const int PMergeMe::_jacobsthal_arr[31] = {
+const int PmergeMe::_jacobsthal_arr[31] = {
 	1, 3, 5, 11, 21, 43, 85, 171, 341, 683,
 	1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525, 699051,
 	1398101, 2796203, 5592405, 11184811, 22369621, 44739243, 89478485,
 	178956971, 357913941, 715827883, 1431655765
 };
 
-PMergeMe::PMergeMe()
+PmergeMe::PmergeMe(): _vec_ops(0), _deq_ops(0)
 {
 }
 
-PMergeMe::~PMergeMe()
+PmergeMe::~PmergeMe()
 {
 }
 
-PMergeMe::PMergeMe(const PMergeMe &other) : _con_vec(other._con_vec), _con_deq(other._con_deq), _t_vec(other._t_vec), _t_deq(other._t_deq) {}
+PmergeMe::PmergeMe(const PmergeMe &other) : _con_vec(other._con_vec), _con_deq(other._con_deq), _t_vec(other._t_vec), _t_deq(other._t_deq), _vec_ops(0), _deq_ops(0) {}
 
-PMergeMe &PMergeMe::operator=(const PMergeMe &other)
+PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 {
 	if (this != &other)
 	{
@@ -39,11 +39,13 @@ PMergeMe &PMergeMe::operator=(const PMergeMe &other)
 		_con_vec = other._con_vec;
 		_t_deq = other._t_deq;
 		_t_vec = other._t_vec;
+		_vec_ops = other._vec_ops;
+		_deq_ops = other._deq_ops;
 	}
 	return *this;
 }
 
-bool PMergeMe::validate_input_and_fill_containers(char **argv)
+bool PmergeMe::validate_input_and_fill_containers(char **argv)
 {
 	long num;
 	int i = 0;
@@ -61,18 +63,7 @@ bool PMergeMe::validate_input_and_fill_containers(char **argv)
 	return true;
 }
 
-template <typename T>
-T PMergeMe::indices_2_values(T &con_val, T &con_ind)
-{
-	T ret_con;
-	for (typename T::iterator it = con_ind.begin(); it != con_ind.end(); ++it)
-	{
-		ret_con.push_back(con_val[*it]);
-	}
-	return ret_con;
-}
-
-void PMergeMe::sort_containers()
+void PmergeMe::sort_containers()
 {
 	struct timespec ts;
 	long start, end;
@@ -82,7 +73,7 @@ void PMergeMe::sort_containers()
 	std::vector<int> vec_indices;
 	for (int i = 0; i < static_cast<int>(_con_vec.size()); i++)
 		vec_indices.push_back(i);
-	vec_indices = sort_container(_con_vec, vec_indices);
+	vec_indices = sort_container(_con_vec, vec_indices, &_vec_ops);
 	_con_vec = indices_2_values(_con_vec, vec_indices);
 	clock_gettime(CLOCK_REALTIME, &ts);
 	end = ts.tv_nsec + ts.tv_sec * 1000 * 1000 * 1000;
@@ -93,14 +84,14 @@ void PMergeMe::sort_containers()
 	std::deque<int> deq_indices;
 	for (int i = 0; i < static_cast<int>(_con_deq.size()); i++)
 		deq_indices.push_back(i);
-	deq_indices = sort_container(_con_deq, deq_indices);
+	deq_indices = sort_container(_con_deq, deq_indices, &_deq_ops);
 	_con_deq = indices_2_values(_con_deq, deq_indices);
 	clock_gettime(CLOCK_REALTIME, &ts);
 	end = ts.tv_nsec + ts.tv_sec * 1000 * 1000 * 1000;
 	_t_deq = (end - start);
 }
 
-unsigned int PMergeMe::next_jacobsthal(unsigned int num)
+unsigned int PmergeMe::next_jacobsthal(unsigned int num)
 {
 	unsigned int prev = 1;
 	unsigned int cur = 1;
@@ -115,14 +106,14 @@ unsigned int PMergeMe::next_jacobsthal(unsigned int num)
 }
 
 //interesting this is not much faster than not hardcoded
-unsigned int PMergeMe::next_jacobsthal_hardcoded(unsigned int num)
+unsigned int PmergeMe::next_jacobsthal_hardcoded(unsigned int num)
 {
 	const int* begin = _jacobsthal_arr;
 	const int* end = _jacobsthal_arr + sizeof(_jacobsthal_arr) / sizeof (_jacobsthal_arr[0]);
 	return *(std::lower_bound(begin, end, num));
 }
 
-unsigned int PMergeMe::update_index(unsigned int count_elems, unsigned int& prev_jacob, unsigned int &cur_jacob)
+unsigned int PmergeMe::update_index(unsigned int count_elems, unsigned int size_b, unsigned int& prev_jacob, unsigned int &cur_jacob)
 {
 	static unsigned int c = 0;
 	if (count_elems == 0)
@@ -133,101 +124,12 @@ unsigned int PMergeMe::update_index(unsigned int count_elems, unsigned int& prev
 		unsigned int prev_save = prev_jacob;
 		prev_jacob = cur_jacob;
 		cur_jacob = 2 * prev_save + cur_jacob;
+		if (cur_jacob > size_b)
+			cur_jacob = size_b;
 		return cur_jacob - 1;
 	}
 	c++;
 	return cur_jacob - c - 1;
-}
-
-// always work with the indices
-// at the end sort indices
-template <typename T>
-T PMergeMe::sort_container(T &values, T &indices)
-{
-	// base case
-	int ssize = static_cast<int>(indices.size());
-	if (ssize == 1)
-		return indices;
-	T a, b, partners;
-	for (size_t i = 0; i < values.size(); i++)
-		partners.push_back(-1);
-	// 1. create pairs of 2, insert winner/loser indices in a and b
-
-	for (typename T::iterator index_it = indices.begin(); index_it < indices.end() - 1; std::advance(index_it, 2))
-	{
-		int winner_index, loser_index;
-		if (values[*index_it] > values[*(index_it + 1)])
-		{
-			winner_index = *index_it;
-			loser_index = *(index_it + 1);
-		}
-		else
-		{
-			winner_index = *(index_it + 1);
-			loser_index = *index_it;
-		}
-		a.push_back(winner_index);
-		b.push_back(loser_index);
-		partners[winner_index] = loser_index; // i think i don't need that
-		partners[loser_index] = winner_index;
-	}
-	// 1a. if odd put last elem in b
-	if (ssize % 2 != 0)
-		b.push_back(*(indices.end() - 1));
-		
-	// 2. recursive sorting of the winners
-	a = sort_container(values, a);
-	// 3. handling of losers (b) - insert elem in list a (binary search from 0 up to the partner)
-	unsigned int cur_jacobsthal = 1;
-	unsigned int prev_jacobsthal = 1;
-	unsigned int count_elems = -1;
-	
-	unsigned int size_b = b.size();
-	unsigned int i = 0;
-	while (++count_elems < size_b)
-	{
-		i = update_index(count_elems, prev_jacobsthal, cur_jacobsthal);
-		// a. find partner index
-		int partner_index = partners[b[i]];
-		// b. find partner iterator
-		const typename T::iterator partner_iterator = std::find(a.begin(), a.end(), partner_index);
-		// c. find where to insert
-		int count = 0;
-		const typename T::iterator insert_here = std::lower_bound(a.begin(), partner_iterator, b[i], IdxLessTemp<T>(values, &count));
-		// d. actual insert
-		a.insert(insert_here, b[i]);
-	}
-	return a;
-}
-
-template <typename T>
-void PMergeMe::print_container(T &con)
-{
-	typename T::iterator it = con.begin();
-	while (it != con.end())
-	{
-		std::cout << *it << " ";
-		++it;
-	}
-	std::cout << std::endl;
-}
-
-void PMergeMe::print_vec()
-{
-	print_container(_con_vec);
-}
-
-void PMergeMe::print_deq()
-{
-	print_container(_con_deq);
-}
-
-void PMergeMe::print_timings()
-{
-	std::cout << "Time to process a range of " << _con_vec.size()
-			  << " elements with std::vector : " << _t_vec << " ns" << std::endl;
-	std::cout << "Time to process a range of " << _con_vec.size()
-			  << " elements with std::deque : " << _t_deq << " ns" << std::endl;
 }
 
 // void PMergeMe::sort_containers(double *t_vec, double *t_deq)

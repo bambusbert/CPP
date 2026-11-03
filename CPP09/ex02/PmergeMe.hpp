@@ -1,16 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PMergeMe.hpp                                       :+:      :+:    :+:   */
+/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 17:47:36 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/03 16:55:25 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/03 17:59:03 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// https://www.youtube.com/watch?v=4VqmGXwpLqc
 
 #ifndef PMERGE_ME_HPP
 #define PMERGE_ME_HPP
@@ -26,7 +24,7 @@
 #include <time.h>
 #include <algorithm>
 
-class PMergeMe
+class PmergeMe
 {
     template <typename T>
     struct IdxLessTemp
@@ -49,18 +47,22 @@ private:
     std::deque<int> _con_deq;
     long _t_vec;
     long _t_deq;
+    int _vec_ops;
+    int _deq_ops;
     template <typename T>
-    T sort_container(T &values, T &indices);
+    T sort_container(T &values, T &indices, int *op_count);
     template <typename T>
     T indices_2_values(T &con_val, T &con_ind);
     template <typename T>
     void print_container(T &con);
-    unsigned int update_index(unsigned int count_elems, unsigned int& prev_jacob, unsigned int &cur_jacob);
+    template <typename T>
+    void loser_handler(T &a, T &b, T& partners, T& values, int *count);
+    unsigned int update_index(unsigned int count_elems, unsigned int size_b, unsigned int& prev_jacob, unsigned int &cur_jacob);
 public:
-    PMergeMe();
-    ~PMergeMe();
-    PMergeMe(const PMergeMe &other);
-    PMergeMe &operator=(const PMergeMe &other);
+    PmergeMe();
+    ~PmergeMe();
+    PmergeMe(const PmergeMe &other);
+    PmergeMe &operator=(const PmergeMe &other);
     bool validate_input_and_fill_containers(char **argv);
     void sort_containers();
     void print_vec();
@@ -69,5 +71,7 @@ public:
     unsigned int next_jacobsthal_hardcoded(unsigned int num);
     unsigned int next_jacobsthal(unsigned int num);
 };
+
+#include "PmergeMe.tpp"
 
 #endif

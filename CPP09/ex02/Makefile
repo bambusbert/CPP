@@ -1,12 +1,13 @@
 NAME = PmergeMe
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wpedantic
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wpedantic -g
 #CXXFLAGS = -std=c++98 -g
 DFLAGS	= -MMD -MP
 RM = rm -f
 
 SRC =	main.cpp \
-		PMergeMe.cpp
+		PmergeMe.cpp \
+		print.cpp
 
 OBJ_DIR = obj
 
