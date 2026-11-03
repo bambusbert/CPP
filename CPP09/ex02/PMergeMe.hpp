@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 17:47:36 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/03 16:10:24 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/03 16:55:25 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ class PMergeMe
     };
 
 private:
+    static const int _jacobsthal_arr[31];
     std::vector<int> _con_vec;
     std::deque<int> _con_deq;
     long _t_vec;
@@ -54,7 +55,7 @@ private:
     T indices_2_values(T &con_val, T &con_ind);
     template <typename T>
     void print_container(T &con);
-    unsigned int update_index(unsigned int count_elems, unsigned int size_b, unsigned int& prev_jacob, unsigned int &cur_jacob);
+    unsigned int update_index(unsigned int count_elems, unsigned int& prev_jacob, unsigned int &cur_jacob);
 public:
     PMergeMe();
     ~PMergeMe();
@@ -65,6 +66,7 @@ public:
     void print_vec();
     void print_deq();
     void print_timings();
+    unsigned int next_jacobsthal_hardcoded(unsigned int num);
     unsigned int next_jacobsthal(unsigned int num);
 };
 
