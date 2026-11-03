@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:17:47 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/03 14:17:38 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/03 16:15:08 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int main(int argc, char **argv)
 	std::cout << "After:  ";
 	pm.print_vec();
 	pm.print_timings();
+	// for (int i = 0; i < 10; i++)
+	// 	std::cout << i*1 << ": " << pm.next_jacobsthal(i*1) << std::endl;
 	return 0;
 }
 

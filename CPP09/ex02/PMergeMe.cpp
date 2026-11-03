@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 17:47:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/03 14:26:00 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/03 16:31:26 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,76 @@ void PMergeMe::sort_containers()
 	_t_deq = (end - start);
 }
 
+unsigned int PMergeMe::next_jacobsthal(unsigned int num)
+{
+	unsigned int prev = 1;
+	unsigned int cur = 1;
+	
+	while (cur < num)
+	{
+		unsigned int prev_save = prev;
+		prev = cur;
+		cur = 2 * prev_save + cur;
+	}
+	return cur;
+}
+
+unsigned int PMergeMe::update_index(unsigned int count_elems, unsigned int size_b, unsigned int& prev_jacob, unsigned int &cur_jacob)
+{
+	static unsigned int c = 0;
+	if (count_elems == 0)
+		return 0;
+	if (next_jacobsthal(count_elems) == count_elems)
+	{
+		c = 0;
+		unsigned int prev_save = prev_jacob;
+		prev_jacob = cur_jacob;
+		cur_jacob = 2 * prev_save + cur_jacob;
+		return cur_jacob - 1;
+	}
+	c++;
+	return cur_jacob - c - 1;
+}
+
+// unsigned int PMergeMe::return_next_jacobsthal_number()
+// {
+// 	static unsigned int cur_jacob = 1;
+// 	static unsigned int prev_jacob = 0;
+// 	if (cur_jacob == 1 && prev_jacob == 0)
+// 	{
+// 		prev_jacob = 1;
+// 		return cur_jacob;
+// 	}
+// 	unsigned int old_prev = prev_jacob;
+// 	prev_jacob = cur_jacob;
+// 	cur_jacob = 2 * old_prev + cur_jacob;
+// 	return cur_jacob;
+// }
+
+// static bool is_power_of_2(unsigned int num)
+// {
+// 	return (num & (num - 1)) == 0;
+// }
+
+// //a number is jacobsthal if either (3x + 1) or (3x - 1) is a power of 2
+// static bool is_jacobsthal(unsigned int num)
+// {
+// 	if (num == 0)
+// 		return false;
+// 	unsigned int to_check1 = 3 * num + 1;
+// 	unsigned int to_check2 = 3 * num - 1;
+// 	if (is_power_of_2(to_check1) || is_power_of_2(to_check2))
+// 		return true;
+// 	return false;
+// }
+
+// static unsigned int my_advancer(unsigned int count, unsigned int prev_jacob, unsigned int cur_jacob)
+// {
+// 	if (count == 0)
+// 		return 0;
+	
+// }
+
 // always work with the indices
 // at the end sort indices
 template <typename T>
@@ -133,17 +203,29 @@ T PMergeMe::sort_container(T &values, T &indices)
 	a = sort_container(values, a);
 	// 3. handling of losers (b) - insert elem in list a (binary search from 0 up to the partner)
 	// TODO not one after each other but Jacobsthal style
-	for (typename T::iterator b_index_it = b.begin(); b_index_it != b.end(); ++b_index_it)
+	unsigned int cur_jacobsthal = 1;
+	unsigned int prev_jacobsthal = 1;
+	unsigned int count_elems = -1;
+	typename T::iterator b_index_it = b.begin();
+	// for (int i = 0; i < b.size(); i++)
+	
+	unsigned int size_b = b.size();
+	unsigned int i = 0;
+	std::cout << "\n NEW RUN" << std::endl;
+	while (++count_elems < size_b)
 	{
+		i = update_index(count_elems, size_b, prev_jacobsthal, cur_jacobsthal);
+		std::cout << "JACOB " << i + 1 << std::endl;
 		// a. find partner index
-		int partner_index = partners[*b_index_it];
+		int partner_index = partners[b[i]];
 		// b. find partner iterator
 		const typename T::iterator partner_iterator = std::find(a.begin(), a.end(), partner_index);
 		// c. find where to insert
 		int count = 0;
-		const typename T::iterator insert_here = std::lower_bound(a.begin(), partner_iterator, *b_index_it, IdxLessTemp<T>(values, &count));
+		const typename T::iterator insert_here = std::lower_bound(a.begin(), partner_iterator, b[i], IdxLessTemp<T>(values, &count));
 		// d. actual insert
-		a.insert(insert_here, *b_index_it);
+		a.insert(insert_here, b[i]);
+		
 	}
 	return a;
 }
