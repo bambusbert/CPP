@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 17:47:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/02 17:31:17 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/03 12:15:56 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,14 @@ bool PMergeMe::validate_input_and_fill_containers(char **argv)
 // }
 
 template <typename T>
-T PMergeMe::indices_2_values(T& con, T& val)
+T PMergeMe::indices_2_values(T& con_val, T& con_ind)
 {
-	//TODO
+	T ret_con; 
+	for (typename T::iterator it = con_ind.begin(); it != con_ind.end(); ++it)
+	{
+		ret_con.push_back(con_val[*it]);
+	}
+	return ret_con;
 }
 
 void PMergeMe::sort_containers()
@@ -107,28 +112,6 @@ void PMergeMe::sort_containers()
 	// std::cout << "Time vec: " << _t_vec << " ns" << std::endl;
 	// std::cout << "Time deq: " << _t_deq << " ns" << std::endl;
 }
-
-// TODO put in tpp
-// 0. start timer
-// 1. split array into 2 smaller arrays
-// 2. perform sort_container on these 2 arrays
-// 3. merge these 2 arrays back into one
-// 4. stop & set timer
-//TODO this is standard merge sort (or divide-and-conquer). what we need to
-//implement is the "Ford-Johnson" or "merge insert" algo.
-template <typename T> T PMergeMe::sort_container(T &con)
-{
-	if (con.size() == 1)
-		return con;
-	typename T::iterator middle = con.begin();
-	std::advance(middle, con.size() / 2);
-	T left(con.begin(), middle);
-	T right(middle, con.end());
-	left = sort_container(left);
-	right = sort_container(right);
-	return merge_container(left, right);
-}
-
 
 //always work with the indices
 //at the end sort indices
@@ -162,79 +145,30 @@ template <typename T> T PMergeMe::sort_container2(T &values, T& indices)
 		//partners.push_back(-1);
 	}
 	// 2. recursive sorting of the winners
+	//if (!container_already_sorted(values, a))
 	a = sort_container2(values, a);
 	// 3. handling of losers (b) - insert elem in list a (binary search from 0 up to the partner)
 	//TODO not one after each other but Jacobsthal style
 	for (typename T::iterator b_index_it = b.begin(); b_index_it != b.end(); ++b_index_it)
 	{
-		// a. find partner index
+		// a. find partner index 
 		int partner_index = partners[*b_index_it];
 		// int partner_number = values[partner_index];
 		// b. find partner iterator
 		typename T::iterator partner_iterator = std::find(a.begin(), a.end(), partner_index);
 		// c. find where to insert
 		//typename T::iterator where_2_insert = std::lower_bound(a.begin(), partner_it, *b_index_it); //no worky
-		typename T::iterator insert_here = where_2_insert(values, a, *b_index_it, partner_iterator);
-		
+		//const typename T::iterator insert_here = where_2_insert(values, values[*b_index_it], a, a.begin(), partner_iterator);
+		const typename T::iterator insert_here = std::lower_bound(a.begin(), partner_iterator, *b_index_it, pred);
 		// d. actual insert
-		
+		a.insert(insert_here, *b_index_it);
 	}
-	// TODO think if plain return is smart (reference?)
 	return a;
 }
 
-
-//this returns the iterator into a. binary search
-template <typename T>
-typename T::iterator PMergeMe::where_2_insert(T &values, T &a, int index, typename T::iterator high)
+bool PMergeMe::pred(const int &a, const int &b)
 {
-	//0. find value based on index
-	//1. find iterator where_2_insert VALUE
-	typename T::iterator low = a.begin();
 	
-}
-
-	// for (int i = 0; i < (ssize / 2) * 2; i+= 2)
-	// {
-	// 	int winner_index, loser_index;
-	// 	if (con[i] > con[i + 1])
-	// 		winner_index = i; loser_index = i + 1;
-	// 	else
-	// 		bigger_index = i + 1; loser_index = i;
-	// 	a.push_back(winner_index);
-	// 	b.push_back(loser_index);
-	// 	//zu jedem loser muss ich den winner speichern
-	// }
-
-// problem: pop_front gibt es nur bei deque, nicht bei vector
-// ich kann aber T::erase(T:begin()) verwenden
-template <typename T> T PMergeMe::merge_container(T &left, T &right)
-{
-	T res;
-	while (left.size() > 0 && right.size() > 0)
-	{
-		if (left.front() <= right.front())
-		{
-			res.insert(res.end(), left.front());
-			left.erase(left.begin());
-		}
-		else
-		{
-			res.insert(res.end(), right.front());
-			right.erase(right.begin());
-		}
-	}
-	while (left.size() > 0)
-	{
-		res.insert(res.end(), left.front());
-		left.erase(left.begin());
-	}
-	while (right.size() > 0)
-	{
-		res.insert(res.end(), right.front());
-		right.erase(right.begin());
-	}
-	return res;
 }
 
 template <typename T> void PMergeMe::print_container(T &con)
@@ -265,3 +199,67 @@ void PMergeMe::print_timings()
 	std::cout	<< "Time to process a range of " << _con_vec.size() 
 				<< " elements with std::deque : " << _t_deq << " ns" << std::endl;
 }
+
+// template <typename T>
+// bool PMergeMe::container_already_sorted(T &con_val, T &con_ind)
+// {
+// 	int ssize = con_ind.size();
+// 	for (int i = 1; i < ssize; i++)
+// 	{
+// 		if (con_val[con_ind[i]] < con_val[con_ind[i - 1]])
+// 			return false;
+// 	}
+// 	return true;
+// }
+
+// TODO put in tpp
+// 0. start timer
+// 1. split array into 2 smaller arrays
+// 2. perform sort_container on these 2 arrays
+// 3. merge these 2 arrays back into one
+// 4. stop & set timer
+//TODO this is standard merge sort (or divide-and-conquer). what we need to
+//implement is the "Ford-Johnson" or "merge insert" algo.
+// template <typename T> T PMergeMe::sort_container(T &con)
+// {
+// 	if (con.size() == 1)
+// 		return con;
+// 	typename T::iterator middle = con.begin();
+// 	std::advance(middle, con.size() / 2);
+// 	T left(con.begin(), middle);
+// 	T right(middle, con.end());
+// 	left = sort_container(left);
+// 	right = sort_container(right);
+// 	return merge_container(left, right);
+// }
+
+// problem: pop_front gibt es nur bei deque, nicht bei vector
+// ich kann aber T::erase(T:begin()) verwenden
+// template <typename T> T PMergeMe::merge_container(T &left, T &right)
+// {
+// 	T res;
+// 	while (left.size() > 0 && right.size() > 0)
+// 	{
+// 		if (left.front() <= right.front())
+// 		{
+// 			res.insert(res.end(), left.front());
+// 			left.erase(left.begin());
+// 		}
+// 		else
+// 		{
+// 			res.insert(res.end(), right.front());
+// 			right.erase(right.begin());
+// 		}
+// 	}
+// 	while (left.size() > 0)
+// 	{
+// 		res.insert(res.end(), left.front());
+// 		left.erase(left.begin());
+// 	}
+// 	while (right.size() > 0)
+// 	{
+// 		res.insert(res.end(), right.front());
+// 		right.erase(right.begin());
+// 	}
+// 	return res;
+// }

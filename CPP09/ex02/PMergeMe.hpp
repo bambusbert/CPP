@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 17:47:36 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/02 17:05:52 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/03 12:15:53 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include <iterator>
 // #include <sys/time.h>
 #include <time.h>
+#include <algorithm>
 
 class PMergeMe
 {
@@ -34,16 +35,17 @@ class PMergeMe
         long _t_deq;
         // void sort_deq(double *t_deq);
         // void sort_vec(double *t_vec);
-        template <typename T>
-        T sort_container(T &con);
+        // template <typename T>
+        // T sort_container(T &con);
         template <typename T>
         T sort_container2(T &values, T& indices);
+        // template <typename T>
+        // T merge_container(T& left, T& right);
         template <typename T>
-        T merge_container(T& left, T& right);
-        template <typename T>
-        T indices_2_values(T& con, T& val);
-        template <typename T>
-        typename T::iterator where_2_insert(T &values, T &a, int index, typename T::iterator partner_it);
+        T indices_2_values(T& con_val, T& con_ind);
+        //template <typename T>
+        //bool container_already_sorted(T &con_val, T &con_ind);
+        bool pred(const int &a, const int &b);
     public:
 	    PMergeMe();
 	    ~PMergeMe();

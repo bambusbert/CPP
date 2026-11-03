@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:17:47 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/26 17:20:10 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/03 10:26:02 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,19 @@ int main(int argc, char **argv)
 	pm.print_timings();
 	return 0;
 }
+
+// #include <vector>
+
+// int main(int argc, char **argv)
+// {
+// 	std::vector<int> v;
+// 	v.push_back(1);
+// 	v.push_back(2);
+// 	v.push_back(3);
+// 	v.push_back(4);
+// 	v.push_back(5);
+// 	v.push_back(7);
+// 	const std::vector<int>::iterator vit = v.b
+	
+// 	return 0;
+// }
