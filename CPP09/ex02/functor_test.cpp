@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/03 12:17:42 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/03 12:54:12 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/03 14:08:41 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,13 @@ template <typename T>
 struct IdxLessTemp
 {
     private:
-        const T &_v;  
+        const T &_v;
     public:
-        IdxLessTemp(const T &v): _v(v) {}
+        int *_count;
+        IdxLessTemp(const T &v, int* count): _v(v), _count(count) {}
         bool operator()(int i, int j) const
         {
+            ++(*_count);
             return _v[i] < _v[j];
         }
 };
@@ -112,16 +114,13 @@ int main()
         idx.push_back(2);
         idx.push_back(0);
         
-        std::deque<int>::iterator where_2_insert = std::lower_bound(idx.begin(), idx.end(), 4, IdxLessTemp<std::deque<int> >(v));
+        int count = 0;
+        std::deque<int>::iterator where_2_insert = std::lower_bound(idx.begin(), idx.end(), 4, IdxLessTemp<std::deque<int> >(v, &count));
         idx.insert(where_2_insert, 4);
         for (std::deque<int>::iterator it = idx.begin(); it != idx.end(); ++it)
             std::cout << *it << " ";
         std::cout << std::endl;
-    }
-
-    {
-        std::cout << "\nTest 5" << std::endl;
-        
+        std::cout << "Count: " << count << std::endl;
     }
     
 }
