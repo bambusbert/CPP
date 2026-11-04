@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:17:47 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/03 17:41:15 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/04 12:10:54 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,13 @@ int main(int argc, char **argv)
 	PmergeMe pm;
 	if (pm.validate_input_and_fill_containers(argv) == false)
 		return (std::cerr << "Error" << std::endl, 1);
-	//std::cout << "all gud" << std::endl;
-	
 	std::cout << "Before: ";
 	pm.print_vec();
 	pm.sort_containers();
 	std::cout << "After:  ";
 	pm.print_vec();
 	pm.print_timings();
-	// for (int i = 0; i < 10; i++)
-	// 	std::cout << i*1 << ": " << pm.next_jacobsthal(i*1) << std::endl;
+	
 	return 0;
 }
 
