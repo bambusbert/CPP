@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/03 17:40:05 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/03 17:58:49 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/04 11:12:49 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ T PmergeMe::sort_container(T &values, T &indices, int *op_count)
 	for (typename T::iterator index_it = indices.begin(); index_it < indices.end() - 1; std::advance(index_it, 2))
 	{
 		int winner_index, loser_index;
+		++(*op_count);
 		if (values[*index_it] > values[*(index_it + 1)])
 		{
 			winner_index = *index_it;
@@ -53,14 +54,29 @@ T PmergeMe::sort_container(T &values, T &indices, int *op_count)
 		}
 		a.push_back(winner_index);
 		b.push_back(loser_index);
-		partners[winner_index] = loser_index; // i think i don't need that
+		partners[winner_index] = loser_index;
 		partners[loser_index] = winner_index;
 	}
 	if (ssize % 2 != 0)
 		b.push_back(*(indices.end() - 1));
 	a = sort_container(values, a, op_count);
+	b = update_b(a, b, partners);
 	loser_handler(a, b, partners, values, op_count);
 	return a;
+}
+
+template <typename T>
+T PmergeMe::update_b(T &a, T &b_old, T &partners)
+{
+	T b_new;
+	for (typename T::iterator it = a.begin(); it != a.end(); ++it)
+	{
+		b_new.push_back(partners[*it]);
+	}
+	//manchmal ist a um 1 element kürzer als b, das muss dann noch hinzugefügt werden
+	if (b_new.size() < b_old.size())
+		b_new.push_back(b_old.back());
+	return b_new;
 }
 
 template <typename T>

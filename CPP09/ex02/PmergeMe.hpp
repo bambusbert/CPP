@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 17:47:36 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/03 17:59:03 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/04 10:53:50 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ private:
     template <typename T>
     void loser_handler(T &a, T &b, T& partners, T& values, int *count);
     unsigned int update_index(unsigned int count_elems, unsigned int size_b, unsigned int& prev_jacob, unsigned int &cur_jacob);
+    template <typename T>
+    T update_b(T &a, T &b_old, T &partners);
 public:
     PmergeMe();
     ~PmergeMe();
