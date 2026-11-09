@@ -6,13 +6,12 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 13:05:43 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/28 15:01:33 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/09 19:00:40 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
-//TODO check if parse string on default constructed element does nothing stupid
 RPN::RPN() { }
 
 RPN::~RPN() { }
@@ -34,7 +33,7 @@ RPN &RPN::operator=(const RPN &other)
 
 void RPN::parse_char_to_long_and_add_to_list(char c)
 {
-	long num = static_cast<long>(c - 48);
+	long num = static_cast<long>(c - '0');
 	_lst.push_back(num);
 }
 
@@ -45,21 +44,20 @@ static bool is_operator(char c)
 	return false;
 }
 
-void RPN::insert_result (long &res)
+void RPN::insert_result (const long &res)
 {
 	_lst.pop_back();
 	_lst.pop_back();
 	_lst.push_back(res);
 }
 
-void RPN::parse_string()
+int RPN::parse_string()
 {
     if (_str.find_first_not_of("0123456789 +-*/") != _str.npos)
-		return (void)(std::cerr << "Error. invalid character detected." << std::endl);
+		return (std::cerr << "Error. invalid character detected." << std::endl, FAIL);
 	_lst.clear();
-	bool fail = false;
-	int i = -1;
-	while (_str[++i])
+	size_t i = -1;
+	while (++i < _str.size())
 	{
 		if (_str[i] == ' ')
 			continue;
@@ -67,17 +65,16 @@ void RPN::parse_string()
 		{
 			long res;
 			if (execute_operation(&res, _str[i]) == FAIL)
-				{ fail = true; break; }
+				return FAIL;
 			insert_result(res);
 			continue;
 		}
 		parse_char_to_long_and_add_to_list(_str[i]);
 	}
-	if (fail)
-		return;
 	if (_lst.empty())
-		return (void)(std::cerr << "Error. empty input" << std::endl);
+		return (std::cerr << "Error. empty input" << std::endl, FAIL);
 	else if (_lst.size() > 1)
-		return (void)(std::cerr << "Error. notation does not solve to one value" << std::endl);
+		return (std::cerr << "Error. notation does not solve to one value" << std::endl, FAIL);
 	std::cout << _lst.front() << std::endl;
+	return SUCCESS;
 }

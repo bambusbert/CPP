@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:17:47 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/26 15:48:21 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/09 18:54:32 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int main(int argc, char **argv)
 	if(argc != 2)
 		return (std::cerr << "Error. no argument. Usage: ./RPN arg" << std::endl, 1);
 	RPN r(argv[1]);
-	r.parse_string();
+	if (r.parse_string() == FAIL)
+		return 1;
 	return 0;
 }
 

@@ -6,14 +6,14 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 13:04:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/29 11:44:55 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/09 19:01:21 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RPN_H
 #define RPN_H
 
-#define FAIL -1
+#define FAIL (-1)
 #define SUCCESS 0
 
 #include <string>
@@ -32,14 +32,14 @@ class RPN
         int execute_multiplication(long *res);
         int execute_division(long *res);
         void parse_char_to_long_and_add_to_list(char c);
-        void insert_result (long &res);
+        void insert_result (const long &res);
     public:
         RPN();
         RPN(const std::string& str);
         ~RPN();
         RPN(const RPN& other);
         RPN&operator=(const RPN& other);
-        void parse_string();
+        int parse_string();
 };
 
 #endif
