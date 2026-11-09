@@ -1,7 +1,6 @@
 NAME = btc
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wpedantic -g
-# CXXFLAGS = -std=c++98 -g
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wpedantic
 DFLAGS	= -MMD -MP
 RM = rm -f
 
@@ -36,4 +35,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+debug: CXXFLAGS += -g -fstandalone-debug -fsanitize=undefined
+debug: re
+
+.PHONY: all clean fclean re debug

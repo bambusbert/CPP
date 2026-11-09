@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 12:35:25 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/28 14:31:13 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/09 16:31:41 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int strtod_wrapper(double *res, const std::string &str)
 	const char *c_str = str.c_str();
 	errno = 0;
 	*res = std::strtod(c_str, &end);
+	
 	if (errno == ERANGE || end == c_str || *end != '\0')
 		return FAIL;
 	return SUCCESS;
@@ -63,6 +64,20 @@ static int date_checker (int &year, int &month, int &day)
 	return SUCCESS;
 }
 
+static bool is_string_numeric (const std::string &str)
+{
+	if (str.find_first_not_of("0123456789") != str.npos)
+		return false;
+	return true;
+}
+
+static int are_strings_numeric (const std::string &year_str, const std::string &month_str, const std::string &day_str)
+{
+	if (!is_string_numeric(year_str) || !is_string_numeric(month_str) || !is_string_numeric(day_str))
+		return FAIL;
+	return SUCCESS;
+}
+
 //"Error: bad input => 2001-42-42"
 // 0. char count OK?
 // 1. are there 2 dashes?
@@ -89,6 +104,9 @@ int BitcoinExchange::check_syntax_left(int *year, int *month, int *day, std::str
 	std::string year_str = left.substr(0, first_dash);
 	std::string month_str = left.substr(first_dash + 1, second_dash - first_dash - 1);
 	std::string day_str = left.substr(second_dash + 1, left.length() - second_dash);
+
+	if (are_strings_numeric(year_str, month_str, day_str) == FAIL)
+		return (std::cout << "Error: date syntax. bad input => '" << left << "'" << std::endl, FAIL);
 	// 3a.
 	if (year_str.length() != 4 || month_str.length() != 2 || day_str.length() != 2)
 		return (std::cout << "Error: date syntax. bad input => '" << left << "'" << std::endl, FAIL);

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 12:31:48 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/28 14:12:06 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/09 16:39:25 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 static int parse_single_rate_line(std::string &line, std::map<std::string, double> &rates)
 {
-	int pos_comma = line.find(',');
+	size_t pos_comma = line.find(',');
+	if (pos_comma == line.npos)
+		return FAIL;
 	std::string key = line.substr(0, pos_comma);
 	std::string value_string = line.substr(pos_comma + 1);
 	double value;

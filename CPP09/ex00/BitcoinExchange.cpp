@@ -6,18 +6,15 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:16:34 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/28 14:42:32 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/09 16:39:04 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
-// TODO Dates before the first rate print garbage
-BitcoinExchange::BitcoinExchange() : _input_file("")
-{
-	// that's nonsensical but subject requires it
-	// initialize_rates();
-	_init_successful = false;
-}
+
+
+// that's nonsensical but subject requires it
+BitcoinExchange::BitcoinExchange() : _input_file(""), _init_successful(false) {}
 
 BitcoinExchange::BitcoinExchange(const std::string &filename) : _input_file(filename)
 {
@@ -27,13 +24,9 @@ BitcoinExchange::BitcoinExchange(const std::string &filename) : _input_file(file
 		_init_successful = true;
 }
 
-BitcoinExchange::~BitcoinExchange()
-{
-}
+BitcoinExchange::~BitcoinExchange() {}
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : _rates(other._rates), _input_file(other._input_file), _init_successful(other._init_successful)
-{
-}
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : _rates(other._rates), _input_file(other._input_file), _init_successful(other._init_successful) {}
 
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
 {
@@ -45,6 +38,11 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
 		_init_successful = other._init_successful;
 	}
 	return *this;
+}
+
+bool BitcoinExchange::get_init_successful() const
+{
+	return _init_successful;
 }
 
 // if key does not exist take the next one below
@@ -60,19 +58,33 @@ double BitcoinExchange::return_price_for_date(const std::string &date) const
 	return (--it)->second;
 }
 
-void BitcoinExchange::display_result(const std::string &date, double &amount_traded) const
+static std::string format_double(double value)
+{
+    std::ostringstream oss;
+    
+    for (int i = 0; i <= 330; i++)
+    {
+        oss.str("");
+        oss << std::fixed << std::setprecision(i) << value;
+        if (strtod(oss.str().c_str(), NULL) == value)
+            break;
+    }
+    return (oss.str());
+}
+
+void BitcoinExchange::display_result(const std::string &date, const double &amount_traded) const
 {
 	double price = return_price_for_date(date);
 	if (price == FAIL)
 		return (void)(std::cout << "Error: no regarding price in database. (valid date but no match)" << std::endl);
-	std::cout << date << " => " << amount_traded << " = " << price * amount_traded << std::endl;
+	std::cout << date << " => " << format_double(amount_traded) << " = " << format_double(price * amount_traded) << std::endl;
 }
 
 // Rules:
 // 1.	there has to be 1 pipe, must not be at the beginning nor the end
 // 2.	split in left and right
 // 3.	check left and right
-void BitcoinExchange::parse_single_quantity_line(std::string &line) const
+void BitcoinExchange::parse_single_quantity_line(const std::string &line) const
 {
 	// 1.
 	size_t first_pipe = line.find('|');

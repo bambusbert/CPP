@@ -6,12 +6,12 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:17:47 by slambert          #+#    #+#             */
-/*   Updated: 2026/10/28 14:10:23 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/09 14:38:39 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //data.csv stores prices
-//input.csv stores traded amount (quantity) of btc
+//input.csv stores quantity of btc
 //output is the multiplication of these 2 variables
 #include "BitcoinExchange.hpp"
 #include <iostream>
@@ -21,6 +21,8 @@ int main(int argc, char **argv)
 	if (argc != 2)
 		return (std::cout << "Error. wrong number of arguments. Usage: ./btc input.txt" << std::endl, 1);
 	BitcoinExchange btc(argv[1]);
+	if (!btc.get_init_successful())
+		return 1;
 	btc.loop_quantity_file();
 
 	return 0;
