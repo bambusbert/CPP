@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:17:47 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/04 12:10:54 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/10 17:19:10 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int main(int argc, char **argv)
 	pm.sort_containers();
 	std::cout << "After:  ";
 	pm.print_vec();
+	// pm.print_deq();
 	pm.print_timings();
 	
 	return 0;
