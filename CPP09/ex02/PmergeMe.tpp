@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/03 17:40:05 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/04 15:01:37 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/10 16:26:23 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 //OCF required by subject because a struct is a class
 template <typename T>
 PmergeMe::IndexValueLess<T>::IndexValueLess():_v(NULL), _count(NULL) { }
+
+template <typename T>
+PmergeMe::IndexValueLess<T>::IndexValueLess(const T *v, int *count) : _v(v), _count(count) { }
 
 template <typename T>
 PmergeMe::IndexValueLess<T>::IndexValueLess::~IndexValueLess() { }
@@ -53,16 +56,16 @@ T PmergeMe::indices_2_values(T &con_val, T &con_ind)
 }
 
 // Ford-Johnson (merge-insertion sort), always working with indices:
-// 1.Create pairs of 2. Bigger num = winner, smaller num = loser. Store partner.
-// 2.Winners go in a, losers in b.
-// 3.If uneven, 1 element has no partner -> manually pushed to end of b.
-// 4.Sort list a recursively.
-// 5.Update b so it matches the changes done in 4.
-// 6.Insert the losers (list b) into list a:
+// 1. Create pairs of 2. Bigger num = winner, smaller num = loser. Store partner.
+// 2. Winners go in a, losers in b.
+// 3. If uneven, 1 element has no partner -> manually pushed to end of b.
+// 4. Sort list a recursively.
+// 5. Update b so it matches the changes done in 4.
+// 6. Insert the losers (list b) into list a:
 //   - Jacobsthal numbers: 1, 3, 5, 11, 21, ...
-//   - Insertion sequence follows Jacobsthal: 1 -> 3 -> 2 -> 5 -> 4 -> 7 -> 6
+//   - Insertion sequence follows Jacobsthal: 1 -> 3 -> 2 -> 5 -> 4 -> 7 -> 6 (for 7 elements)
 //   - (jump up to the next Jacobsthal number, then count down to the previous one)
-//   - Each element gets inserted with binary search.
+//   - Each element gets inserted with binary search (by algorithm).
 //   - Lower limit (iterator) = a.begin(), upper limit is the position of the partner,
 //   - because we already did that comparison.
 //	 - (element without partner has to check up to a.end() - whole list)
@@ -112,14 +115,16 @@ T PmergeMe::update_b(T &a, T &b_old, T &partners)
 // c. find where to insert
 // d. actual insert
 //we use smth called a functor here. because we work with the indices, we can not simply use
-//the "normal" std::lower_bound with 3 arguments because it would simply compare the indices
-//what we actually want is to compare the values behind that indices. for that reason
-//we use an overload of std::lower_bound that takes a Comparator as a 4th argument
-//the Comparator has to have this sig: bool pred(const Type1 &a, const Type2 &b)
+//the "normal" std::lower_bound with 3 arguments because it would simply compare the indices.
+//What we actually want is to compare the values behind that indices. for that reason
+//we use an overload of std::lower_bound that takes a Comparator as a 4th argument.
+
+//The Comparator has to have this sig: bool pred(const Type1 &a, const Type2 &b)
 //Type1 has to be the type that you get when you dereference the iterator
 //Type2 is the type from the thing we want to compare to (b[i])
 //(both types are int in our case)
-//the thing is that we need the values list for that comparison.
+
+//The thing is that we need the values list for that comparison.
 //i created a struct that upon construction has a pointer to said values.
 //overloading the ()operator actually enables the comparison.
 template <typename T>

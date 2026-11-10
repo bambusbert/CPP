@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 17:47:49 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/04 14:54:08 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/10 16:12:50 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 #include <cerrno>
 #include <limits>
 #include <time.h>
-
-const int PmergeMe::_jacobsthal_arr[31] = {
-	1, 3, 5, 11, 21, 43, 85, 171, 341, 683,
-	1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525, 699051,
-	1398101, 2796203, 5592405, 11184811, 22369621, 44739243, 89478485,
-	178956971, 357913941, 715827883, 1431655765
-};
 
 PmergeMe::PmergeMe(): _t_vec(0), _t_deq(0), _vec_ops(0), _deq_ops(0) { }
 
@@ -126,7 +119,13 @@ unsigned int PmergeMe::update_index(unsigned int count_elems, unsigned int size_
 	return cur_jacob - c - 1;
 }
 
-//interesting this is not much faster than not hardcoded
+// const int PmergeMe::_jacobsthal_arr[31] = {
+// 	1, 3, 5, 11, 21, 43, 85, 171, 341, 683,
+// 	1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525, 699051,
+// 	1398101, 2796203, 5592405, 11184811, 22369621, 44739243, 89478485,
+// 	178956971, 357913941, 715827883, 1431655765
+// };
+
 // unsigned int PmergeMe::next_jacobsthal_hardcoded(unsigned int num)
 // {
 // 	const int* begin = _jacobsthal_arr;

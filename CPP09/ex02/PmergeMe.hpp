@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 17:47:36 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/04 14:57:15 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/10 16:17:56 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,14 @@ class PmergeMe
             
         public:
             IndexValueLess();
+            IndexValueLess(const T *v, int *count);
             ~IndexValueLess();
             IndexValueLess(const IndexValueLess &other);
             IndexValueLess &operator=(const IndexValueLess &other);
-            
-            IndexValueLess(const T *v, int *count) : _v(v), _count(count) {}
             bool operator()(int i, int j) const;
     };
 
     private:
-        static const int _jacobsthal_arr[31];
         std::vector<int> _con_vec;
         std::deque<int> _con_deq;
         long _t_vec;
