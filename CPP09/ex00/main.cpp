@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:17:47 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/09 14:38:39 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/10 12:23:37 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int main(int argc, char **argv)
 	BitcoinExchange btc(argv[1]);
 	if (!btc.get_init_successful())
 		return 1;
-	btc.loop_quantity_file();
-
+	if (btc.loop_quantity_file() == 1)
+		return 1;
 	return 0;
 }
 

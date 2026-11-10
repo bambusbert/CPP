@@ -6,12 +6,11 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:16:34 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/09 16:39:04 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/10 12:44:27 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
-
 
 // that's nonsensical but subject requires it
 BitcoinExchange::BitcoinExchange() : _input_file(""), _init_successful(false) {}
@@ -58,7 +57,7 @@ double BitcoinExchange::return_price_for_date(const std::string &date) const
 	return (--it)->second;
 }
 
-static std::string format_double(double value)
+static std::string format_double(const double& value)
 {
     std::ostringstream oss;
     
@@ -66,7 +65,7 @@ static std::string format_double(double value)
     {
         oss.str("");
         oss << std::fixed << std::setprecision(i) << value;
-        if (strtod(oss.str().c_str(), NULL) == value)
+        if (std::strtod(oss.str().c_str(), NULL) == value)
             break;
     }
     return (oss.str());
@@ -107,18 +106,19 @@ void BitcoinExchange::parse_single_quantity_line(const std::string &line) const
 	display_result(left, val_right);
 }
 
-void BitcoinExchange::loop_quantity_file() const
+int BitcoinExchange::loop_quantity_file() const
 {
 	if (_init_successful == false)
-		return (void)(std::cout << "Error. loop can't be executed because initialization failed" << std::endl);
+		return (std::cout << "Error. loop can't be executed because initialization failed" << std::endl, 1);
 	std::ifstream infile(_input_file.c_str(), std::ifstream::in);
 	if (!infile.is_open())
-		return (void)(std::cout << "Error. input file could not be opened" << std::endl);
+		return (std::cout << "Error. input file could not be opened" << std::endl, 1);
 
 	std::string line;
 	std::getline(infile, line);
 	if (line != "date | value")
-		return (void)(std::cout << "Error. First line of input file must be 'date | value'" << std::endl);
+		return (std::cout << "Error. First line of input file must be 'date | value'" << std::endl, 1);
 	while (std::getline(infile, line))
-		parse_single_quantity_line(line);
+		parse_single_quantity_line(line);	
+	return 0;
 }

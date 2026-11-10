@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:16:46 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/09 16:37:13 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/10 12:22:39 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ class BitcoinExchange
         BitcoinExchange(const BitcoinExchange& other);
         BitcoinExchange& operator=(const BitcoinExchange& other);
         bool get_init_successful() const;
-        void loop_quantity_file() const;
+        int loop_quantity_file() const;
 };
 
 int strtod_wrapper(double *res, const std::string &str);

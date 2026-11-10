@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 12:35:25 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/09 16:31:41 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/10 12:35:49 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int strtol_wrapper(int *res, const std::string &str)
 	char *end;
 	const char *c_str = str.c_str();
 	errno = 0;
-	*res = std::strtol(c_str, &end, 10);
+	*res = static_cast<int>(std::strtol(c_str, &end, 10));
 	if (errno == ERANGE || end == c_str || *end != '\0')
 		return FAIL;
 	return SUCCESS;
@@ -30,7 +30,6 @@ int strtod_wrapper(double *res, const std::string &str)
 	const char *c_str = str.c_str();
 	errno = 0;
 	*res = std::strtod(c_str, &end);
-	
 	if (errno == ERANGE || end == c_str || *end != '\0')
 		return FAIL;
 	return SUCCESS;
