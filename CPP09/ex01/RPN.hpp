@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 13:04:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/09 19:01:21 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/10 11:52:28 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <string>
 #include <list>
 #include <iostream>
-#include <climits>
+#include <limits>
 
 class RPN
 {
@@ -27,10 +27,10 @@ class RPN
         std::list<long> _lst;
         std::string _str;
         int execute_operation(long *res, char c);
-        int execute_addition(long *res);
-        int execute_subtraction(long *res);
-        int execute_multiplication(long *res);
-        int execute_division(long *res);
+        int execute_addition(long *res, std::list<long>::iterator &second_to_last);
+        int execute_subtraction(long *res, std::list<long>::iterator &second_to_last);
+        int execute_multiplication(long *res, std::list<long>::iterator &second_to_last);
+        int execute_division(long *res, std::list<long>::iterator &second_to_last);
         void parse_char_to_long_and_add_to_list(char c);
         void insert_result (const long &res);
     public:

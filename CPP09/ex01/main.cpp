@@ -6,13 +6,14 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:17:47 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/09 18:54:32 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/10 11:37:39 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 #include <iostream>
 
+//Example Usages: ./RPN "1 5 /" | ./RPN "   1   5   / " | ./RPN "15/"
 int main(int argc, char **argv)
 {
 	if(argc != 2)
