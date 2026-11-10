@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/03 17:40:05 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/10 16:26:23 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/10 16:38:57 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ template <typename T>
 PmergeMe::IndexValueLess<T>::IndexValueLess():_v(NULL), _count(NULL) { }
 
 template <typename T>
-PmergeMe::IndexValueLess<T>::IndexValueLess(const T *v, int *count) : _v(v), _count(count) { }
+PmergeMe::IndexValueLess<T>::IndexValueLess(const T &v, int *count) : _v(v), _count(count) { }
 
 template <typename T>
 PmergeMe::IndexValueLess<T>::IndexValueLess::~IndexValueLess() { }
@@ -43,7 +43,7 @@ template <typename T>
 bool PmergeMe::IndexValueLess<T>::operator()(int i, int j) const
 {
     ++(*_count);
-    return (*(_v))[i] < (*(_v))[j];
+    return _v[i] < _v[j];
 }
 
 template <typename T>
@@ -141,7 +141,7 @@ void PmergeMe::loser_handler(T &a, T &b, T& partners, T& values, int* count)
 		i = update_index(count_elems, size_b, prev_jacobsthal, cur_jacobsthal);
 		int partner_index = partners[b[i]];
 		const typename T::iterator partner_iterator = std::find(a.begin(), a.end(), partner_index);
-		const typename T::iterator insert_here = std::lower_bound(a.begin(), partner_iterator, b[i], IndexValueLess<T>(&values, count));
+		const typename T::iterator insert_here = std::lower_bound(a.begin(), partner_iterator, b[i], IndexValueLess<T>(values, count));
 		a.insert(insert_here, b[i]);
 	}
 }
