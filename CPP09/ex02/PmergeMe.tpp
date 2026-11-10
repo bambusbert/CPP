@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/03 17:40:05 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/10 16:38:57 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/10 16:55:52 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ template <typename T>
 PmergeMe::IndexValueLess<T>::IndexValueLess():_v(NULL), _count(NULL) { }
 
 template <typename T>
-PmergeMe::IndexValueLess<T>::IndexValueLess(const T &v, int *count) : _v(v), _count(count) { }
+PmergeMe::IndexValueLess<T>::IndexValueLess(const T *v, int *count) : _v(v), _count(count) { }
 
 template <typename T>
 PmergeMe::IndexValueLess<T>::IndexValueLess::~IndexValueLess() { }
@@ -43,7 +43,7 @@ template <typename T>
 bool PmergeMe::IndexValueLess<T>::operator()(int i, int j) const
 {
     ++(*_count);
-    return _v[i] < _v[j];
+    return (*(_v))[i] < (*(_v))[j];
 }
 
 template <typename T>
@@ -75,9 +75,8 @@ T PmergeMe::sort_container(T &values, T &indices, int *op_count)
 	int ssize = static_cast<int>(indices.size());
 	if (ssize == 1)
 		return indices;
-	T a, b, partners;
-	for (size_t i = 0; i < values.size(); i++)
-		partners.push_back(-1);
+	T a, b;
+	T partners(values.size(), -1);
 	for (typename T::iterator index_it = indices.begin(); index_it < indices.end() - 1; std::advance(index_it, 2))
 	{
 		int winner_index, loser_index;
@@ -132,16 +131,17 @@ void PmergeMe::loser_handler(T &a, T &b, T& partners, T& values, int* count)
 {
 	unsigned int cur_jacobsthal = 1;
 	unsigned int prev_jacobsthal = 1;
-	unsigned int count_elems = -1;
+	unsigned int count_elems = 0;
 	unsigned int size_b = b.size();
 	unsigned int i = 0;
 	
+	a.insert(a.begin(), b[i]);
 	while (++count_elems < size_b)
 	{
 		i = update_index(count_elems, size_b, prev_jacobsthal, cur_jacobsthal);
 		int partner_index = partners[b[i]];
 		const typename T::iterator partner_iterator = std::find(a.begin(), a.end(), partner_index);
-		const typename T::iterator insert_here = std::lower_bound(a.begin(), partner_iterator, b[i], IndexValueLess<T>(values, count));
+		const typename T::iterator insert_here = std::lower_bound(a.begin(), partner_iterator, b[i], IndexValueLess<T>(&values, count));
 		a.insert(insert_here, b[i]);
 	}
 }

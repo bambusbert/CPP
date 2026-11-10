@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 17:47:36 by slambert          #+#    #+#             */
-/*   Updated: 2026/11/10 16:37:09 by slambert         ###   ########.fr       */
+/*   Updated: 2026/11/10 16:46:27 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ class PmergeMe
     struct IndexValueLess
     {
         private:
-            const T &_v;
+            const T *_v;
             int *_count;
             
         public:
             IndexValueLess();
-            IndexValueLess(const T &v, int *count);
+            IndexValueLess(const T *v, int *count);
             ~IndexValueLess();
             IndexValueLess(const IndexValueLess &other);
             IndexValueLess &operator=(const IndexValueLess &other);
